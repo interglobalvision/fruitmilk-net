@@ -1,9 +1,6 @@
-wp_boil
+Fruitmilk
 -------
-
-Starting point for our wordpress themes
-
-git clone --recursive --depth 1 git@github.com:interglobalvision/interglobalvision-wp-boil.git
+Fruitmilk is a concept space dedicated to showcasing artists, clothing designers, object-makers and publishers while acting as a platform to keep the creator independent.
 
 Tech this uses [thnx]:
 
