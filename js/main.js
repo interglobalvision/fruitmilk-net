@@ -18,12 +18,12 @@ jQuery(document).ready(function () {
 		});
 	}
 
-	var $feed = $('#posts .container.feed');
+	var $feed = $('#posts .masonry');
 	$feed.imagesLoaded( function() {
 		$feed.masonry({
 		  columnWidth: ".grid-sizer",
 		  gutterWidth: ".gutter-sizer",
-		  itemSelector: 'article.item'
+		  itemSelector: '.item'
 		});
 	});
 

@@ -21,7 +21,7 @@ get_header();
 <?php
 if( have_posts() ) {
 ?>
-    <div class="container feed">
+    <div class="container masonry">
       <div class="grid-sizer"></div>
       <div class="gutter-sizer"></div>
 <?php

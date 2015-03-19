@@ -26,7 +26,7 @@ get_header();
 <?php
 if( have_posts() ) {
 ?>
-    <div class="container feed">
+    <div class="container masonry">
       <div class="grid-sizer"></div>
       <div class="gutter-sizer"></div>
 <?php
@@ -34,12 +34,21 @@ if( have_posts() ) {
     the_post();
     $images = get_post_meta( $post->ID, '_igv_images', true);
 ?>
-        <article <?php post_class('item col1'); ?> id="post-<?php the_ID(); ?>">
+        <div <?php post_class('item col1'); ?> id="post-<?php the_ID(); ?>">
           <a href="<?php the_permalink(); ?>">
             <h1><?php the_title(); ?></h1>
           </a>
           <?php the_content(); ?>
-        </article>
+        </div>
+<?php
+  foreach ($images as $image) {
+?>
+        <div class="item col1">
+          <img src="<?php echo $image['image']; ?>" />
+        </div>
+<?php
+  } 
+?>  
 <?php
     }
 ?>

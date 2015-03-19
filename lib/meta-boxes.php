@@ -41,7 +41,7 @@ function igv_cmb_metaboxes() {
 
 	$about_page = new_cmb2_box( array(
 		'id'            => $prefix . 'about_page',
-		'title'         => __( 'About', 'cmb2' ),
+		'title'         => __( '', 'cmb2' ),
 		'object_types'  => array( 'page', ), // Post type
 		'context'       => 'normal',
 		'priority'      => 'high',
@@ -72,6 +72,34 @@ function igv_cmb_metaboxes() {
 		'id'      => $prefix . 'colorpicker',
 		'type'    => 'colorpicker',
 		'default' => '#ffffff',
+	) );
+
+
+	$single = new_cmb2_box( array(
+		'id'            => $prefix . 'single',
+		'title'         => __( 'Images', 'cmb2' ),
+		'object_types'  => array( 'collab' ), // Post type
+		'context'       => 'normal',
+		'priority'      => 'high',
+		'show_names'    => true, // Show field names on the left
+	) );
+
+	$images_group = $single->add_field( array(
+		'id'          => $prefix . 'images',
+		'type'        => 'group',
+		'description' => __( '', 'cmb2' ),
+		'options'     => array(
+			'group_title'   => __( 'Image {#}', 'cmb2' ), // {#} gets replaced by row number
+			'add_button'    => __( 'Add Another Image', 'cmb2' ),
+			'remove_button' => __( 'Remove Image', 'cmb2' ),
+			'sortable'      => true, // beta
+		),
+	) );
+
+	$single->add_group_field( $images_group, array(
+		'name' => __( 'Image', 'cmb2' ),
+		'id'   => 'image',
+		'type' => 'file',
 	) );
 
 }

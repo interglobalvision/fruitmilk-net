@@ -1125,23 +1125,26 @@ img {
 .post {
   width: 100%;
 }
-article.item {
+.item {
   position: relative;
   margin-bottom: 80px;
   margin-left: 40px;
   margin-right: 40px;
 }
-article.item h1 {
+.item h1 {
   text-align: left;
   line-height: 1.5em;
 }
-article.item h2 {
+.item h1 a {
+  display: inline-block;
+}
+.item h2 {
   position: absolute;
   top: 1em;
   width: 100%;
   text-align: center;
 }
-article.item img {
+.item img {
   width: 100%;
 }
 #pagination {
