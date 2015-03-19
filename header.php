@@ -29,6 +29,12 @@
 
   <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
   <?php wp_head(); ?>
+  <?php 
+  $color = get_post_meta( get_id_by_slug('about'), '_igv_colorpicker', true ); 
+  if ($color) {
+    echo '<style>p a, p a:visited, p a:active, .secondary {color: '.$color.';}</style>';
+  }
+  ?>
 </head>
 <body <?php body_class(); ?>>
 <!--[if lt IE 7]><p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p><![endif]-->
@@ -37,5 +43,7 @@
 
   <!-- start content -->
   <header id="header">
-    <h1><a href="<?php echo home_url(); ?>"><?php bloginfo('name'); ?></a></h1>
+    <h1><?php bloginfo('name'); ?></h1>
+    <nav>
+    </nav>
   </header>

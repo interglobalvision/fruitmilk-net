@@ -9,19 +9,31 @@ get_header();
   <!-- main posts loop -->
   <section id="posts">
 
+    <div class="container">
+
 <?php
 if( have_posts() ) {
   while( have_posts() ) {
     the_post();
 ?>
 
-    <article <?php post_class(); ?> id="post-<?php the_ID(); ?>">
+      <article <?php post_class(); ?> id="post-<?php the_ID(); ?>">
 
-      <a href="<?php the_permalink() ?>"><?php the_title(); ?></a>
+        <div class="row">
+          <div class="col col2">
+            <h1 class="section-title"><a href="<?php the_permalink() ?>"><?php the_title(); ?></a></h1>
+          </div>
+        </div>
 
-      <?php the_content(); ?>
+        <div class="row">
+          <div class="col col1">
+            <?php the_content(); ?>
+          </div>
+          <div class="col col1">
+          </div>
+        </div>
 
-    </article>
+      </article>
 
 <?php
   }
@@ -32,6 +44,9 @@ if( have_posts() ) {
 } ?>
 
   <!-- end posts -->
+
+    </div>
+
   </section>
 
   <?php get_template_part('partials/pagination'); ?>
