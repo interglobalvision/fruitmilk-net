@@ -18,7 +18,7 @@ jQuery(document).ready(function () {
 		});
 	}
 
-	$feed = $('#posts .container.feed');
+	var $feed = $('#posts .container.feed');
 	$feed.imagesLoaded( function() {
 		$feed.masonry({
 		  columnWidth: ".grid-sizer",

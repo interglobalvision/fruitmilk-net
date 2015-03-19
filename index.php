@@ -32,7 +32,7 @@ if( have_posts() ) {
     $thumb_url = $thumb_url_array[0];
 ?>
 
-        <article <?php post_class('item col col1'); ?> id="post-<?php the_ID(); ?>">
+        <article <?php post_class('item col1'); ?> id="post-<?php the_ID(); ?>">
           <a href="<?php the_permalink(); ?>">
             <h1 class="secondary"><?php the_title(); ?></h1>
             <img src="<?php echo $thumb_url; ?>" />
