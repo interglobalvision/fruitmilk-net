@@ -10,6 +10,14 @@ get_header();
   <section id="posts">
 
     <div class="container">
+      <div class="grid-sizer"></div>
+      <div class="gutter-sizer"></div>
+
+      <div class="row">
+        <div class="col col2">
+          <h1 class="section-title"><a href="<?php echo get_post_type_archive_link(get_post_type()); ?>"><?php post_type_archive_title(); ?></a></h1>
+        </div>
+      </div> 
 
 <?php
 if( have_posts() ) {
@@ -18,20 +26,6 @@ if( have_posts() ) {
 ?>
 
       <article <?php post_class(); ?> id="post-<?php the_ID(); ?>">
-
-        <div class="row">
-          <div class="col col2">
-            <h1 class="section-title"><a href="<?php the_permalink() ?>"><?php the_title(); ?></a></h1>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col col1">
-            <?php the_content(); ?>
-          </div>
-          <div class="col col1">
-          </div>
-        </div>
 
       </article>
 

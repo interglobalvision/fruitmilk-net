@@ -1,9 +1,10 @@
 jQuery(document).ready(function () {
   'use strict';
 
-  var url = 'https://api.instagram.com/v1/users/928570277/media/recent/?client_id=e8f11a6e3e484422b9f2cadea94f160f';
+	if ($('body').hasClass('page-about')) {
+		 var url = 'https://api.instagram.com/v1/users/928570277/media/recent/?client_id=e8f11a6e3e484422b9f2cadea94f160f';
 
-	$.ajax({
+		$.ajax({
 	    url: url,
 	    dataType: 'jsonp',
 	    success: function (data) { 
@@ -14,5 +15,6 @@ jQuery(document).ready(function () {
 			    $('.instagram').append('<a href="'+link+'" target="_blank"><img src="'+src+'" /></a>');
 				}
 	    },
-	});
+		});
+	}
 });

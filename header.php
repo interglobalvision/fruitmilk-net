@@ -45,5 +45,8 @@
   <header id="header">
     <h1><?php bloginfo('name'); ?></h1>
     <nav>
+      <a href="<?php echo get_post_type_archive_link( 'collab' ); ?>">COLLABS</a>
+      <a href="<?php echo get_post_type_archive_link( 'installation' ); ?>">INSTALLATION</a>
+      <a href="<?php echo get_post_type_archive_link( 'press' ); ?>">PRESS</a>
     </nav>
   </header>
