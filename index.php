@@ -46,7 +46,9 @@ if( have_posts() ) {
 <?php
 } else {
 ?>
-    <article class="u-alert"><?php _e('Sorry, no posts matched your criteria :{'); ?></article>
+    <div class="container">
+      <article class="u-alert col col1"><?php _e('Sorry, no posts matched your criteria :{'); ?></article>
+    </div>
 <?php
 } ?>
 
