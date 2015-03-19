@@ -27,8 +27,8 @@ if( function_exists( 'add_theme_support' ) ) {
 if( function_exists( 'add_image_size' ) ) {
   add_image_size( 'admin-thumb', 150, 150, false );
   add_image_size( 'opengraph', 1200, 630, true );
+  add_image_size( 'feed', 600, 999999, false );
 
-  add_image_size( 'name', 199, 299, true );
 }
 
 // Register Nav Menus

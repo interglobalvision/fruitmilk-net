@@ -19,6 +19,14 @@ $gutter = 80px
 for col in 1..$cols
   .col{col}
     width: ( col * $col ) + ( ( col - 1 ) * $gutter )
+    
+.grid-sizer
+  width: $col + $gutter
+.gutter-sizer
+  width: $gutter
+    
+.u-cf
+  clear: both
 
 // VARIABLES
 
@@ -130,11 +138,6 @@ img
 
 // POSTS LOOP
 
-.grid-sizer
-  width: $col 
-.gutter-sizer
-  width: $gutter
-
 #main-content
   margin-top: $margin-basic
 
@@ -153,6 +156,18 @@ img
 
 .post
   width: 100%
+  
+article.item
+  position: relative
+  //padding-left: ($gutter/2)
+  h1
+    position: absolute
+    top: 1em
+    width: 100%
+    text-align: center
+  img
+    width: 100%
+    
 
 #pagination
   width: 100%

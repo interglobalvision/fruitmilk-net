@@ -26,6 +26,7 @@ if( have_posts() ) {
           <div class="col col2">
             <h1 class="section-title"><a href="<?php the_permalink() ?>"><?php the_title(); ?></a></h1>
           </div>
+          <div class="u-cf"></div>
         </div>
 
         <div class="row">
@@ -53,6 +54,7 @@ if( have_posts() ) {
             </form>
             <div class="instagram"></div>
           </div>
+          <div class="u-cf"></div>
         </div>
 
       </article>
