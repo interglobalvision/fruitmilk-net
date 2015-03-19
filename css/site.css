@@ -1026,12 +1026,12 @@ ul.u-inline-list li {
 }
 body {
   font-family: 'luculentregular', helvetica, arial, sans-serif;
-  font-size: 16px;
+  font-size: 17px;
   line-height: 1.35em;
   letter-spacing: 0.001em;
 }
 h1 {
-  font-size: 2em;
+  font-size: 3em;
   font-family: 'alienleagueiiital';
 }
 h2 {
@@ -1113,6 +1113,8 @@ img {
   display: inline-block;
   padding: 0.7em 1em 0.2em;
   margin-bottom: 1em;
+  font-size: 2em;
+  text-align: center;
 }
 .section-title a:link {
   text-decoration: none;
@@ -1130,6 +1132,10 @@ article.item {
   margin-right: 40px;
 }
 article.item h1 {
+  text-align: left;
+  line-height: 1.5em;
+}
+article.item h2 {
   position: absolute;
   top: 1em;
   width: 100%;
