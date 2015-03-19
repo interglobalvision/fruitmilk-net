@@ -18,10 +18,13 @@ jQuery(document).ready(function () {
 		});
 	}
 
-	$('#posts .container.feed').masonry({
-	  columnWidth: ".grid-sizer",
-	  gutterWidth: ".gutter-sizer",
-	  itemSelector: 'article.item'
+	$feed = $('#posts .container.feed');
+	$feed.imagesLoaded( function() {
+		$feed.masonry({
+		  columnWidth: ".grid-sizer",
+		  gutterWidth: ".gutter-sizer",
+		  itemSelector: 'article.item'
+		});
 	});
 
 });

@@ -1125,6 +1125,7 @@ img {
 }
 article.item {
   position: relative;
+  margin-bottom: 80px;
 }
 article.item h1 {
   position: absolute;
