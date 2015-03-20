@@ -74,17 +74,39 @@ function igv_cmb_metaboxes() {
 		'default' => '#ffffff',
 	) );
 
+	$press = new_cmb2_box( array(
+		'id'            => $prefix . 'press',
+		'title'         => __( 'Press link', 'cmb2' ),
+		'object_types'  => array( 'press', ), // Post type
+		'context'       => 'normal',
+		'priority'      => 'high',
+		'show_names'    => false, // Show field names on the left
+	) );
 
-	$single = new_cmb2_box( array(
-		'id'            => $prefix . 'single',
-		'title'         => __( 'Images', 'cmb2' ),
-		'object_types'  => array( 'collab' ), // Post type
+	$press->add_field( array(
+		'name' => __( 'Link', 'cmb2' ),
+		'desc' => __( '', 'cmb2' ),
+		'id'   => $prefix . 'press_link',
+		'type' => 'text',
+	) );
+
+	$project = new_cmb2_box( array(
+		'id'            => $prefix . 'project',
+		'title'         => __( 'Project', 'cmb2' ),
+		'object_types'  => array( 'collab','installation' ), // Post type
 		'context'       => 'normal',
 		'priority'      => 'high',
 		'show_names'    => true, // Show field names on the left
 	) );
 
-	$images_group = $single->add_field( array(
+	$project->add_field( array(
+		'name' => __( 'Project dates', 'cmb2' ),
+		'desc' => __( '', 'cmb2' ),
+		'id'   => $prefix . 'dates',
+		'type' => 'text',
+	) );
+
+	$images_group = $project->add_field( array(
 		'id'          => $prefix . 'images',
 		'type'        => 'group',
 		'description' => __( '', 'cmb2' ),
@@ -96,7 +118,7 @@ function igv_cmb_metaboxes() {
 		),
 	) );
 
-	$single->add_group_field( $images_group, array(
+	$project->add_group_field( $images_group, array(
 		'name' => __( 'Image', 'cmb2' ),
 		'id'   => 'image',
 		'type' => 'file',

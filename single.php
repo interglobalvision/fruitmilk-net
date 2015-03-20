@@ -32,22 +32,26 @@ if( have_posts() ) {
 <?php
   while( have_posts() ) {
     the_post();
+    $dates = get_post_meta( $post->ID, '_igv_dates', true);
     $images = get_post_meta( $post->ID, '_igv_images', true);
 ?>
         <div <?php post_class('item col1'); ?> id="post-<?php the_ID(); ?>">
           <a href="<?php the_permalink(); ?>">
             <h1><?php the_title(); ?></h1>
           </a>
+          <?php if ($dates) { echo '<p><em>'.$dates.'</em></p>'; } ?>
           <?php the_content(); ?>
         </div>
 <?php
-  foreach ($images as $image) {
+      if ($images) {
+        foreach ($images as $image) {
 ?>
         <div class="item col1">
           <img src="<?php echo $image['image']; ?>" />
         </div>
 <?php
-  } 
+        } 
+      }
 ?>  
 <?php
     }
