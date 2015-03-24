@@ -1294,6 +1294,10 @@ input#submit {
     margin-left: 10px;
     margin-right: 10px;
   }
+  input#email,
+  input#submit {
+    width: 100%;
+  }
 }
 @media screen and (max-width: 400px) {
   .container {
