@@ -1143,6 +1143,7 @@ img {
   top: 1em;
   width: 100%;
   text-align: center;
+  line-height: 2em;
 }
 .item img {
   width: 100%;
@@ -1278,7 +1279,7 @@ input#submit {
     width: 20px;
   }
   body {
-    font-size: 17px;
+    font-size: 15px;
     line-height: 1.35em;
     letter-spacing: 0.001em;
   }
