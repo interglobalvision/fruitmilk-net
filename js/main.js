@@ -25,13 +25,8 @@ jQuery(document).ready(function () {
 			url: url,
 			data: data,
 			dataType: 'jsonp',
-			error: function(err, text) {
-				console.log("Mailchimp error:");
-				console.log(text);
-				console.log(err);
-				alert("Subscription failure.");
-			},
 			success: function(data) {
+				console.log(data);
 				if (data.result === "success") {
 					alert("Subscription success!")
 				} else {
