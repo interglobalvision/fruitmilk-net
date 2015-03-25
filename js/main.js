@@ -12,6 +12,7 @@ jQuery(document).ready(function () {
 
 // MAILCHIMP
 	$('#subscribe').submit(function(e) {
+		e.preventDefault();
 		e.stopPropagation();
 		$.ajax({
         url: '//fruitmilk.us8.list-manage.com/subscribe/post?u=b0b0183cd0a1db371072e3363&amp;id=5c344ff57c',
