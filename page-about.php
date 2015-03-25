@@ -48,9 +48,9 @@ if( have_posts() ) {
               }
               ?>
             </p>
-            <form>
-              <input id="subscribe-email" type="text" placeholder="email">
-              <input id="subscribe-submit" type="submit" class="color-secondary" value="subscribe">
+            <form id="subscribe" method="post">
+              <input id="subscribe-email" type="text" name="EMAIL" placeholder="email">
+              <input id="subscribe-submit" type="submit" class="color-secondary" name="subscribe" value="subscribe">
             </form>
             <div id="instagram">
 <?php
