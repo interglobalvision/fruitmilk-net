@@ -12,7 +12,24 @@ jQuery(document).ready(function () {
 
 // MAILCHIMP
 	$('#subscribe').submit(function(e) {
-		var data, dataArray, url;
+		e.stopPropagation();
+		$.ajax({
+        url: '//fruitmilk.us8.list-manage.com/subscribe/post?u=b0b0183cd0a1db371072e3363&amp;id=5c344ff57c',
+        type: 'GET',
+        data: $('#subscribe').serialize(),
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        success: function (data) {
+           if (data['result'] != "success") {
+                //ERROR
+                console.log(data['msg']);
+           } else {
+                alert('success');
+           }
+        }
+    });
+  });
+/*
 		e.preventDefault();
 		e.stopPropagation();
 		url = '//fruitmilk.us8.list-manage.com/subscribe/post?u=b0b0183cd0a1db371072e3363&amp;id=5c344ff57c';
@@ -34,8 +51,8 @@ jQuery(document).ready(function () {
 					alert("Subscription failure. " + data.msg);
 				}
 			}
-		});
-	});
+		});*/
+	
 
 
 });
