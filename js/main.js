@@ -14,6 +14,7 @@ jQuery(document).ready(function () {
 	$('#subscribe').submit(function(e) {
 		e.preventDefault();
 		e.stopPropagation();
+		$('#subscribe-result').html('Sending...');
 		$.ajax({
         url: '//fruitmilk.us8.list-manage.com/subscribe/post-json?u=b0b0183cd0a1db371072e3363&amp;id=5c344ff57c&c=?',
         type: 'GET',
@@ -25,8 +26,9 @@ jQuery(document).ready(function () {
            if (data['result'] != "success") {
                 //ERROR
                 console.log(data['msg']);
+                $('#subscribe-result').html('Sorry! Something went wrong... Try again?');
            } else {
-                alert('success');
+                $('#subscribe-result').html('Yesssssss! U did it');
            }
         }
     });
