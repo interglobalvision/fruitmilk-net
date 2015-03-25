@@ -48,7 +48,7 @@ if( have_posts() ) {
               }
               ?>
             </p>
-            <form id="subscribe" method="post">
+            <form id="subscribe" action="//fruitmilk.us8.list-manage.com/subscribe/post-json?u=b0b0183cd0a1db371072e3363&amp;id=5c344ff57c&c=?" method="get">
               <input id="subscribe-email" type="text" name="EMAIL" placeholder="email">
               <input id="subscribe-submit" type="submit" class="color-secondary" name="subscribe" value="subscribe">
             </form>
