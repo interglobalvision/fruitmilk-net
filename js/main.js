@@ -18,7 +18,8 @@ jQuery(document).ready(function () {
         url: '//fruitmilk.us8.list-manage.com/subscribe/post?u=b0b0183cd0a1db371072e3363&amp;id=5c344ff57c',
         type: 'GET',
         data: $('#subscribe').serialize(),
-        dataType: 'json',
+        dataType: 'jsonp',
+        jsonp: 'c',
         contentType: "application/json; charset=utf-8",
         success: function (data) {
            if (data['result'] != "success") {
