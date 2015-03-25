@@ -31,7 +31,7 @@
 wp_head();
 $color = get_post_meta( get_id_by_slug('about'), '_igv_colorpicker', true );
 if ($color) {
-  echo '<style>p a, p a:visited, p a:active, .color-secondary {color: '.$color.';}</style>';
+  echo '<style type="text/css">p a, p a:visited, p a:active, .color-secondary {color: '.$color.';}</style>';
 }
  ?>
 </head>
