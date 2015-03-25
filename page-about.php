@@ -54,35 +54,20 @@ if( have_posts() ) {
             </form>
             <div id="instagram">
 <?php
-function callInstagram($url)
-{
-$ch = curl_init();
-curl_setopt_array($ch, array(
-CURLOPT_URL => $url,
-CURLOPT_RETURNTRANSFER => true,
-CURLOPT_SSL_VERIFYPEER => false,
-CURLOPT_SSL_VERIFYHOST => 2
-));
-
-$result = curl_exec($ch);
-curl_close($ch);
-return $result;
-}
-
 $user_id = '928570277';
 $client_id = "e8f11a6e3e484422b9f2cadea94f160f";
 
 $url = 'https://api.instagram.com/v1/users/'.$user_id.'/media/recent/?client_id='.$client_id;
 
-$inst_stream = callInstagram($url);
-$results = json_decode($inst_stream, true);
+$results = json_decode(file_get_contents($url), true);
 
 for ($i = 0; $i < 6; ++$i) {
   $item = $results['data'][$i];
   $image_link = $item['link'];
   $image_src = $item['images']['low_resolution']['url']; ?>
-              <a href="<?php echo $image_link; ?>" target="_blank"><img class="instagram-image" src="<?php echo $image_src ?>" /></a>
-<?php } ?>
+              <a href="<?php echo $image_link; ?>" target="_blank" class="instagram-link"><img class="instagram-image" src="<?php echo $image_src ?>" /></a>
+<?php } ?> 
+            <div class="u-cf"></div>
             </div>
           </div>
           <div class="u-cf"></div>

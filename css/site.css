@@ -1146,11 +1146,12 @@ img {
 #pagination {
   width: 100%;
 }
-.instagram-image {
+a.instagram-link .instagram-image {
+  float: left;
   width: 49%;
   margin-bottom: 1%;
 }
-.instagram-image:nth-child(odd) {
+a.instagram-link:nth-child(odd) .instagram-image {
   margin-right: 1%;
 }
 form {
