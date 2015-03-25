@@ -15,13 +15,13 @@ get_header();
           <h1 class="section-title"><a href="<?php echo get_post_type_archive_link(get_post_type()); ?>"><?php post_type_archive_title(); ?></a></h1>
         </div>
         <div class="u-cf"></div>
-      </div> 
+      </div>
     </div>
 
 <?php
 if( have_posts() ) {
 ?>
-    <div class="container masonry">
+    <div class="container js-masonry">
       <div class="grid-sizer"></div>
       <div class="gutter-sizer"></div>
 <?php
@@ -31,16 +31,16 @@ if( have_posts() ) {
     $thumb_url_array = wp_get_attachment_image_src($thumb_id, 'feed', true);
     $thumb_url = $thumb_url_array[0];
 ?>
-    
+
         <article <?php post_class('item col1'); ?> id="post-<?php the_ID(); ?>">
           <a href="<?php the_permalink(); ?>">
-            <h2 class="secondary"><?php the_title(); ?></h1>
+            <h2 class="item-title color-secondary"><?php the_title(); ?></h1>
             <img src="<?php echo $thumb_url; ?>" />
           </a>
         </article>
 
 <?php
-    } 
+    }
 ?>
     </div>
 <?php

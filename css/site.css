@@ -1094,7 +1094,7 @@ img {
   left: 0;
   z-index: 0;
 }
-#header h1 {
+#fruitmilk-title {
   position: absolute;
   width: 100%;
   top: 46%;
@@ -1105,6 +1105,7 @@ img {
 }
 #main-content {
   padding-top: 165px;
+  padding-bottom: 165px;
 }
 .section-title {
   border: 1px solid #1a1a1a;
@@ -1119,12 +1120,6 @@ img {
 .section-title a:link {
   text-decoration: none;
 }
-#posts {
-  width: 100%;
-}
-.post {
-  width: 100%;
-}
 .item {
   position: relative;
   margin-bottom: 82.5px;
@@ -1138,24 +1133,24 @@ img {
 .item h1 a {
   display: inline-block;
 }
-.item h2 {
+.item img {
+  width: 100%;
+}
+.item-title {
   position: absolute;
   top: 1em;
   width: 100%;
   text-align: center;
   line-height: 2em;
 }
-.item img {
-  width: 100%;
-}
 #pagination {
   width: 100%;
 }
-.instagram img {
+.instagram-image {
   width: 49%;
   margin-bottom: 1%;
 }
-.instagram img:nth-child(odd) {
+.instagram-image:nth-child(odd) {
   margin-right: 1%;
 }
 form {
@@ -1175,12 +1170,12 @@ input {
 input:focus {
   outline: 0;
 }
-input#email {
+#subscribe-email {
   width: 70%;
   border: solid #1a1a1a;
   border-width: 0 0 1px;
 }
-input#submit {
+#subscribe-submit {
   font-family: 'luculentbold';
   width: 27%;
 }
@@ -1294,8 +1289,8 @@ input#submit {
     margin-left: 10px;
     margin-right: 10px;
   }
-  input#email,
-  input#submit {
+  #subscribe-email,
+  #subscribe-submit {
     width: 100%;
   }
 }

@@ -14,7 +14,6 @@
   <link rel="apple-touch-icon" href="<?php bloginfo('stylesheet_directory'); ?>/img/favicon-touch.png">
   <link rel="apple-touch-icon" sizes="114x114" href="<?php bloginfo('stylesheet_directory'); ?>/img/favicon.png">
 
-
   <script src="<?php bloginfo('stylesheet_directory'); ?>/js/vendor/modernizr.js"></script>
   <script type="text/javascript">
     /* Modernizr 2.8.3 (Custom Build) | MIT & BSD Build: http://modernizr.com/download/#-shiv-mq-cssclasses-teststyles-load */
@@ -28,13 +27,13 @@
   </script>
 
   <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
-  <?php wp_head(); ?>
-  <?php 
-  $color = get_post_meta( get_id_by_slug('about'), '_igv_colorpicker', true ); 
-  if ($color) {
-    echo '<style>p a, p a:visited, p a:active, .secondary {color: '.$color.';}</style>';
-  }
-  ?>
+<?php
+wp_head();
+$color = get_post_meta( get_id_by_slug('about'), '_igv_colorpicker', true );
+if ($color) {
+  echo '<style>p a, p a:visited, p a:active, .color-secondary {color: '.$color.';}</style>';
+}
+ ?>
 </head>
 <body <?php body_class(); ?>>
 <!--[if lt IE 7]><p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p><![endif]-->
@@ -43,11 +42,11 @@
 
   <!-- start content -->
   <header id="header">
-    <h1><?php bloginfo('name'); ?></h1>
+    <h1 id="fruitmilk-title"><?php bloginfo('name'); ?></h1>
     <nav>
       <a href="<?php echo get_permalink(get_id_by_slug('about')); ?>">ABOUT</a>
-      <a href="<?php echo get_post_type_archive_link( 'collab' ); ?>">COLLABS</a>
-      <a href="<?php echo get_post_type_archive_link( 'installation' ); ?>">INSTALLATION</a>
-      <a href="<?php echo get_post_type_archive_link( 'press' ); ?>">PRESS</a>
+      <a href="<?php echo get_post_type_archive_link('collab'); ?>">COLLABS</a>
+      <a href="<?php echo get_post_type_archive_link('installation'); ?>">INSTALLATION</a>
+      <a href="<?php echo get_post_type_archive_link('press'); ?>">PRESS</a>
     </nav>
   </header>

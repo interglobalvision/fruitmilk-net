@@ -34,7 +34,7 @@ if( have_posts() ) {
             <?php the_content(); ?>
           </div>
           <div class="col col1">
-            <?php 
+            <?php
             if ($services) {
               echo $services[0];
             } ?>
@@ -49,10 +49,10 @@ if( have_posts() ) {
             ?>
             </p>
             <form>
-              <input id="email" type="text" placeholder="email">
-              <input id="submit" type="submit" class="secondary" value="subscribe">
+              <input id="subscribe-email" type="text" placeholder="email">
+              <input id="subscribe-submit" type="submit" class="color-secondary" value="subscribe">
             </form>
-            <div class="instagram"></div>
+            <div id="instagram"></div>
           </div>
           <div class="u-cf"></div>
         </div>
