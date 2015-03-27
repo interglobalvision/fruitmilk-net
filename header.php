@@ -43,10 +43,9 @@ if ($color) {
   <!-- start content -->
   <header id="header">
     <h1 id="fruitmilk-title"><?php bloginfo('name'); ?></h1>
-    <nav>
+    <nav id="nav"></nav>
+    <nav id="temp-nav">
       <a href="<?php echo get_permalink(get_id_by_slug('about')); ?>">ABOUT</a>
       <a href="<?php echo get_post_type_archive_link('collab'); ?>">COLLABS</a>
       <a href="<?php echo get_post_type_archive_link('installation'); ?>">INSTALLATION</a>
-      <a href="<?php echo get_post_type_archive_link('press'); ?>">PRESS</a>
-    </nav>
   </header>
