@@ -11,12 +11,16 @@
       Bodies = Matter.Bodies,
       Vertices = Matter.Vertices,
       Common = Matter.Common,
+      Composite = Matter.Composite,
       Composites = Matter.Composites,
       MouseConstraint = Matter.MouseConstraint,
       Mouse = Matter.Mouse;
 
   var Nav = {};
-  Nav.walls = {};
+
+  Nav.options = {
+    loopTimer: 8000
+  };
 
   var _engine,
   _sceneWidth,
@@ -52,11 +56,15 @@
       }
     });
 
+    Nav.walls = Composite.create();
+    Nav.blobs = Composite.create();
+    Composite.add(_engine.world, [Nav.walls, Nav.blobs]);
+
     // run the engine
     Engine.run(_engine);
     Nav.updateScene();
     Nav.main();
-
+    Nav.loop();
   };
 
   Nav.main = function() {
@@ -64,9 +72,6 @@
 
     // add a mouse controlled constraint
     World.add(_world, MouseConstraint.create(_engine));
-
-    // add walls
-    Nav.updateWalls();
 
     // create two boxes and a ground
     // showBounds: truee
@@ -128,7 +133,7 @@
 
 
     // add all of the bodies to the world
-    World.add(_world, [boxA, boxB, aboutBlob, blogBlob, collabsBlob, installationsBlob, pressBlob, shopBlob]);
+    Composite.add(Nav.blobs, [boxA, boxB, aboutBlob, blogBlob, collabsBlob, installationsBlob, pressBlob, shopBlob]);
 
   };
 
@@ -152,12 +157,19 @@
     Nav.updateWalls();
   };
 
+  Nav.loop = function() {
+    setTimeout(function () {
+      Nav.loop();
+    }, Nav.options.loopTimer);
+  };
+
   Nav.updateWalls = function() {
     if (!_engine)
       return;
 
-    if(this.walls.top != undefined)
-      World.remove(_engine.world, [ this.walls.top, this.walls.bottom, this.walls.left, this.walls.right]);
+    debugger;
+    if(this.walls.bodies.length != 0)
+      Composite.clear(Nav.walls);
 
     wallOptions = { 
       isStatic: true,
@@ -168,12 +180,12 @@
       }
     };
 
-    this.walls.top = Bodies.rectangle(window.innerWidth/2, 1, window.innerWidth, 2, wallOptions);
-    this.walls.bottom = Bodies.rectangle(window.innerWidth/2, window.innerHeight - 1, window.innerWidth, 2, wallOptions);
-    this.walls.left = Bodies.rectangle(0, window.innerHeight/2, 2, window.innerHeight, wallOptions);
-    this.walls.right = Bodies.rectangle(window.innerWidth-1, window.innerHeight/2, 2, window.innerHeight, wallOptions);
-
-    World.add(_engine.world, [ this.walls.top, this.walls.bottom, this.walls.left, this.walls.right]);
+    Composite.add( Nav.walls, [ 
+      Bodies.rectangle(window.innerWidth/2, 1, window.innerWidth, 2, wallOptions),
+      Bodies.rectangle(window.innerWidth/2, window.innerHeight - 1, window.innerWidth, 2, wallOptions),
+      Bodies.rectangle(0, window.innerHeight/2, 2, window.innerHeight, wallOptions),
+      Bodies.rectangle(window.innerWidth-1, window.innerHeight/2, 2, window.innerHeight, wallOptions)
+    ]);
 
   };
 
