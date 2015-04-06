@@ -6,6 +6,7 @@
 
   // Matter module aliases
   var Engine = Matter.Engine,
+      Events = Matter.Events,
       World = Matter.World,
       Body = Matter.Body,
       Bodies = Matter.Bodies,
@@ -171,7 +172,7 @@
     // create semi-static blobs
     var staticBlobsOptios = {
       frictionAir: 1, 
-      friction: 1,
+      friction: 0,
       restitution: 1,
       render: {
         strokeStyle: '#000000',
@@ -183,7 +184,7 @@
 
     // add all of the bodies to the world
     Composite.add(Nav.blobs, [aboutBlob, blogBlob, collabsBlob, installationsBlob, pressBlob, shopBlob]);
-    Composite.add(Nav.blobs, [boxA, boxB]);
+    Composite.add(Nav.staticBlobs, [boxA, boxB]);
 
   };
 
@@ -191,7 +192,6 @@
     if (!_engine)
       return;
 
-    debugger;
     _sceneWidth = document.documentElement.clientWidth;
     _sceneHeight = document.documentElement.clientHeight;
 
