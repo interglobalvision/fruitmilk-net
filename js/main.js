@@ -1,3 +1,28 @@
+var $nav = $('#nav'),
+  // use this set false for when nav is minimized
+  navFullWindow = true;
+
+// LAYOUT FUNCTIONS
+function setNavSize() {
+  if (navFullWindow === true) {
+    $nav.css({
+      width: $(window).width(),
+      height: $(window).height()
+    });
+  } else {
+    $nav.css({
+      width: $(window).width(),
+      height: $(window).height()*0.35
+    });
+  }
+}
+
+// LAYOUT INIT
+setNavSize();
+$(window).resize(function() {
+  setNavSize();
+});
+
 jQuery(document).ready(function () {
   'use strict';
 
@@ -24,9 +49,9 @@ $('#subscribe').submit(function(e) {
     jsonp: 'c',
     contentType: "application/json; charset=utf-8",
     success: function (data) {
-      if (data['result'] != "success") {
+      if (data.result != "success") {
         //ERROR
-        console.log(data['msg']);
+        console.log(data.msg);
         $('#subscribe-result').html('Sorry! Something went wrong... Try again?');
       } else {
         $('#subscribe-result').html('Yesssssss! U did it');
