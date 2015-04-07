@@ -45,11 +45,16 @@
           background: 'rgba(0,0,0,0)',
           wireframes: false,
           showAngleIndicator: true,
+          showBroadphase: true,
           showBounds: true,
           showDebug: true,
           showCollisions: true,
-          showAxis: true,
-          showAngleIndicator: true
+          showVelocity: true,
+          showAxes: true,
+          showAngleIndicator: true,
+          showPositions: true,
+          showAngleIndicator: true,
+          showShadows: true
         }
       },
       world: {
@@ -86,8 +91,8 @@
       restitution: 1,
       render: {
         strokeStyle: '#000000',
-        fillStyle: '#000000'
-      }
+        fillStyle: 'rgba(0,0,0,0.5)'
+      },
     };
 
     // Blobls
