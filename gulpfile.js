@@ -24,7 +24,7 @@ function errorNotify(error){
 gulp.task('js', function() {
   gulp.src([
     'js/main.js',
-    'js/library.js'
+    'js/nav.js'
   ])
   .pipe(sourcemaps.init())
   .pipe(jshint())
@@ -63,7 +63,7 @@ gulp.task('images', function () {
 });
 
 gulp.task('watch', function() {
-  gulp.watch(['js/main.js'], ['js']);
+  gulp.watch(['js/nav.js', 'js/main.js'], ['js']);
   gulp.watch(['css/site.styl'], ['style']);
   gulp.watch(['img/src/**'], ['images']);
 });
