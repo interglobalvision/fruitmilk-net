@@ -1,26 +1,74 @@
-var $nav = $('#nav'),
-  // use this set false for when nav is minimized
-  navFullWindow = true;
+var basicAnimationSpeed = 2000;
 
-// LAYOUT FUNCTIONS
-function setNavSize() {
-  if (navFullWindow === true) {
-    $nav.css({
-      width: $(window).width(),
-      height: $(window).height()
-    });
-  } else {
-    $nav.css({
-      width: $(window).width(),
-      height: $(window).height()*0.35
-    });
-  }
+function l(data) {
+  console.log(data);
 }
 
+// ROUTER
+function router( hash ) {
+
+  hash = hash.replace("#!/",'');
+
+  if (hash === 'menu') {
+    Menu.maximize();
+
+  } else {
+    Menu.minimize();
+
+  }
+
+}
+
+// NAV
+
+var Menu = {
+  $nav: $('#nav'),
+  minimized: false,
+
+  setSize: function() {
+    if (this.minimized === true) {
+      this.$nav.css({
+        width: $(window).width(),
+        height: $(window).height()*0.3
+      });
+    } else {
+      this.$nav.css({
+        width: $(window).width(),
+        height: $(window).height()
+      });
+    }
+  },
+
+  minimize: function() {
+    if (this.minimized !== true) {
+      var height = $(window).height()*0.3;
+      this.$nav.animate({
+        height: height + 'px',
+        top: '-' + height + 'px'
+      }, basicAnimationSpeed, function() {
+        this.minimized = true;
+      });
+    }
+  }
+
+  maximize: function() {
+    if (this.minimized === true) {
+      var height = $(window).height();
+      this.$nav.animate({
+        height: height + 'px',
+        top: '0px'
+      }, basicAnimationSpeed, function() {
+        this.minimized = false;
+      });
+    }
+  }
+
+};
+
 // LAYOUT INIT
-setNavSize();
+Menu.setSize();
 $(window).resize(function() {
-  setNavSize();
+  Menu.setSize();
 });
 
 jQuery(document).ready(function () {
