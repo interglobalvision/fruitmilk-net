@@ -49,6 +49,16 @@
       }
     },
 
+    // Walls options
+    wallOptions: {
+      isStatic: true,
+      restitution: 1,
+      render: {
+        visible: true,
+        strokeStyle: 'red'
+      }
+    },
+
   };
 
   var _engine,
@@ -185,22 +195,12 @@
       Composite.clear(Nav.walls);
     }
 
-      // up to global
-    wallOptions = {
-      isStatic: true,
-      restitution: 1,
-      render: {
-        visible: true,
-        strokeStyle: 'red'
-      }
-    };
-
     // can this be a translation not a remove/add thing?
     Composite.add( Nav.walls, [
-      Bodies.rectangle(window.innerWidth/2, 1, window.innerWidth, 2, wallOptions),
-      Bodies.rectangle(window.innerWidth/2, window.innerHeight - 1, window.innerWidth, 2, wallOptions),
-      Bodies.rectangle(0, window.innerHeight/2, 2, window.innerHeight, wallOptions),
-      Bodies.rectangle(window.innerWidth-1, window.innerHeight/2, 2, window.innerHeight, wallOptions)
+      Bodies.rectangle(window.innerWidth/2, 1, window.innerWidth, 2, Nav.options.wallOptions),
+      Bodies.rectangle(window.innerWidth/2, window.innerHeight - 1, window.innerWidth, 2, Nav.options.wallOptions),
+      Bodies.rectangle(0, window.innerHeight/2, 2, window.innerHeight, Nav.options.wallOptions),
+      Bodies.rectangle(window.innerWidth-1, window.innerHeight/2, 2, window.innerHeight, Nav.options.wallOptions)
     ]);
 
   };
