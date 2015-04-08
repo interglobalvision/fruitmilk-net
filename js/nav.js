@@ -11,6 +11,7 @@
       Body = Matter.Body,
       Bodies = Matter.Bodies,
       Vertices = Matter.Vertices,
+      Vector = Matter.Vector,
       Common = Matter.Common,
       Composite = Matter.Composite,
       Composites = Matter.Composites,
@@ -76,9 +77,8 @@
       },
       render: {
         options: {
-          // takes size of containing element not
-          width: document.documentElement.clientWidth,
-          height: document.documentElement.clientHeight,
+          width: Nav.container.clientWidth,
+          height: Nav.container.clientHeight,
           background: Nav.options.background,
           wireframes: false,
           showAngleIndicator: true,
@@ -165,10 +165,9 @@
 
     if (!_engine) {
       return;
-    }
-
-    // refactor these variables
-    _sceneWidth = document.documentElement.clientWidth;
+    } 
+    
+ _sceneWidth = document.documentElement.clientWidth;
     _sceneHeight = document.documentElement.clientHeight;
 
     var boundsMax = _engine.world.bounds.max,
@@ -179,8 +178,8 @@
     boundsMax.x = _sceneWidth;
     boundsMax.y = _sceneHeight;
 
-    canvas.width = renderOptions.width = _sceneWidth;
-    canvas.height = renderOptions.height = _sceneHeight;
+    canvas.width = renderOptions.width = Nav.container.clientWidth;
+    canvas.height = renderOptions.height = Nav.container.clientHeight;
 
     Nav.updateWalls();
   };
@@ -191,17 +190,73 @@
       return;
     }
 
-    if(this.walls.bodies.length != 0) {
-      Composite.clear(Nav.walls);
-    }
+    if(this.walls.bodies.length == 0) {
+      // Add walls
+      Composite.add( Nav.walls, [
+        Bodies.rectangle(_engine.render.options.width/2, 0, _engine.render.options.width, 1, Common.extend({ label: 'topWall'}, Nav.options.wallOptions)),
+        Bodies.rectangle(_engine.render.options.width/2, _engine.render.options.height, _engine.render.options.width, 1, Common.extend({ label: 'bottomWall'}, Nav.options.wallOptions)),
+        Bodies.rectangle(0, _engine.render.options.height/2, 1, _engine.render.options.height, Common.extend({ label: 'leftWall'}, Nav.options.wallOptions)),
+        Bodies.rectangle(_engine.render.options.width, _engine.render.options.height/2, 1, _engine.render.options.height, Common.extend({ label: 'rightWall'}, Nav.options.wallOptions))
+      ]);
+    } else {
+      var walls = Composite.allBodies(Nav.walls);
+      for(var i = 0; i < walls.length; i++) {
+        var scaleX = 0,
+            scaleY = 0,
+            translateX = 0,
+            translateY = 0;
+        // Translate topWall
+        if(walls[i].label === 'topWall' || walls[i].label === 'bottomWall') {
+          
+          // If grow X          
+          if(walls[i].bounds.max.x < _engine.render.options.width ) {
+            scaleX = _engine.render.options.width / walls[i].bounds.max.x;
+            Body.scale(walls[i], scaleX, 1, {x: 0, y: 1});
+          } else if(walls[i].bounds.max.x > _engine.render.options.width) {
+            scaleX = walls[i].bounds.max.x / _engine.render.options.width;
+            Body.scale(walls[i], scaleX, 1, {x: 0, y: 1});
+          }
 
-    // can this be a translation not a remove/add thing?
-    Composite.add( Nav.walls, [
-      Bodies.rectangle(window.innerWidth/2, 1, window.innerWidth, 2, Nav.options.wallOptions),
-      Bodies.rectangle(window.innerWidth/2, window.innerHeight - 1, window.innerWidth, 2, Nav.options.wallOptions),
-      Bodies.rectangle(0, window.innerHeight/2, 2, window.innerHeight, Nav.options.wallOptions),
-      Bodies.rectangle(window.innerWidth-1, window.innerHeight/2, 2, window.innerHeight, Nav.options.wallOptions)
-    ]);
+        } else if(walls[i].label === 'leftWall' || walls[i].label === 'rightWall') {
+
+          // if grow Y
+          if(walls[i].bounds.max.y < _engine.render.options.height ) {
+            scaleY = _engine.render.options.height / walls[i].bounds.max.y;
+            Body.scale(walls[i], 1, scaleY, {x: 1, y: 0});
+          } else if(walls[i].bounds.max.y > _engine.render.options.height ) {
+            scaleY = walls[i].bounds.max.y / _engine.render.options.height;
+            Body.scale(walls[i], 1, scaleY, {x: 1, y: 0});
+          }
+         
+        }
+
+        if(walls[i].label === 'bottomWall') {
+
+          // if grow Y
+          if(walls[i].position.y < _engine.render.options.height ) {
+            translateY = _engine.render.options.height - walls[i].position.y;
+            Body.translate(walls[i], {x: translateX, y: translateY});
+          } else if(walls[i].position.y > _engine.render.options.height ) {
+            translateY =  walls[i].position.y - _engine.render.options.height;
+            Body.translate(walls[i], {x: translateX, y: translateY});
+          }
+
+        } else if(walls[i].label === 'rightWall') {
+
+          // if grow X
+          if(walls[i].position.x < _engine.render.options.width ) {
+            translateX = _engine.render.options.width - walls[i].position.x;
+            Body.translate(walls[i], {x: translateX, y: translateY});
+          } else if(walls[i].position.x > _engine.render.options.width ) {
+            translateX =  walls[i].position.x - _engine.render.options.width;
+            Body.translate(walls[i], {x: translateX, y: translateY});
+          }
+
+        }
+
+      }
+
+    }
 
   };
 
