@@ -29,11 +29,13 @@ gulp.task('js', function() {
   .pipe(sourcemaps.init())
   .pipe(jshint())
   .pipe(jshint.reporter('jshint-stylish'))
-  .on('error', errorNotify)
   .pipe(uglify())
+  .on('error', errorNotify)
   .pipe(rename({suffix: '.min'}))
   .pipe(sourcemaps.write('/'))
+  .on('error', errorNotify)
   .pipe(gulp.dest('js'))
+  .on('error', errorNotify)
   .pipe(notify({ message: 'Js task complete' }));
 });
 

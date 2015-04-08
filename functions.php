@@ -112,7 +112,7 @@ function is_single_type($type, $post) {
   }
 }
 
-//Page Slug Body Class
+// Page Slug Body Class
 function add_slug_body_class( $classes ) {
 global $post;
 if ( isset( $post ) ) {
