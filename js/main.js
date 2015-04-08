@@ -49,7 +49,7 @@ var Menu = {
         this.minimized = true;
       });
     }
-  }
+  },
 
   maximize: function() {
     if (this.minimized === true) {
