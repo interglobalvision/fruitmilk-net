@@ -88,9 +88,7 @@
           showCollisions: true,
           showVelocity: true,
           showAxes: true,
-          showAngleIndicator: true,
           showPositions: true,
-          showAngleIndicator: true,
           showShadows: true
         }
       },
@@ -135,7 +133,7 @@
     };
 
     // Add all blobs
-    for(key in blobs) {
+    for(var key in blobs) {
       Composite.add(Nav.blobs, Body.create( Common.extend({
           label: key,
           vertices: Vertices.fromPath(blobs[key]),
@@ -190,7 +188,7 @@
       return;
     }
 
-    if(this.walls.bodies.length == 0) {
+    if(this.walls.bodies.length === 0) {
       // Add walls
       Composite.add( Nav.walls, [
         Bodies.rectangle(_engine.render.options.width/2, 0, _engine.render.options.width, 1, Common.extend({ label: 'topWall'}, Nav.options.wallOptions)),
