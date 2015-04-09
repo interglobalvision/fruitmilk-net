@@ -23,15 +23,15 @@
 
   // Comment the function of these?
   Nav.options = {
+
     // Initial forces and reapplied forces
     maxForce: 0.25,
     minForce: -0.25,
-    loopTimer: 1000,
-    background: 'rgba(0,0,0,0)',
-    gravity: 0,
 
-    // The threshold to check if force should be reapplied or not
-    velocityThreshold: 0.20,
+    loopTimer: 1, // Time between each loop iteration in seconds
+    background: 'rgba(0,0,0,0)', //World background
+    gravity: 0, // World gravity
+    velocityThreshold: 0.20, // The threshold to check if force should be reapplied or not
 
     // Blobs options
     blobsOptions : {
@@ -58,7 +58,7 @@
     // Walls options
     wallOptions: {
       isStatic: true,
-      restitution: 0.8,
+      restitution: 0.3,
       friction: 0.1,
       render: {
         visible: true,
@@ -103,6 +103,18 @@
         gravity: {
           y: Nav.options.gravity
         },
+
+        // Infinity cuz it doesn't rly matter https://github.com/liabru/matter-js/issues/67
+        bounds: {
+          min: {
+            x: -Infinity,
+            y: -Infinity
+          },
+          max: {
+            x: Infinity,
+            y: Infinity
+          }
+        },
       }
     });
 
@@ -132,22 +144,24 @@
     Events.on(_engine, 'tick', function() {
       var mouse = _mouseConstraint.mouse;
       var blobs = Composite.allBodies(Nav.blobs);
-
+      var inBlob = false;
       // if mouse is down
       for(var i = 0; i < blobs.length; i++) { 
         var blob = blobs[i];
         if(Bounds.contains(blob.bounds, mouse.position)) {
 
-          document.body.style.cursor = 'pointer';
+          inBlob = true;
 
           if( mouse.button === 0 ) {
             window.location = '#!/' + blob.label;
             break;
           }
-        } else {
-          document.body.style.cursor = 'default';
         }
-
+      }
+      if(inBlob) {
+        document.body.style.cursor = 'pointer';
+      } else {
+        document.body.style.cursor = 'default';
       }
     });
 
@@ -196,16 +210,8 @@
       return;
     } 
     
- _sceneWidth = document.documentElement.clientWidth;
-    _sceneHeight = document.documentElement.clientHeight;
-
-    var boundsMax = _engine.world.bounds.max,
-      renderOptions = _engine.render.options,
+    var renderOptions = _engine.render.options,
       canvas = _engine.render.canvas;
-
-    // goes in next bit
-    boundsMax.x = _sceneWidth;
-    boundsMax.y = _sceneHeight;
 
     canvas.width = renderOptions.width = Nav.container.clientWidth;
     canvas.height = renderOptions.height = Nav.container.clientHeight;
