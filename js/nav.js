@@ -31,8 +31,10 @@
 
     loopTimer: 1, // Time between each loop iteration in seconds
     background: 'rgba(0,0,0,0)', //World background
-    gravity: 0, // World gravity
     velocityThreshold: 0.20, // The threshold to check if force should be reapplied or not
+    
+    gravity: 0, // World default gravity
+    altGravity: 0.2, // World alternative gravity
 
     // Blobs options
     blobsOptions : {
@@ -286,7 +288,14 @@
   };
 
   Nav.switchGravity = function() {
-    
+    if( _engine.world.gravity.y != Nav.options.gravity ) {
+      _engine.world.gravity.y = Nav.options.altGravity * -2;
+      setTimeout( function() {
+        _engine.world.gravity.y = Nav.options.gravity;
+      }, 300);
+    } else {
+      _engine.world.gravity.y = Nav.options.altGravity;
+    }
   };
 
   Nav.random = function(min, max) {
