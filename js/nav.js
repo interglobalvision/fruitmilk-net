@@ -11,6 +11,7 @@
       Body = Matter.Body,
       Bodies = Matter.Bodies,
       Bounds = Matter.Bounds,
+      Detector = Matter.Detector,
       Vertices = Matter.Vertices,
       Vector = Matter.Vector,
       Common = Matter.Common,
@@ -135,20 +136,54 @@
     // is main the best name here?
     Nav.main();
     Nav.updateScene();
-    Nav.loop();
   };
 
   Nav.main = function() {
     var _world = _engine.world;
 
+    var counter = 0;
+
     Events.on(_engine, 'tick', function() {
+
+      /*
+       *  Loop that runs to reapply force and stuff
+       */
+      counter++;
+      // Every [Nav.options.loopTimer] seconds
+      if(counter >= 60 * Nav.options.loopTimer) {
+        // Re apply force
+        var blobs = Composite.allBodies(Nav.blobs);
+        for(var i = 0; i < blobs.length; i++) {
+          var blob = blobs[i];
+          if( Math.abs(blob.velocity.x) < Nav.options.velocityThreshold && Math.abs(blob.velocity.y) < Nav.options.velocityThreshold ) {
+            Body.applyForce(
+              blob, 
+              { x: 0, y: 0 },
+              {
+                x: Nav.random(Nav.options.minForce, Nav.options.maxForce),
+                y: Nav.random(Nav.options.minForce, Nav.options.maxForce)
+              }
+            );
+          }
+        }
+      }
+
+      /*
+       * Mouse constraint stuff
+       */
       var mouse = _mouseConstraint.mouse;
       var blobs = Composite.allBodies(Nav.blobs);
       var inBlob = false;
       // if mouse is down
       for(var i = 0; i < blobs.length; i++) { 
         var blob = blobs[i];
-        if(Bounds.contains(blob.bounds, mouse.position)) {
+        
+        // Check if mouse is inside a blob
+        if(
+          Bounds.contains(blob.bounds, mouse.position)
+          //&& Vertices.contains(blob.vertices, mouse.position)
+          && Detector.canCollide(blob.collisionFilter, _mouseConstraint.collisionFilter)
+        ) {
 
           inBlob = true;
 
@@ -297,28 +332,6 @@
 
   Nav.switchGravity = function() {
     
-  };
-
-  Nav.loop = function() {
-    setTimeout(function () {
-
-      // Re apply force
-      var blobs = Composite.allBodies(Nav.blobs);
-      for(var i = 0; i < blobs.length; i++) {
-        var blob = blobs[i];
-        if( Math.abs(blob.velocity.x) < Nav.options.velocityThreshold && Math.abs(blob.velocity.y) < Nav.options.velocityThreshold ) {
-          Body.applyForce(
-            blob, 
-            { x: 0, y: 0 },
-            {
-              x: Nav.random(Nav.options.minForce, Nav.options.maxForce),
-              y: Nav.random(Nav.options.minForce, Nav.options.maxForce)
-            }
-          );
-        }
-      }
-      Nav.loop();
-    }, Nav.options.loopTimer);
   };
 
   Nav.random = function(min, max) {
