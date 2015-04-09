@@ -23,17 +23,21 @@
 
   // Comment the function of these?
   Nav.options = {
-    maxForce: 0.15,
-    minForce: -0.15,
-    loopTimer: 8000,
+    // Initial forces and reapplied forces
+    maxForce: 0.25,
+    minForce: -0.25,
+    loopTimer: 1000,
     background: 'rgba(0,0,0,0)',
     gravity: 0,
 
+    // The threshold to check if force should be reapplied or not
+    velocityThreshold: 0.20,
+
     // Blobs options
     blobsOptions : {
-      frictionAir: 0,
-      friction: 0,
-      restitution: 1,
+      frictionAir: 0.01,
+      friction: 0.1,
+      restitution: 0.7,
       render: {
         strokeStyle: '#000000',
         fillStyle: 'rgba(0,0,0,0.5)'
@@ -54,7 +58,8 @@
     // Walls options
     wallOptions: {
       isStatic: true,
-      restitution: 1,
+      restitution: 0.8,
+      friction: 0.1,
       render: {
         visible: true,
         strokeStyle: 'red'
@@ -127,19 +132,15 @@
     Events.on(_engine, 'tick', function() {
       var mouse = _mouseConstraint.mouse;
       var blobs = Composite.allBodies(Nav.blobs);
-      l(mouse.button);
 
       // if mouse is down
-      l(mouse.position);
       for(var i = 0; i < blobs.length; i++) { 
         var blob = blobs[i];
-        l(blobs.vertices);
-        if(Vertices.contains(blob.vertices, mouse.position)) {
+        if(Bounds.contains(blob.bounds, mouse.position)) {
 
           document.body.style.cursor = 'pointer';
 
           if( mouse.button === 0 ) {
-            l(blob.label);
             window.location = '#!/' + blob.label;
             break;
           }
@@ -288,8 +289,28 @@
 
   };
 
+  Nav.switchGravity = function() {
+    
+  };
+
   Nav.loop = function() {
     setTimeout(function () {
+
+      // Re apply force
+      var blobs = Composite.allBodies(Nav.blobs);
+      for(var i = 0; i < blobs.length; i++) {
+        var blob = blobs[i];
+        if( Math.abs(blob.velocity.x) < Nav.options.velocityThreshold && Math.abs(blob.velocity.y) < Nav.options.velocityThreshold ) {
+          Body.applyForce(
+            blob, 
+            { x: 0, y: 0 },
+            {
+              x: Nav.random(Nav.options.minForce, Nav.options.maxForce),
+              y: Nav.random(Nav.options.minForce, Nav.options.maxForce)
+            }
+          );
+        }
+      }
       Nav.loop();
     }, Nav.options.loopTimer);
   };
