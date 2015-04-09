@@ -263,7 +263,10 @@
       return;
     } 
 
-    Nav.updateBlobs(Nav.container.clientWidth / _engine.render.options.width); 
+    if( Nav.container.clientWidth < 1020 ) {
+      Nav.updateBlobs(Nav.container.clientWidth / _engine.render.options.width); 
+    }
+      
     
     var renderOptions = _engine.render.options,
       canvas = _engine.render.canvas;
