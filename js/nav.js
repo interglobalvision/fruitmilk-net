@@ -250,6 +250,11 @@
       )));
     }
 
+    // Scale blobs & bumpers
+    if( Nav.container.clientWidth < 1020 ) {
+      Nav.updateBlobs(Nav.container.clientWidth / 1020); 
+    }
+
   };
 
   Nav.updateScene = function() {
@@ -257,6 +262,8 @@
     if (!_engine) {
       return;
     } 
+
+    Nav.updateBlobs(Nav.container.clientWidth / _engine.render.options.width); 
     
     var renderOptions = _engine.render.options,
       canvas = _engine.render.canvas;
@@ -265,6 +272,24 @@
     canvas.height = renderOptions.height = Nav.container.clientHeight;
 
     Nav.updateWalls();
+  };
+
+  Nav.updateBlobs = function(scale) {
+    if (!_engine) {
+      return;
+    } 
+
+    var blobs = Composite.allBodies(Nav.blobs);
+    for(var i = 0; i < blobs.length; i++) {
+      var blob = blobs[i];
+      Body.scale(blob, scale, scale);
+    }
+
+    var bumpers = Composite.allBodies(Nav.bumpers);
+    for(var i = 0; i < bumpers.length; i++) {
+      var bumper = bumpers[i];
+      Body.scale(bumper, scale, scale);
+    }
   };
 
   Nav.updateWalls = function() {
