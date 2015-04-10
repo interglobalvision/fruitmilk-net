@@ -18,7 +18,8 @@
       Composite = Matter.Composite,
       Composites = Matter.Composites,
       MouseConstraint = Matter.MouseConstraint,
-      Mouse = Matter.Mouse;
+      Mouse = Matter.Mouse,
+      Sleeping = Matter.Sleeping;
 
   var Nav = {};
 
@@ -52,9 +53,10 @@
       frictionAir: 1,
       friction: 0,
       restitution: 1,
+      draggable: true,
       render: {
         strokeStyle: '#000000',
-        fillStyle: '#000000'
+        fillStyle: 'rgba(0,0,0,0)'
       }
     },
 
@@ -149,6 +151,7 @@
 
     Events.on(_engine, 'tick', function() {
       var blobs = Composite.allBodies(Nav.blobs);
+      var bumpers = Composite.allBodies(Nav.bumpers);
 
       /*
        *  Loop that runs to reapply force and stuff
@@ -177,8 +180,9 @@
        */
       var mouse = _mouseConstraint.mouse;
       var inBlob = false;
-      // if mouse is down
-      for(var i = 0; i < blobs.length; i++) { 
+      var inBumper = false;
+
+      for(var i = 0; i < blobs.length; i++) {
         var blob = blobs[i];
         
         // Check if mouse is inside a blob
@@ -190,14 +194,33 @@
 
           inBlob = true;
 
+          // Mouse down
           if( mouse.button === 0 ) {
             window.location = '#!/' + blob.label;
             break;
           }
         }
       }
+      
+      // Bumpers
+      for(var i = 0; i < bumpers.length; i++) {
+        var bumper = bumpers[i];
+
+        // Check if mouse is inside a bumper
+        if(
+          Bounds.contains(bumper.bounds, mouse.position)
+            //&& Vertices.contains(bumper.vertices, mouse.position)
+            && Detector.canCollide(bumper.collisionFilter, _mouseConstraint.collisionFilter)
+        ) {
+          inBumper = true;
+        }
+      }
+
+
       if(inBlob) {
         document.body.style.cursor = 'pointer';
+      } else if(inBumper) {
+        document.body.style.cursor = 'move';
       } else {
         document.body.style.cursor = 'default';
       }
@@ -334,4 +357,43 @@
 
   window.addEventListener('load', Nav.init);
   window.addEventListener('resize', Nav.updateScene);
+
+  // Monkey patch to make convex blobs draggable
+  MouseConstraint.update = function(mouseConstraint, bodies) {
+    var mouse = mouseConstraint.mouse,
+    constraint = mouseConstraint.constraint,
+    body = mouseConstraint.body;
+
+    if (mouse.button === 0) {
+      if (!constraint.bodyB) {
+        for (var i = 0; i < bodies.length; i++) {
+          body = bodies[i];
+          if (body.draggable
+            && Bounds.contains(body.bounds, mouse.position) 
+              //&& Vertices.contains(body.vertices, mouse.position)
+            && Detector.canCollide(body.collisionFilter, mouseConstraint.collisionFilter)) {
+
+              constraint.pointA = mouse.position;
+              constraint.bodyB = mouseConstraint.body = body;
+              constraint.pointB = { x: mouse.position.x - body.position.x, y: mouse.position.y - body.position.y };
+              constraint.angleB = body.angle;
+
+              Sleeping.set(body, false);
+              Events.trigger(mouseConstraint, 'startdrag', { mouse: mouse, body: body });
+            }
+        }
+      } else {
+        Sleeping.set(constraint.bodyB, false);
+        constraint.pointA = mouse.position;
+      }
+    } else {
+      constraint.bodyB = mouseConstraint.body = null;
+      constraint.pointB = null;
+
+      if (body)
+        Events.trigger(mouseConstraint, 'enddrag', { mouse: mouse, body: body });
+    }
+  };
+
+
 //})();
