@@ -26,9 +26,13 @@
   // Comment the function of these?
   Nav.options = {
 
-    // Initial forces and reapplied forces
+    // Initial and reapplied forces
     maxForce: 0.2,
     minForce: -0.2,
+
+    // Initial and reapplied torque
+    maxTorque: 25,
+    minTorque: -25,
 
     loopTimer: 1, // Time between each loop iteration in seconds
     background: 'rgba(0,0,0,0)', //World background
@@ -149,6 +153,8 @@
 
     var counter = 0;
 
+    var isDragging = false;
+
     Events.on(_engine, 'tick', function() {
       var blobs = Composite.allBodies(Nav.blobs);
       var bumpers = Composite.allBodies(Nav.bumpers);
@@ -171,6 +177,7 @@
                 y: Nav.random(Nav.options.minForce, Nav.options.maxForce)
               }
             );
+            blob.torque = Nav.random(Nav.options.minTorque, Nav.options.maxTorque);
           }
         }
       }
@@ -182,12 +189,22 @@
       var inBlob = false;
       var inBumper = false;
 
+      Events.on(_mouseConstraint, 'startdrag', function() {
+        isDragging = true;
+      });
+
+      Events.on(_mouseConstraint, 'enddrag', function() {
+        isDragging = false;
+      });
+
       for(var i = 0; i < blobs.length; i++) {
         var blob = blobs[i];
         
+        console.log(!isDragging);
         // Check if mouse is inside a blob
         if(
           Bounds.contains(blob.bounds, mouse.position)
+          && !isDragging
           //&& Vertices.contains(blob.vertices, mouse.position)
           && Detector.canCollide(blob.collisionFilter, _mouseConstraint.collisionFilter)
         ) {
@@ -209,6 +226,7 @@
         // Check if mouse is inside a bumper
         if(
           Bounds.contains(bumper.bounds, mouse.position)
+          && !isDragging
             //&& Vertices.contains(bumper.vertices, mouse.position)
             && Detector.canCollide(bumper.collisionFilter, _mouseConstraint.collisionFilter)
         ) {
@@ -250,7 +268,8 @@
           force: {
             x: Nav.random(Nav.options.minForce, Nav.options.maxForce),
             y: Nav.random(Nav.options.minForce, Nav.options.maxForce)
-          }
+          },
+          torque: Nav.random(Nav.options.minTorque, Nav.options.maxTorque)
         },
         Nav.options.blobsOptions 
       )));
