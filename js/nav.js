@@ -131,8 +131,15 @@
 
 
     // add a mouse controlled constraint
-    _mouseConstraint = MouseConstraint.create(_engine);
-    World.add(_engine.world, MouseConstraint.create(_engine));
+    _mouseConstraint = MouseConstraint.create(_engine, {
+      constraint: {
+        render: {
+          lineWidth: 0,
+          strokeStyle: 'rgba(0,0,0,0)',
+        }
+      }
+    });
+    World.add(_engine.world, _mouseConstraint );
 
     // run the engine
     Engine.run(_engine);
