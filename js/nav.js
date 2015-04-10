@@ -43,7 +43,7 @@
       restitution: 0.7,
       render: {
         strokeStyle: '#000000',
-        fillStyle: 'rgba(0,0,0,0.5)'
+        fillStyle: 'rgba(0,0,0,1)'
       },
     },
 
@@ -54,7 +54,7 @@
       restitution: 1,
       render: {
         strokeStyle: '#000000',
-        fillStyle: 'red'
+        fillStyle: '#000000'
       }
     },
 
@@ -64,7 +64,7 @@
       restitution: 0.3,
       friction: 0.1,
       render: {
-        visible: true,
+        visible: false,
         strokeStyle: 'red'
       }
     },
@@ -91,6 +91,7 @@
           height: Nav.container.clientHeight,
           background: Nav.options.background,
           wireframes: false,
+          /*
           showAngleIndicator: true,
           showBroadphase: true,
           showBounds: true,
@@ -100,6 +101,7 @@
           showAxes: true,
           showPositions: true,
           showShadows: true
+          */
         }
       },
       world: {
@@ -320,7 +322,7 @@
       _engine.world.gravity.y = Nav.options.altGravity * -2;
       setTimeout( function() {
         _engine.world.gravity.y = Nav.options.gravity;
-      }, 300);
+      }, 700);
     } else {
       _engine.world.gravity.y = Nav.options.altGravity;
     }
