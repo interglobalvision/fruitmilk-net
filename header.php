@@ -38,14 +38,10 @@ if ($color) {
 <body <?php body_class(); ?>>
 <!--[if lt IE 7]><p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p><![endif]-->
 
-  <section id="main-container">
+<section id="main-container">
 
   <!-- start content -->
   <header id="header">
     <h1 id="fruitmilk-title"><?php bloginfo('name'); ?></h1>
     <nav id="nav"></nav>
-    <nav id="temp-nav">
-      <a href="<?php echo get_permalink(get_id_by_slug('about')); ?>">ABOUT</a>
-      <a href="<?php echo get_post_type_archive_link('collab'); ?>">COLLABS</a>
-      <a href="<?php echo get_post_type_archive_link('installation'); ?>">INSTALLATION</a>
   </header>

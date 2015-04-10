@@ -1106,6 +1106,13 @@ img {
   letter-spacing: 0.5em;
   line-height: 0;
 }
+#nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
 #main-content {
   padding-top: 165px;
   padding-bottom: 165px;
@@ -1167,8 +1174,6 @@ input {
   -webkit-appearance: none;
   -moz-appearance: none;
   border: 0;
-  -webkit-border-radius: 0;
-  -moz-border-radius: 0;
   border-radius: 0;
   background: none;
   font-family: 'luculentregular';
