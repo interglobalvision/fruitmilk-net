@@ -12,7 +12,7 @@ function l(data) {
 var Menu = {
   $nav: $('#nav'),
   minimized: false,
-  minimizedHeight: 150,
+  minimizedHeight: 80,
 
   init: function() {
     var _this = this;
