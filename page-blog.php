@@ -11,7 +11,7 @@ get_header();
 
     <div class="container">
       <div class="row">
-        <div class="col col1">
+        <div class="col col2">
           <h1 class="section-title">
             <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
           </h1>
@@ -38,11 +38,12 @@ $results = json_decode(file_get_contents($url), true);
 for ($i = 0; $i < $tumblr_limit; ++$i) {
   $item = $results['response']['posts'][$i]; 
 ?>
-        <div class="item col1 tumblr">
+        <div class="item col1">
           <?php echo $item['body']; ?>
+          <a href="<?php echo $item['post_url']; ?>">See this post on our tumblr!</a>
         </div>
 <?php }  ?> 
-        <div class="item col1">
+        <div class="item col1 tumblr-link">
           <a href="http://<?php echo $tumblr_uri; ?>">
             <?php the_content(); ?>
           </a>
