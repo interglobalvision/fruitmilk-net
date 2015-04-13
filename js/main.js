@@ -44,15 +44,19 @@ jQuery(document).ready(function () {
 
   Menu.init();
 
-  var masonry = $('.js-masonry');
-  masonry.imagesLoaded( function() {
-    masonry.masonry({
-      columnWidth: '.grid-sizer',
-      gutterWidth: '.gutter-sizer',
-      itemSelector: '.item'
-    });
+});
+
+
+//MASONRY
+var masonry = $('.js-masonry');
+masonry.imagesLoaded( function() {
+  masonry.masonry({
+    columnWidth: '.grid-sizer',
+    gutterWidth: '.gutter-sizer',
+    itemSelector: '.item'
   });
 });
+
 
 // MAILCHIMP
 $('#subscribe').submit(function(e) {
