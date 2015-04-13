@@ -39,13 +39,18 @@ for ($i = 0; $i < $tumblr_limit; ++$i) {
   $item = $results['response']['posts'][$i]; 
 ?>
         <div class="item col1">
-          <p>
+          <span class="tumblr-meta">
             <a href="<?php echo $item['post_url']; ?>" target="_blank">
               <?php echo date('m/d/Y', $item['timestamp']); ?>
               ~*
               <?php echo $item['note_count']; ?> notes
             </a>
-          </p>
+          </span>
+          <h2 class="tumblr-title">
+            <a href="<?php echo $item['post_url']; ?>" target="_blank">
+              <?php echo $item['title']; ?>
+            </a>
+          </h2>
           <?php echo $item['body']; ?>
         </div>
 <?php }  ?> 
