@@ -1076,6 +1076,11 @@ a:visited {
   color: inherit;
   text-decoration: none;
 }
+h1 a,
+h2 a,
+h3 a {
+  color: #1a1a1a !important;
+}
 p a,
 p a:active,
 p a:visited {
@@ -1089,16 +1094,8 @@ img {
   max-width: 100%;
   height: auto;
 }
-#header {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 0;
-}
 #site-title {
-  position: absolute;
+  position: fixed;
   width: 100%;
   top: 46%;
   text-align: center;
@@ -1114,6 +1111,7 @@ img {
   bottom: 0;
   -webkit-transition: all 2000ms;
           transition: all 2000ms;
+  z-index: 9999;
 }
 #main-content {
   padding-top: 165px;
@@ -1157,6 +1155,13 @@ img {
 }
 #pagination {
   width: 100%;
+}
+.tumblr-meta {
+  margin-bottom: 0.7em;
+  display: block;
+}
+.tumblr-title {
+  margin-bottom: 1em;
 }
 a.instagram-link .instagram-image {
   float: left;

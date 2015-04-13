@@ -46,6 +46,7 @@ jQuery(document).ready(function () {
   });
 });
 
+
 // MAILCHIMP
 $('#subscribe').submit(function(e) {
   e.preventDefault();
