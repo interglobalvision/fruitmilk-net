@@ -1112,6 +1112,8 @@ img {
   left: 0;
   right: 0;
   bottom: 0;
+  -webkit-transition: all 2000ms;
+          transition: all 2000ms;
 }
 #main-content {
   padding-top: 165px;

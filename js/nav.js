@@ -21,7 +21,11 @@
       Mouse = Matter.Mouse,
       Sleeping = Matter.Sleeping;
 
-  var Nav = {};
+  var Nav = {
+    $nav: $('#nav'),
+    minimized: false,
+    minimizedHeight: 80,
+  };
 
   // Comment the function of these?
   Nav.options = {
@@ -192,9 +196,10 @@
       /*
        * Mouse constraint stuff
        */
-      var mouse = _mouseConstraint.mouse;
-      var inBlob = false;
-      var inBumper = false;
+      var mouse = _mouseConstraint.mouse,
+          inBlob = false,
+          inBumper = false,
+          inMinNav = false;
 
       Events.on(_mouseConstraint, 'startdrag', function() {
         isDragging = true;
@@ -204,24 +209,30 @@
         isDragging = false;
       });
 
-      for(var i = 0; i < blobs.length; i++) {
-        var blob = blobs[i];
-        
-        console.log(!isDragging);
-        // Check if mouse is inside a blob
-        if(
-          Bounds.contains(blob.bounds, mouse.position)
-          && !isDragging
-          //&& Vertices.contains(blob.vertices, mouse.position)
-          && Detector.canCollide(blob.collisionFilter, _mouseConstraint.collisionFilter)
-        ) {
+      if(Nav.minimized) {
+        inMinNav = true;
+        if( mouse.button === 0 ) {
+          Nav.maximize();
+        }
+      } else {
+        for(var i = 0; i < blobs.length; i++) {
+          var blob = blobs[i];
+          
+          // Check if mouse is inside a blob
+          if(
+            Bounds.contains(blob.bounds, mouse.position)
+            && !isDragging
+            //&& Vertices.contains(blob.vertices, mouse.position)
+            && Detector.canCollide(blob.collisionFilter, _mouseConstraint.collisionFilter)
+          ) {
 
-          inBlob = true;
+            inBlob = true;
 
-          // Mouse down
-          if( mouse.button === 0 ) {
-            window.location = '#!/' + blob.label;
-            break;
+            // Mouse down
+            if( mouse.button === 0 ) {
+              window.location = '#!/' + blob.label;
+              break;
+            }
           }
         }
       }
@@ -242,7 +253,9 @@
       }
 
 
-      if(inBlob) {
+      if(inMinNav) {
+        document.body.style.cursor = 's-resize';
+      } else if(inBlob) {
         document.body.style.cursor = 'pointer';
       } else if(inBumper) {
         document.body.style.cursor = 'move';
@@ -306,6 +319,11 @@
       Nav.updateBlobs(Nav.container.clientWidth / 1300); 
     }
 
+    if( window.location.hash ) {
+      Nav.minimize();
+    }
+
+
   };
 
   Nav.updateScene = function() {
@@ -365,6 +383,28 @@
     ]);
 
   };
+
+  Nav.minimize = function () {
+    if(Nav.minimized) {
+      return;
+    }
+
+    Nav.switchGravity();
+    var height = $(window).height() - Nav.minimizedHeight;
+    Nav.container.style.top = "-" + height + "px";
+    Nav.minimized = true;
+  }
+
+  Nav.maximize = function() {
+    if(!Nav.minimized) {
+      return;
+    }
+
+    Nav.switchGravity();
+    Nav.container.style.top = "0";
+    Nav.minimized = false;
+     
+  }
 
   Nav.switchGravity = function() {
     if( _engine.world.gravity.y != Nav.options.gravity ) {
