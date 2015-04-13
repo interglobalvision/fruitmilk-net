@@ -42,6 +42,8 @@ if ($color) {
 
   <!-- start content -->
   <header id="header">
+    <?php if (is_home() || is_front_page()) { ?>
     <h1 id="fruitmilk-title"><?php bloginfo('name'); ?></h1>
+    <?php } ?>
     <nav id="nav"></nav>
   </header>
