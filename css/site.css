@@ -1076,6 +1076,11 @@ a:visited {
   color: inherit;
   text-decoration: none;
 }
+h1 a,
+h2 a,
+h3 a {
+  color: #1a1a1a !important;
+}
 p a,
 p a:active,
 p a:visited {
