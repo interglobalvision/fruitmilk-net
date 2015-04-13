@@ -22,13 +22,13 @@
       Sleeping = Matter.Sleeping;
 
   var Nav = {
-    $nav: $('#nav'),
     minimized: false,
-    minimizedHeight: 80,
   };
 
   // Comment the function of these?
   Nav.options = {
+
+    minimizedHeight: 80,
 
     // Initial and reapplied forces
     maxForce: 0.2,
@@ -390,7 +390,7 @@
     }
 
     Nav.switchGravity();
-    var height = $(window).height() - Nav.minimizedHeight;
+    var height = $(window).height() - Nav.options.minimizedHeight;
     Nav.container.style.top = "-" + height + "px";
     Nav.minimized = true;
   }
