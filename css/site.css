@@ -1156,6 +1156,13 @@ img {
 #pagination {
   width: 100%;
 }
+.tumblr-meta {
+  margin-bottom: 0.7em;
+  display: block;
+}
+.tumblr-title {
+  margin-bottom: 1em;
+}
 a.instagram-link .instagram-image {
   float: left;
   width: 49%;
