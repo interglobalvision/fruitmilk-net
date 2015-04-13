@@ -1097,13 +1097,13 @@ img {
   left: 0;
   z-index: 0;
 }
-#fruitmilk-title {
+#site-title {
   position: absolute;
   width: 100%;
   top: 46%;
   text-align: center;
   font-size: 4em;
-  letter-spacing: 0.5em;
+  letter-spacing: 0.4em;
   line-height: 0;
 }
 #nav {
@@ -1220,9 +1220,6 @@ input:focus {
     line-height: 1.35em;
     letter-spacing: 0.001em;
   }
-  #header {
-    height: 120px;
-  }
   #main-content {
     padding-top: 120px;
   }
@@ -1257,9 +1254,6 @@ input:focus {
     line-height: 1.35em;
     letter-spacing: 0.001em;
   }
-  #header {
-    height: 90px;
-  }
   #main-content {
     padding-top: 90px;
   }
@@ -1291,8 +1285,8 @@ input:focus {
     line-height: 1.35em;
     letter-spacing: 0.001em;
   }
-  #header {
-    height: 40px;
+  #site-title {
+    font-size: 2em;
   }
   #main-content {
     padding-top: 40px;
@@ -1328,9 +1322,6 @@ input:focus {
     font-size: 17px;
     line-height: 1.35em;
     letter-spacing: 0.001em;
-  }
-  #header {
-    height: 20px;
   }
   #main-content {
     padding-top: 20px;
