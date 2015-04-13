@@ -42,7 +42,7 @@ for ($i = 0; $i < $tumblr_limit; ++$i) {
           <p>
             <a href="<?php echo $item['post_url']; ?>" target="_blank">
               <?php echo date('m/d/Y', $item['timestamp']); ?>
-              &mdash;
+              ~*
               <?php echo $item['note_count']; ?> notes
             </a>
           </p>
