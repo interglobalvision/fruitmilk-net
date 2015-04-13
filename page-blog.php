@@ -39,11 +39,17 @@ for ($i = 0; $i < $tumblr_limit; ++$i) {
   $item = $results['response']['posts'][$i]; 
 ?>
         <div class="item col1">
+          <p>
+            <a href="<?php echo $item['post_url']; ?>" target="_blank">
+              <?php echo date('m/d/Y', $item['timestamp']); ?>
+              &mdash;
+              <?php echo $item['note_count']; ?> notes
+            </a>
+          </p>
           <?php echo $item['body']; ?>
-          <a href="<?php echo $item['post_url']; ?>">See this post on our tumblr!</a>
         </div>
 <?php }  ?> 
-        <div class="item col1 tumblr-link">
+        <div class="item col2 tumblr-link">
           <a href="http://<?php echo $tumblr_uri; ?>">
             <?php the_content(); ?>
           </a>
@@ -59,8 +65,6 @@ for ($i = 0; $i < $tumblr_limit; ++$i) {
 } ?>
 
   <!-- end posts -->
-
-    </div>
 
   </section>
 
