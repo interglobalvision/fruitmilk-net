@@ -302,8 +302,8 @@
     }
 
     // Scale blobs & bumpers
-    if( Nav.container.clientWidth < 1020 ) {
-      Nav.updateBlobs(Nav.container.clientWidth / 1020); 
+    if( Nav.container.clientWidth < 1300 ) {
+      Nav.updateBlobs(Nav.container.clientWidth / 1300); 
     }
 
   };
@@ -314,7 +314,7 @@
       return;
     } 
 
-    if( Nav.container.clientWidth < 1020 ) {
+    if( Nav.container.clientWidth < 1300 ) {
       Nav.updateBlobs(Nav.container.clientWidth / _engine.render.options.width); 
     }
       
