@@ -74,7 +74,7 @@
       restitution: 0.3,
       friction: 0.1,
       render: {
-        visible: false,
+        visible: true,
         strokeStyle: 'red'
       }
     },
@@ -260,7 +260,7 @@
       } else if(inBumper) {
         document.body.style.cursor = 'move';
       } else {
-        document.body.style.cursor = 'default';
+        document.body.style.removeProperty('cursor');
       }
     });
 
@@ -319,10 +319,14 @@
       Nav.updateBlobs(Nav.container.clientWidth / 1300); 
     }
 
+    // Hashes
     if( window.location.hash ) {
       Nav.minimize();
     }
 
+    window.onhashchange = function () {
+      Nav.minimize();
+    }
 
   };
 
@@ -384,6 +388,7 @@
 
   };
 
+  x = 0;
   Nav.minimize = function () {
     if(Nav.minimized) {
       return;
@@ -393,6 +398,7 @@
     var height = $(window).height() - Nav.options.minimizedHeight;
     Nav.container.style.top = "-" + height + "px";
     Nav.minimized = true;
+
   }
 
   Nav.maximize = function() {

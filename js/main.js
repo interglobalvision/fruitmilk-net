@@ -15,23 +15,17 @@ function router( hash ) {
 
   l(hash);
 
-  if (hash === 'menu') {
-    Menu.maximize();
-
-  } else {
-    Menu.minimize();
-
-  }
-
 }
 
 jQuery(document).ready(function () {
   'use strict';
 
+  $('#nav').height( $(window).height() );
+
   // Router: on change
   window.onhashchange = function () {
     var hash = window.location.hash.replace("#",'');
-    router( 'director', hash );
+    router( hash );
   };
 
   // Router: on load
@@ -41,8 +35,6 @@ jQuery(document).ready(function () {
     router( 'director', hash );
   }
 */
-
-  Menu.init();
 
   var masonry = $('.js-masonry');
   masonry.imagesLoaded( function() {
