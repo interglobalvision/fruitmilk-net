@@ -230,7 +230,8 @@
 
             // Mouse down
             if( mouse.button === 0 ) {
-              window.location = '#!/' + blob.label;
+              History.pushState(null, null, blob.label);
+              //window.location = '#!/' + blob.label;
               break;
             }
           }
