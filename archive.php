@@ -1,5 +1,10 @@
 <?php
 get_header();
+
+$post_type = get_post_type();
+if ($post_type == 'press') {
+  $press_link = get_post_meta( $post->ID, '_igv_press_link', true );
+}
 ?>
 
 <!-- main content -->
@@ -12,7 +17,7 @@ get_header();
     <div class="container">
       <div class="row">
         <div class="col col2">
-          <h1 class="section-title"><a href="<?php echo get_post_type_archive_link(get_post_type()); ?>"><?php post_type_archive_title(); ?></a></h1>
+          <h1 class="section-title"><a href="<?php echo get_post_type_archive_link($post_type); ?>"><?php post_type_archive_title(); ?></a></h1>
         </div>
         <div class="u-cf"></div>
       </div>
@@ -33,7 +38,7 @@ if( have_posts() ) {
 ?>
 
         <article <?php post_class('item col1'); ?> id="post-<?php the_ID(); ?>">
-          <a href="<?php the_permalink(); ?>">
+          <a href="<?php if ($post_type == 'press') { echo $press_link.'" target="_blank'; } else { the_permalink(); } ?>">
             <h2 class="item-title color-secondary"><?php the_title(); ?></h1>
             <img src="<?php echo $thumb_url; ?>" />
           </a>
