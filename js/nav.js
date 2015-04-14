@@ -254,13 +254,13 @@
 
 
       if(inMinNav) {
-        document.body.style.cursor = 's-resize';
+        Nav.container.style.cursor = 's-resize';
       } else if(inBlob) {
-        document.body.style.cursor = 'pointer';
+        Nav.container.style.cursor = 'pointer';
       } else if(inBumper) {
-        document.body.style.cursor = 'move';
+        Nav.container.style.cursor = 'move';
       } else {
-        document.body.style.removeProperty('cursor');
+        Nav.container.style.removeProperty('cursor');
       }
     });
 
@@ -388,7 +388,6 @@
 
   };
 
-  x = 0;
   Nav.minimize = function () {
     if(Nav.minimized) {
       return;
