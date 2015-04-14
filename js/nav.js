@@ -231,7 +231,10 @@
             // Mouse down
             if( mouse.button === 0 ) {
               History.pushState(null, null, blob.label);
-              //window.location = '#!/' + blob.label;
+              var href = window.location['href'];
+              console.log(window.location);
+              $('#main-content').load(href + ' #main-content', function() {
+              });
               break;
             }
           }
@@ -320,14 +323,7 @@
       Nav.updateBlobs(Nav.container.clientWidth / 1300); 
     }
 
-    // Hashes
-    if( window.location.hash ) {
-      Nav.minimize();
-    }
-
-    window.onhashchange = function () {
-      Nav.minimize();
-    }
+    // Minimize on change
 
     window.onstatechange = function () { //history.js
       Nav.minimize();
