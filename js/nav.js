@@ -230,8 +230,6 @@
 
             // Mouse down
             if( mouse.button === 0 ) {
-              current = window.location;
-              console.log(current);
               History.pushState(null, null, blob.label);
               href = window.location['href'];
               $.ajax({
