@@ -34,8 +34,9 @@ $tumblr_apikey = 'IOB9uwQ7SgRUYoBr8LGNiXr4jTHK4DUzhGNCDcTd6XQjQ6ikKD';
 $url = 'http://api.tumblr.com/v2/blog/'.$tumblr_uri.'/posts/'.$tumblr_type.'?limit='.$tumblr_limit.'&api_key='.$tumblr_apikey;
 
 $results = json_decode(file_get_contents($url), true);
+$count = count($item = $results['response']['posts']);
 
-for ($i = 0; $i < $tumblr_limit; ++$i) {
+for ($i = 0; $i < $count; ++$i) {
   $item = $results['response']['posts'][$i]; 
 ?>
         <div class="item col1">
