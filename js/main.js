@@ -7,44 +7,51 @@ function l(data) {
   console.log(data);
 }
 
+var masonry = $('.js-masonry');
+
+
 // ROUTER
-
-function router( hash ) {
-
-  hash = hash.replace("#!/",'');
-
-  l(hash);
-
+var Router = {
+  loadBlob: function(label) {
+    History.pushState(null, null, wp.origin + '/' + label);
+  },
+  loadContent: function() {
+    href = window.location['href'];
+    $.ajax({
+      url: href,
+      success: function(data) {
+        content = $(data).find('#main-content');
+        $('#main-content').replaceWith(content);
+      }
+    })
+    .done(function() {
+      $('.js-masonry').imagesLoaded( function() {
+        $('.js-masonry').masonry({
+          columnWidth: '.grid-sizer',
+          gutterWidth: '.gutter-sizer',
+          itemSelector: '.item'
+        });
+      });
+    });
+  },
 }
+
+
 
 jQuery(document).ready(function () {
   'use strict';
 
   $('#nav').height( $(window).height() );
 
-  // Router: on change
-  window.onhashchange = function () {
-    var hash = window.location.hash.replace("#",'');
-    router( hash );
-  };
-
-  // Router: on load
-/*
-  if ( window.location.hash ) {
-    var hash = window.location.hash.replace("#",'');
-    router( 'director', hash );
-  }
-*/
-
-  var masonry = $('.js-masonry');
-  masonry.imagesLoaded( function() {
-    masonry.masonry({
+  $('.js-masonry').imagesLoaded( function() {
+    $('.js-masonry').masonry({
       columnWidth: '.grid-sizer',
       gutterWidth: '.gutter-sizer',
       itemSelector: '.item'
     });
   });
 });
+
 
 
 // MAILCHIMP
