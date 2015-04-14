@@ -230,10 +230,16 @@
 
             // Mouse down
             if( mouse.button === 0 ) {
+              current = window.location;
+              console.log(current);
               History.pushState(null, null, blob.label);
-              var href = window.location['href'];
-              console.log(window.location);
-              $('#main-content').load(href + ' #main-content', function() {
+              href = window.location['href'];
+              $.ajax({
+                url: href,
+                success: function(data) {
+                  content = $(data).find('#main-content');
+                  $('#main-content').replaceWith(content);
+                }
               });
               break;
             }
