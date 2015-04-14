@@ -327,7 +327,10 @@
       Nav.updateBlobs(Nav.container.clientWidth / 1300); 
     }
 
-    // Minimize on change
+    // Minimize
+    if (!($('body').hasClass('home'))) {
+      Nav.minimize();
+    }
 
     window.onstatechange = function () { //history.js
       Nav.minimize();
