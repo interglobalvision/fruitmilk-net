@@ -231,19 +231,7 @@
 
             // Mouse down
             if( mouse.button === 0 ) {
-              currentState = window.location['href'];
-              History.pushState(null, null, wp.origin + '/' + blob.label);
-              href = window.location['href'];
-              $.ajax({
-                url: href,
-                success: function(data) {
-                  content = $(data).find('#main-content');
-                  $('#main-content').replaceWith(content);
-                },
-                error: function() {
-                  History.pushState(null, null, currentState);
-                }
-              });
+              Router.loadBlob(blob.label);
               break;
             }
           }
@@ -345,8 +333,9 @@
       Nav.minimize();
     }
 
-    window.onstatechange = function () { //history.js
+    window.onstatechange = function () {
       Nav.minimize();
+      Router.loadContent();
     }
 
   };
