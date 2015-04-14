@@ -11,7 +11,7 @@ function scripts_and_styles_method() {
   $navscript = $templateuri."nav.js";
   wp_enqueue_script( 'navscript', $navscript,'','',true );
   wp_localize_script( 'myscripts', 'wp', array(
-    'templateDir' => get_stylesheet_directory_uri()
+    'templateDir' => get_stylesheet_directory_uri(),
     'origin' => get_site_url()
   ));
 

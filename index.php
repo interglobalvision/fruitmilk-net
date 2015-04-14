@@ -6,13 +6,7 @@ get_header();
 
 <main id="main-content">
 
-  <!-- main posts loop -->
-
-  <section id="posts">
-
-  </section>
-
-<!-- end main-content -->
+	<h1 id="site-title"><?php bloginfo('name'); ?></h1>
 
 </main>
 
