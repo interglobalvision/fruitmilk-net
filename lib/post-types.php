@@ -15,23 +15,23 @@ add_action( 'admin_head', 'add_menu_icons_styles' );
 
 
 //Register Custom Post Types
-add_action( 'init', 'register_cpt_collabs' );
+add_action( 'init', 'register_cpt_collab' );
 
-function register_cpt_collabs() {
+function register_cpt_collab() {
 
     $labels = array( 
-        'name' => _x( 'Collabs', 'collabs' ),
-        'singular_name' => _x( 'Collab', 'collabs' ),
-        'add_new' => _x( 'Add New', 'collabs' ),
-        'add_new_item' => _x( 'Add New Collab', 'collabs' ),
-        'edit_item' => _x( 'Edit Collab', 'collabs' ),
-        'new_item' => _x( 'New Collab', 'collabs' ),
-        'view_item' => _x( 'View Collab', 'collabs' ),
-        'search_items' => _x( 'Search Collabs', 'collabs' ),
-        'not_found' => _x( 'No Collabs found', 'collabs' ),
-        'not_found_in_trash' => _x( 'No Collabs found in Trash', 'collabs' ),
-        'parent_item_colon' => _x( 'Parent Collab:', 'collabs' ),
-        'menu_name' => _x( 'Collabs', 'collabs' ),
+        'name' => _x( 'Collabs', 'collab' ),
+        'singular_name' => _x( 'Collab', 'collab' ),
+        'add_new' => _x( 'Add New', 'collab' ),
+        'add_new_item' => _x( 'Add New Collab', 'collab' ),
+        'edit_item' => _x( 'Edit Collab', 'collab' ),
+        'new_item' => _x( 'New Collab', 'collab' ),
+        'view_item' => _x( 'View Collab', 'collab' ),
+        'search_items' => _x( 'Search Collabs', 'collab' ),
+        'not_found' => _x( 'No Collabs found', 'collab' ),
+        'not_found_in_trash' => _x( 'No Collabs found in Trash', 'collab' ),
+        'parent_item_colon' => _x( 'Parent Collab:', 'collab' ),
+        'menu_name' => _x( 'Collabs', 'collab' ),
     );
 
     $args = array( 
@@ -55,7 +55,7 @@ function register_cpt_collabs() {
         'capability_type' => 'post'
     );
 
-    register_post_type( 'collabs', $args );
+    register_post_type( 'collab', $args );
 }
 
 add_action( 'init', 'register_cpt_installation' );
