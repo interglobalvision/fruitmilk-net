@@ -329,6 +329,10 @@
       Nav.minimize();
     }
 
+    window.onstatechange = function () { //history.js
+      Nav.minimize();
+    }
+
   };
 
   Nav.updateScene = function() {
