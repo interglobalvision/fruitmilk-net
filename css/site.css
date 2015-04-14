@@ -1166,6 +1166,9 @@ body.error404 #main-content {
 .tumblr-title {
   margin-bottom: 1em;
 }
+.tumblr-link {
+  text-align: center;
+}
 a.instagram-link .instagram-image {
   float: left;
   width: 49%;
