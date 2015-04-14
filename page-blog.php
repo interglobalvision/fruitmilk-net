@@ -54,12 +54,18 @@ for ($i = 0; $i < $count; ++$i) {
           </h2>
           <?php echo $item['body']; ?>
         </div>
-<?php }  ?> 
+<?php }  
+  $link_text =  get_the_content();
+  if ($link_text) {
+?>
         <div class="item col2 tumblr-link">
           <a href="http://<?php echo $tumblr_uri; ?>">
-            <?php the_content(); ?>
+            <?php echo strip_tags($link_text); ?>
           </a>
         </div>
+<?php 
+  }
+?>
     </div>
 <?php
 } else {
