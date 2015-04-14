@@ -7,8 +7,6 @@ function l(data) {
   console.log(data);
 }
 
-var masonry = $('.js-masonry');
-
 
 // ROUTER
 var Router = {
@@ -17,21 +15,26 @@ var Router = {
   },
   loadContent: function() {
     href = window.location['href'];
+    $('#main-content').animate({'opacity': 0}, 2000);
     $.ajax({
       url: href,
       success: function(data) {
-        content = $(data).find('#main-content');
-        $('#main-content').replaceWith(content);
+        content = $(data).find('#main-content > *');
+        $('#main-content').html(content);
       }
     })
     .done(function() {
-      $('.js-masonry').imagesLoaded( function() {
-        $('.js-masonry').masonry({
-          columnWidth: '.grid-sizer',
-          gutterWidth: '.gutter-sizer',
-          itemSelector: '.item'
+      $('html, body').animate({ scrollTop: "0px" }, 800);
+      if ($('.js-masonry .item').length) {
+        $('.js-masonry').imagesLoaded( function() {
+          $('.js-masonry').masonry({
+            columnWidth: '.grid-sizer',
+            gutterWidth: '.gutter-sizer',
+            itemSelector: '.item'
+          });
         });
-      });
+      }
+      $('#main-content').animate({'opacity': 1}, 2000);
     });
   },
 }
