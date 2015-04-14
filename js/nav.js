@@ -232,7 +232,7 @@
             // Mouse down
             if( mouse.button === 0 ) {
               currentState = window.location['href'];
-              History.pushState(null, null, wp.origin + blob.label);
+              History.pushState(null, null, wp.origin + '/' + blob.label);
               href = window.location['href'];
               $.ajax({
                 url: href,
