@@ -217,11 +217,11 @@
       } else {
         for(var i = 0; i < blobs.length; i++) {
           var blob = blobs[i];
-          
+
           // Check if mouse is inside a blob
           if(
             Bounds.contains(blob.bounds, mouse.position)
-            && !isDragging
+              && !isDragging
             //&& Vertices.contains(blob.vertices, mouse.position)
             && Detector.canCollide(blob.collisionFilter, _mouseConstraint.collisionFilter)
           ) {
@@ -236,7 +236,7 @@
           }
         }
       }
-      
+
       // Bumpers
       for(var i = 0; i < bumpers.length; i++) {
         var bumper = bumpers[i];
@@ -244,9 +244,9 @@
         // Check if mouse is inside a bumper
         if(
           Bounds.contains(bumper.bounds, mouse.position)
-          && !isDragging
-            //&& Vertices.contains(bumper.vertices, mouse.position)
-            && Detector.canCollide(bumper.collisionFilter, _mouseConstraint.collisionFilter)
+            && !isDragging
+          //&& Vertices.contains(bumper.vertices, mouse.position)
+          && Detector.canCollide(bumper.collisionFilter, _mouseConstraint.collisionFilter)
         ) {
           inBumper = true;
         }
@@ -396,8 +396,9 @@
     Nav.switchGravity();
     var height = $(window).height() - Nav.options.minimizedHeight;
     Nav.container.style.top = "-" + height + "px";
-    Nav.minimized = true;
-
+    setTimeout( function() {
+      Nav.minimized = true;
+    }, basicAnimationSpeed);
   }
 
   Nav.maximize = function() {
@@ -407,8 +408,9 @@
 
     Nav.switchGravity();
     Nav.container.style.top = "0";
-    Nav.minimized = false;
-     
+    setTimeout( function() {
+      Nav.minimized = false;
+    }, basicAnimationSpeed);
   }
 
   Nav.switchGravity = function() {
