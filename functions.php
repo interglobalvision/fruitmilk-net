@@ -12,7 +12,8 @@ function scripts_and_styles_method() {
   wp_enqueue_script( 'navscript', $navscript,'','',true );
   wp_localize_script( 'myscripts', 'wp', array(
     'templateDir' => get_stylesheet_directory_uri(),
-    'origin' => get_site_url()
+    'origin' => get_site_url(),
+    'shopUrl' => parseShopUrl()
   ));
 
   // enqueue stylesheet here. file does not exist until stylus file is processed
@@ -25,6 +26,21 @@ function scripts_and_styles_method() {
 
 }
 add_action('wp_enqueue_scripts', 'scripts_and_styles_method');
+
+function parseShopUrl() {
+  $get_shop_url = get_post_meta( get_id_by_slug('about'), '_igv_shop_url', true);
+  if ($get_shop_url) {
+    $start = substr($get_shop_url, 0, 4);
+    if ($start == 'http') {
+      $shop_url = $get_shop_url;
+    } else {
+      $shop_url = 'http://' . $get_shop_url;
+    }
+    return $shop_url;
+  } else {
+    return false;
+  }
+}
 
 if( function_exists( 'add_theme_support' ) ) {
   add_theme_support( 'post-thumbnails' );

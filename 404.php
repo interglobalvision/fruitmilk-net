@@ -5,7 +5,15 @@ get_header();
 <!-- main content -->
 
 <section id="main-content" class="u-align-center">
-  <h1>Not found</h1>
+
+    <div class="container">
+      <div class="row">
+        <div class="col col2">
+          <h1>Not found :(</h1>
+        </div>
+      </div>
+    </div>
+
 <!-- end main-content -->
 
 <?php get_template_part('partials/pagefooter'); ?>
