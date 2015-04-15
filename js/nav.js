@@ -232,15 +232,12 @@
             // Mouse down
             if( mouse.button === 0 ) {
               var newLocation = wp.origin + '/' + blob.label;
-              console.log ('new ' +newLocation);
               if (blob.label == 'shop') {
                 window.location = shopUrl;
               } else {
                 if (currentLocation == newLocation || currentLocation == newLocation + '/') {
-                  console.log('same');
                   Nav.minimize();
                 } else {
-                  console.log('notsame');
                   Router.loadBlob(blob.label);
                 }
               }
