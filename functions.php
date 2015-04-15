@@ -10,7 +10,7 @@ function scripts_and_styles_method() {
   wp_enqueue_script( 'myscripts', $myscripts,'','',true );
   $navscript = $templateuri."nav.js";
   wp_enqueue_script( 'navscript', $navscript,'','',true );
-  wp_localize_script( 'myscripts', 'wp', array(
+  wp_localize_script( 'myscripts', 'WP', array(
     'templateDir' => get_stylesheet_directory_uri(),
     'origin' => get_site_url(),
     'shopUrl' => parseShopUrl()

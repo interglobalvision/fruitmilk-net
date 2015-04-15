@@ -1,5 +1,5 @@
 /* jshint browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
-/* global $, jQuery, document, Modernizr, Nav, History, wp, debounce */
+/* global $, jQuery, document, Modernizr, Nav, History, WP, debounce */
 
 function l(data) {
   console.log(data);
@@ -34,7 +34,7 @@ var Router = {
     History.pushState(null, null, href);
   },
   loadBlob: function(label) {
-    History.pushState(null, null, wp.origin + '/' + label);
+    History.pushState(null, null, WP.origin + '/' + label);
   },
   loadContent: function(href) {
     $('#preloader').addClass('show');

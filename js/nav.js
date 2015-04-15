@@ -1,6 +1,5 @@
-/*
- * NAV / MATTER.JS
- */
+/* jshint browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
+/* global $, jQuery, document, Modernizr, Nav, History, WP, debounce */
 
  var gravityTimeout;
 
@@ -228,9 +227,9 @@ Nav.main = function() {
 
           // Mouse down
           if( mouse.button === 0 ) {
-            var newLocation = wp.origin + '/' + blob.label;
+            var newLocation = WP.origin + '/' + blob.label;
             if (blob.label == 'shop') {
-              window.location = shopUrl;
+              window.location = WP.shopUrl;
             } else {
               if (currentLocation == newLocation || currentLocation == newLocation + '/') {
                 Nav.minimize();
@@ -338,7 +337,7 @@ Nav.main = function() {
       render: {
         fillStyle: '#000',
         sprite: {
-          texture:  wp.templateDir + '/img/sprites/' + blob.label + '.png',
+          texture:  WP.templateDir + '/img/sprites/' + blob.label + '.png',
           xOffset: blob.offset.x,
           yOffset: blob.offset.y
         }
