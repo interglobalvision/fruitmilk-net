@@ -1033,17 +1033,17 @@ body {
 h1 {
   font-size: 3em;
   font-family: 'alienleagueiiital';
-  text-transform: uppercase;
+  text-transform: lowercase;
 }
 h2 {
   font-size: 2em;
   font-family: 'alienleagueiiital';
-  text-transform: uppercase;
+  text-transform: lowercase;
 }
 h3 {
   font-size: 1.5em;
   font-family: 'alienleagueiiital';
-  text-transform: uppercase;
+  text-transform: lowercase;
 }
 p {
   margin: 0 0 1.7em;
@@ -1098,13 +1098,11 @@ body.error404 #main-content {
   text-align: center;
 }
 #site-title {
-  position: fixed;
-  width: 100%;
-  top: 46%;
   text-align: center;
   font-size: 4em;
   letter-spacing: 0.4em;
   line-height: 0;
+  padding-bottom: 82.5px;
 }
 #nav {
   position: fixed;
