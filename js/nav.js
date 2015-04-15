@@ -492,7 +492,7 @@
   };
 
   window.addEventListener('load', Nav.init);
-  window.addEventListener('resize', debounce( Nav.updateScene ) );
+  window.addEventListener('resize', Nav.updateScene );
 
   // Monkey patch to make convex blobs draggable
   MouseConstraint.update = function(mouseConstraint, bodies) {
