@@ -1108,8 +1108,8 @@ img {
           transition: opacity 1s;
   opacity: 0;
   pointer-events: none;
-  -webkit-animation: twist 1s infinite;
-          animation: twist 1s infinite;
+  -webkit-animation: twist 1.3s infinite;
+          animation: twist 1.3s infinite;
   -webkit-animation-timing-function: cubic-bezier(0, 0, 0.58, 1);
           animation-timing-function: cubic-bezier(0, 0, 0.58, 1);
 }
