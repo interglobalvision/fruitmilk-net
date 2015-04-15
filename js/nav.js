@@ -29,8 +29,6 @@
   // Comment the function of these?
   Nav.options = {
 
-    minimizedHeight: 100,
-
     // Initial and reapplied forces
     maxForce: 0.2,
     minForce: -0.2,
@@ -406,17 +404,11 @@
       Nav.updateBlobs(Nav.container.clientWidth / _engine.render.options.width); 
     }
       
-    
     var renderOptions = _engine.render.options,
       canvas = _engine.render.canvas;
 
     canvas.width = renderOptions.width = Nav.container.clientWidth;
     canvas.height = renderOptions.height = Nav.container.clientHeight;
-
-    if (Nav.minimized) {
-      height = Nav.container.clientHeight - Nav.options.minimizedHeight;
-      Nav.container.style.top = "-" + height + "px";
-    } 
    
     Nav.updateWalls();
   };
@@ -465,7 +457,7 @@
     }
 
     Nav.switchGravity();
-    var height = $(window).height() - Nav.options.minimizedHeight;
+    var height = $(window).height() - navMargin;
     Nav.container.style.top = "-" + height + "px";
     setTimeout( function() {
       Nav.minimized = true;

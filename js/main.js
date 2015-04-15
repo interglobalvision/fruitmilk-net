@@ -53,8 +53,14 @@ $('body').on('click', 'a.js-ajax-link', function() {
 
 
 //RESIZE
+var navMargin = $(window).height() * 0.15;
+$('#main-content').css('padding-top',navMargin+30);
+
 $(window).on( 'resize', function() {
-  debounce( $('#nav').height( $(window).height() ) );
+  debounce( function() {
+    var navMargin = $(window).height() * 0.15;
+    $('#main-content').css('padding-top',navMargin+30);
+  });
 });
 
 
