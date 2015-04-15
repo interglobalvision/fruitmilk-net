@@ -1097,13 +1097,6 @@ img {
 body.error404 #main-content {
   text-align: center;
 }
-#site-title {
-  text-align: center;
-  font-size: 4em;
-  letter-spacing: 0.4em;
-  line-height: 0;
-  padding-bottom: 82.5px;
-}
 #nav {
   position: fixed;
   top: 0;
@@ -1116,7 +1109,7 @@ body.error404 #main-content {
 }
 #main-content {
   padding-top: 165px;
-  padding-bottom: 165px;
+  padding-bottom: 82.5px;
 }
 .section-title {
   border: 1px solid #1a1a1a;
@@ -1205,6 +1198,19 @@ input:focus {
 }
 #footer {
   width: 100%;
+  padding-top: 82.5px;
+}
+#site-title {
+  text-align: center;
+  font-size: 4em;
+  letter-spacing: 0.4em;
+  line-height: 0;
+}
+.home-title {
+  width: 100%;
+  top: 46%;
+  position: fixed;
+  z-index: 0;
 }
 @media screen and (max-width: 1024px) {
   .container {
