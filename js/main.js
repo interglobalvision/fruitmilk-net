@@ -40,12 +40,12 @@ var Router = {
 }
 
 
-//AJAX POST LOAD
-$('.js-ajax-item').on('click', function(event) {
-  event.preventDefault();
+//AJAX LINK LOAD
+$('body').on('click', 'a.js-ajax-link', function() {
   href = $(this).attr('href');
-  Router.loadContent(href);
-})
+  History.pushState(null, null, href);
+  return false;
+});
 
 
 //RESIZE
