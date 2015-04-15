@@ -125,6 +125,22 @@ img
   
 #main-content.error404
   text-align: center
+  
+#preloader 
+  position: fixed
+  top: 50%
+  left: 0
+  width: 100%
+  text-align: center
+  z-index: 0
+  span
+    text-transform: lowercase
+    font-family: $font-alien
+    font-size: 1.2em
+  
+#preloader.show
+  -webkit-animation: twist 1s;
+  -webkit-animation-iteration-count: infinite;
 
 
 // HEADER

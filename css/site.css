@@ -1097,6 +1097,23 @@ img {
 #main-content.error404 {
   text-align: center;
 }
+#preloader {
+  position: fixed;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  z-index: 0;
+}
+#preloader span {
+  text-transform: lowercase;
+  font-family: 'alienleagueiiital';
+  font-size: 1.2em;
+}
+#preloader.show {
+  -webkit-animation: twist 1s;
+  -webkit-animation-iteration-count: infinite;
+}
 #nav {
   position: fixed;
   top: 0;
