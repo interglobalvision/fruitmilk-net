@@ -2,6 +2,8 @@
  * NAV / MATTER.JS
  */
 
+ var gravityTimeout;
+
 // Matter module aliases
 var Engine = Matter.Engine,
     Events = Matter.Events,
@@ -17,7 +19,7 @@ var Engine = Matter.Engine,
     Composites = Matter.Composites,
     MouseConstraint = Matter.MouseConstraint,
     Mouse = Matter.Mouse,
-    Sleeping = Matter.Sleeping,
+    Sleeping = Matter.Sleeping
     currentLocation = window.location.href;
 
 var Nav = {
@@ -227,7 +229,6 @@ Nav.main = function() {
           // Mouse down
           if( mouse.button === 0 ) {
             var newLocation = wp.origin + '/' + blob.label;
-            console.log(currentLocation);
             if (blob.label == 'shop') {
               window.location = shopUrl;
             } else {
@@ -235,8 +236,6 @@ Nav.main = function() {
                 Nav.minimize();
               } else {
                 Router.loadBlob(blob.label);
-                currentLocation = window.location.href;
-                console.log(currentLocation);
               }
             }
             break;
@@ -452,13 +451,15 @@ Nav.minimize = function () {
   Nav.container.style.top = '-' + height + 'px';
   setTimeout( function() {
     Nav.minimized = true;
-  }, basicAnimationSpeed);
+  }, 1500);
 };
 
 Nav.maximize = function() {
   if(!Nav.minimized) {
     return;
   }
+
+  currentLocation = window.location.href;
 
   Nav.switchGravity();
   Nav.container.style.top = '0';
@@ -468,9 +469,9 @@ Nav.maximize = function() {
 };
 
 Nav.switchGravity = function() {
-  if( _engine.world.gravity.y != Nav.options.gravity ) {
+  if(Nav.minimized) {
     _engine.world.gravity.y = Nav.options.altGravity * -2;
-    setTimeout( function() {
+    gravityTimeout = setTimeout( function() {
       _engine.world.gravity.y = Nav.options.gravity;
     }, 700);
   } else {
