@@ -13,8 +13,7 @@ var Router = {
   loadBlob: function(label) {
     History.pushState(null, null, wp.origin + '/' + label);
   },
-  loadContent: function() {
-    href = window.location['href'];
+  loadContent: function(href) {
     $('#main-content, #footer').animate({'opacity': 0}, basicAnimationSpeed, function() {
       $.ajax({
         url: href,
@@ -39,6 +38,14 @@ var Router = {
     });
   },
 }
+
+
+//AJAX POST LOAD
+$('.js-ajax-item').on('click', function(event) {
+  event.preventDefault();
+  href = $(this).attr('href');
+  Router.loadContent(href);
+})
 
 
 //RESIZE
