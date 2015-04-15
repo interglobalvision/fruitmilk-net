@@ -24,6 +24,20 @@
         nope: "<?php bloginfo('stylesheet_directory'); ?>/js/polyfills/mediaqueries.js"
       }
     ]);
+
+<?php 
+
+$get_shop_url = get_post_meta( get_id_by_slug('about'), '_igv_shop_url', true);
+if ($get_shop_url) {
+  $start = substr($get_shop_url,0,4);
+  if ($start == 'http') {
+    $shop_url = $get_shop_url;
+  } else {
+    $shop_url = 'http://' . $get_shop_url;
+  }
+  echo 'shopUrl = "'.$shop_url.'";';
+}
+?>
   </script>
 
   <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
@@ -37,7 +51,6 @@ if ($color) {
 </head>
 <body <?php body_class(); ?>>
 <!--[if lt IE 7]><p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p><![endif]-->
-
 <section id="main-container">
 
   <!-- start content -->
