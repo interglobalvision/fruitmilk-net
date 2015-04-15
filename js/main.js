@@ -15,7 +15,7 @@ var Router = {
   },
   loadContent: function() {
     href = window.location['href'];
-    $('#main-content').animate({'opacity': 0}, basicAnimationSpeed, function() {
+    $('#main-content, #footer').animate({'opacity': 0}, basicAnimationSpeed, function() {
       $.ajax({
         url: href,
         success: function(data) {
@@ -34,7 +34,7 @@ var Router = {
             });
           });
         }
-        $('#main-content').animate({'opacity': 1}, basicAnimationSpeed);
+        $('#main-content, #footer').animate({'opacity': 1}, basicAnimationSpeed);
       });
     });
   },
