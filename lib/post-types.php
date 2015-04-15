@@ -15,9 +15,9 @@ add_action( 'admin_head', 'add_menu_icons_styles' );
 
 
 //Register Custom Post Types
-add_action( 'init', 'register_cpt_collab' );
+add_action( 'init', 'register_cpt_collabs' );
 
-function register_cpt_collab() {
+function register_cpt_collabs() {
 
     $labels = array( 
         'name' => _x( 'Collabs', 'collabs' ),
@@ -58,9 +58,9 @@ function register_cpt_collab() {
     register_post_type( 'collabs', $args );
 }
 
-add_action( 'init', 'register_cpt_installation' );
+add_action( 'init', 'register_cpt_installations' );
 
-function register_cpt_installation() {
+function register_cpt_installations() {
 
     $labels = array( 
         'name' => _x( 'Installations', 'installations' ),
