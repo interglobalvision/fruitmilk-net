@@ -14,6 +14,7 @@ var Router = {
     History.pushState(null, null, wp.origin + '/' + label);
   },
   loadContent: function(href) {
+    $('#preloader').addClass('show');
     $('#main-content, #footer').animate({'opacity': 0}, basicAnimationSpeed, function() {
       $.ajax({
         url: href,
@@ -23,6 +24,7 @@ var Router = {
         }
       })
       .done(function() {
+        $('#preloader').removeClass('show');
         $('html, body').animate({ scrollTop: "0px" }, basicAnimationSpeed/2);
         if ($('.js-masonry .item').length) {
           $('.js-masonry').imagesLoaded( function() {
