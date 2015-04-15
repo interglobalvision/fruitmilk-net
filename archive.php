@@ -38,7 +38,7 @@ if( have_posts() ) {
 ?>
 
         <article <?php post_class('item col1'); ?> id="post-<?php the_ID(); ?>">
-          <a href="<?php if ($post_type == 'press') { echo $press_link.'" target="_blank'; } else { the_permalink(); } ?>">
+          <a href="<?php if ($post_type == 'press') { echo $press_link.'" target="_blank'; } else { the_permalink(); } ?>" class="js-ajax-item">
             <h2 class="item-title color-secondary"><?php the_title(); ?></h1>
             <img src="<?php echo $thumb_url; ?>" />
           </a>
