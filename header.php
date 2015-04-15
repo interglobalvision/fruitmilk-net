@@ -6,6 +6,9 @@
   <title><?php wp_title('|',true,'right'); bloginfo('name'); ?></title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
+  <link rel="dns-prefetch" href="//www.instagram.com">
+  <link rel="dns-prefetch" href="//www.media.tumblr.com">
+
   <?php get_template_part('partials/seo'); ?>
 
   <link rel="alternate" type="application/rss+xml" title="<?php bloginfo('name'); ?> RSS Feed" href="<?php bloginfo('rss2_url'); ?>" />
@@ -25,7 +28,7 @@
       }
     ]);
 
-<?php 
+<?php
 
 $get_shop_url = get_post_meta( get_id_by_slug('about'), '_igv_shop_url', true);
 if ($get_shop_url) {
