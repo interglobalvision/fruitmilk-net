@@ -84,6 +84,8 @@ for ($i = 0; $i < $count; ++$i) {
 
 <!-- end main-content -->
 
+<?php get_template_part('partials/pagefooter'); ?>
+
 </main>
 
 <?php

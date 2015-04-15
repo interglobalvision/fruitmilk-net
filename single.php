@@ -78,6 +78,8 @@ if( have_posts() ) {
 
 <!-- end main-content -->
 
+<?php get_template_part('partials/pagefooter'); ?>
+
 </main>
 
 <?php

@@ -6,6 +6,8 @@ get_header();
 
 <main id="main-content">
 
+<?php get_template_part('partials/pagefooter'); ?>
+
 </main>
 
 <?php
