@@ -377,7 +377,8 @@
 
     window.onstatechange = function () {
       Nav.minimize();
-      Router.loadContent();
+      href = window.location['href'];
+      Router.loadContent(href);
     }
 
   };
