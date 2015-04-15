@@ -31,9 +31,11 @@ var Router = {
               gutterWidth: '.gutter-sizer',
               itemSelector: '.item'
             });
+            $('#main-content, #footer').animate({'opacity': 1}, basicAnimationSpeed);
           });
+        } else {
+          $('#main-content, #footer').animate({'opacity': 1}, basicAnimationSpeed);
         }
-        $('#main-content, #footer').animate({'opacity': 1}, basicAnimationSpeed);
       });
     });
   },
