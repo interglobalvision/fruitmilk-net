@@ -55,6 +55,7 @@ $(window).on( 'resize', function() {
   debounce( $('#nav').height( $(window).height() ) );
 });
 
+
 //DOC READY
 jQuery(document).ready(function () {
   'use strict';
@@ -74,8 +75,6 @@ jQuery(document).ready(function () {
 
 // MAILCHIMP
 $('body').on('submit', '#subscribe', function(e) {
-  e.preventDefault();
-  e.stopPropagation();
   $('#subscribe-result').html('Sending...');
   $.ajax({
     url: '//fruitmilk.us8.list-manage.com/subscribe/post-json?u=b0b0183cd0a1db371072e3363&amp;id=5c344ff57c&c=?',
@@ -94,6 +93,7 @@ $('body').on('submit', '#subscribe', function(e) {
       }
     }
   });
+  return false;
 });
 /*
    e.preventDefault();
