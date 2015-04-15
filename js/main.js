@@ -73,7 +73,7 @@ jQuery(document).ready(function () {
 
 
 // MAILCHIMP
-$('#subscribe').submit(function(e) {
+$('body').on('submit', '#subscribe', function(e) {
   e.preventDefault();
   e.stopPropagation();
   $('#subscribe-result').html('Sending...');
