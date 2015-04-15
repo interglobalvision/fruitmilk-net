@@ -230,7 +230,11 @@
 
             // Mouse down
             if( mouse.button === 0 ) {
-              Router.loadBlob(blob.label);
+              if (blob.label == 'shop') {
+                window.location = shopUrl;
+              } else {
+                Router.loadBlob(blob.label);
+              }
               break;
             }
           }
