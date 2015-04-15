@@ -42,7 +42,7 @@ if( have_posts() ) {
             <p>
               <?php
               if ($email) {
-                echo 'You can contact us at <a href="mailto:'.$email[0].'" target="_blank">'.$email[0].'</a> or subscribe to our mailing list:';
+                echo 'You can contact us at <a href="mailto:'.$email[0].'">'.$email[0].'</a> or subscribe to our mailing list:';
               } else {
                 echo 'Subscribe to our mailing list:';
               }
