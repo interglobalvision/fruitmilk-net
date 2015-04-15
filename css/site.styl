@@ -126,21 +126,36 @@ img
 #main-content.error404
   text-align: center
   
+//PRELOADER
+  
 #preloader 
   position: fixed
-  top: 50%
+  top: 46%
   left: 0
   width: 100%
   text-align: center
-  z-index: 0
+  z-index: -1
+  transition: opacity 1s
+  opacity: 0
+  pointer-events: none
+  animation: twist 1s infinite
+  animation-timing-function: cubic-bezier(0, 0, .58, 1)
   span
     text-transform: lowercase
     font-family: $font-alien
-    font-size: 1.2em
+    font-size: 2em
   
 #preloader.show
-  -webkit-animation: twist 1s;
-  -webkit-animation-iteration-count: infinite;
+  opacity: 1
+  
+@keyframes twist {
+    0%, 100% {
+        transform: rotate(12deg)
+    }
+    50% {
+        transform: rotate(-12deg)
+    }
+}
 
 
 // HEADER

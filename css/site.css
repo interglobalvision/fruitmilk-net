@@ -1099,20 +1099,27 @@ img {
 }
 #preloader {
   position: fixed;
-  top: 50%;
+  top: 46%;
   left: 0;
   width: 100%;
   text-align: center;
-  z-index: 0;
+  z-index: -1;
+  -webkit-transition: opacity 1s;
+          transition: opacity 1s;
+  opacity: 0;
+  pointer-events: none;
+  -webkit-animation: twist 1s infinite;
+          animation: twist 1s infinite;
+  -webkit-animation-timing-function: cubic-bezier(0, 0, 0.58, 1);
+          animation-timing-function: cubic-bezier(0, 0, 0.58, 1);
 }
 #preloader span {
   text-transform: lowercase;
   font-family: 'alienleagueiiital';
-  font-size: 1.2em;
+  font-size: 2em;
 }
 #preloader.show {
-  -webkit-animation: twist 1s;
-  -webkit-animation-iteration-count: infinite;
+  opacity: 1;
 }
 #nav {
   position: fixed;
@@ -1364,5 +1371,25 @@ input:focus {
     margin-bottom: 10px;
     margin-left: 5px;
     margin-right: 5px;
+  }
+}
+@-webkit-keyframes twist {
+  0%, 100% {
+    -webkit-transform: rotate(12deg);
+            transform: rotate(12deg);
+  }
+  50% {
+    -webkit-transform: rotate(-12deg);
+            transform: rotate(-12deg);
+  }
+}
+@keyframes twist {
+  0%, 100% {
+    -webkit-transform: rotate(12deg);
+            transform: rotate(12deg);
+  }
+  50% {
+    -webkit-transform: rotate(-12deg);
+            transform: rotate(-12deg);
   }
 }
