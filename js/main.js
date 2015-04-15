@@ -7,44 +7,59 @@ function l(data) {
   console.log(data);
 }
 
+
 // ROUTER
-
-function router( hash ) {
-
-  hash = hash.replace("#!/",'');
-
-  l(hash);
-
+var Router = {
+  loadBlob: function(label) {
+    History.pushState(null, null, wp.origin + '/' + label);
+  },
+  loadContent: function() {
+    href = window.location['href'];
+    $('#main-content').animate({'opacity': 0}, 2000);
+    $.ajax({
+      url: href,
+      success: function(data) {
+        content = $(data).find('#main-content > *');
+        $('#main-content').html(content);
+      }
+    })
+    .done(function() {
+      $('html, body').animate({ scrollTop: "0px" }, 800);
+      if ($('.js-masonry .item').length) {
+        $('.js-masonry').imagesLoaded( function() {
+          $('.js-masonry').masonry({
+            columnWidth: '.grid-sizer',
+            gutterWidth: '.gutter-sizer',
+            itemSelector: '.item'
+          });
+        });
+      }
+      $('#main-content').animate({'opacity': 1}, 2000);
+    });
+  },
 }
 
+
+//RESIZE
+$(window).on( 'resize', function() {
+  debounce( $('#nav').height( $(window).height() ) );
+});
+
+//DOC READY
 jQuery(document).ready(function () {
   'use strict';
 
   $('#nav').height( $(window).height() );
 
-  // Router: on change
-  window.onhashchange = function () {
-    var hash = window.location.hash.replace("#",'');
-    router( hash );
-  };
-
-  // Router: on load
-/*
-  if ( window.location.hash ) {
-    var hash = window.location.hash.replace("#",'');
-    router( 'director', hash );
-  }
-*/
-
-  var masonry = $('.js-masonry');
-  masonry.imagesLoaded( function() {
-    masonry.masonry({
+  $('.js-masonry').imagesLoaded( function() {
+    $('.js-masonry').masonry({
       columnWidth: '.grid-sizer',
       gutterWidth: '.gutter-sizer',
       itemSelector: '.item'
     });
   });
 });
+
 
 
 // MAILCHIMP

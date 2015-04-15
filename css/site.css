@@ -1159,6 +1159,16 @@ body.error404 #main-content {
 #pagination {
   width: 100%;
 }
+.tumblr-meta {
+  margin-bottom: 0.5em;
+  display: block;
+}
+.tumblr-title {
+  margin-bottom: 1em;
+}
+.tumblr-link {
+  text-align: center;
+}
 a.instagram-link .instagram-image {
   float: left;
   width: 49%;

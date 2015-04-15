@@ -230,19 +230,7 @@
 
             // Mouse down
             if( mouse.button === 0 ) {
-              currentState = window.location['href'];
-              History.pushState(null, null, wp.origin + blob.label);
-              href = window.location['href'];
-              $.ajax({
-                url: href,
-                success: function(data) {
-                  content = $(data).find('#main-content');
-                  $('#main-content').replaceWith(content);
-                },
-                error: function() {
-                  History.pushState(null, null, currentState);
-                }
-              });
+              Router.loadBlob(blob.label);
               break;
             }
           }
@@ -387,8 +375,9 @@
       Nav.minimize();
     }
 
-    window.onstatechange = function () { //history.js
+    window.onstatechange = function () {
       Nav.minimize();
+      Router.loadContent();
     }
 
   };
@@ -410,6 +399,11 @@
     canvas.width = renderOptions.width = Nav.container.clientWidth;
     canvas.height = renderOptions.height = Nav.container.clientHeight;
 
+    if (Nav.minimized) {
+      height = Nav.container.clientHeight - Nav.options.minimizedHeight;
+      Nav.container.style.top = "-" + height + "px";
+    } 
+   
     Nav.updateWalls();
   };
 
@@ -492,7 +486,7 @@
   };
 
   window.addEventListener('load', Nav.init);
-  window.addEventListener('resize', Nav.updateScene);
+  window.addEventListener('resize', debounce( Nav.updateScene ) );
 
   // Monkey patch to make convex blobs draggable
   MouseConstraint.update = function(mouseConstraint, bodies) {
