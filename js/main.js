@@ -40,7 +40,12 @@ var Router = {
 }
 
 
+//RESIZE
+$(window).on( 'resize', function() {
+  debounce( $('#nav').height( $(window).height() ) );
+});
 
+//DOC READY
 jQuery(document).ready(function () {
   'use strict';
 
