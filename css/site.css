@@ -443,6 +443,8 @@ textarea {
 .u-invisible {
   visibility: hidden;
 }
+.row:before,
+.row:after,
 .u-cf:before,
 .u-cf:after {
   content: " ";
@@ -450,6 +452,7 @@ textarea {
   display: table;
 /* 2 */
 }
+.row:after,
 .u-cf:after {
   clear: both;
 }

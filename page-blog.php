@@ -16,8 +16,7 @@ get_header();
             <a href="<?php the_permalink(); ?>" class="js-ajax-link"><?php the_title(); ?></a>
           </h1>
         </div>
-        <div class="u-cf"></div>
-      </div> 
+      </div>
     </div>
 
 <?php
@@ -37,7 +36,7 @@ $results = json_decode(file_get_contents($url), true);
 $count = count($item = $results['response']['posts']);
 
 for ($i = 0; $i < $count; ++$i) {
-  $item = $results['response']['posts'][$i]; 
+  $item = $results['response']['posts'][$i];
 ?>
         <div class="item col1">
           <span class="tumblr-meta">
@@ -54,8 +53,8 @@ for ($i = 0; $i < $count; ++$i) {
           </h2>
           <?php echo $item['body']; ?>
         </div>
-<?php }  
-  $link_text =  get_the_content();
+<?php }
+  $link_text = get_the_content();
   if ($link_text) {
 ?>
         <div class="item col2 tumblr-link">
@@ -63,7 +62,7 @@ for ($i = 0; $i < $count; ++$i) {
             <?php echo strip_tags($link_text); ?>
           </a>
         </div>
-<?php 
+<?php
   }
 ?>
     </div>
@@ -71,7 +70,11 @@ for ($i = 0; $i < $count; ++$i) {
 } else {
 ?>
     <div class="container">
-      <article class="u-alert col col1"><?php _e('Sorry, no posts matched your criteria :{'); ?></article>
+      <article class="u-alert row">
+        <div class="col col2">
+          <?php _e('Sorry, no posts matched your criteria :{'); ?>
+        </div>
+      </article>
     </div>
 <?php
 } ?>

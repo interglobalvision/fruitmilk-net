@@ -19,7 +19,6 @@ if ($post_type == 'press') {
         <div class="col col2">
           <h1 class="section-title"><a href="<?php echo get_post_type_archive_link($post_type); ?>" class="js-ajax-link"><?php post_type_archive_title(); ?></a></h1>
         </div>
-        <div class="u-cf"></div>
       </div>
     </div>
 
@@ -52,7 +51,9 @@ if( have_posts() ) {
 } else {
 ?>
     <div class="container">
-      <article class="u-alert col col1"><?php _e('Sorry, no posts matched your criteria :{'); ?></article>
+      <div class="row">
+        <article class="u-alert col col2"><?php _e('Sorry, no posts matched your criteria :{'); ?></article>
+      </div>
     </div>
 <?php
 } ?>

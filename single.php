@@ -13,14 +13,13 @@ get_header();
       <div class="row">
         <div class="col col2">
           <h2 class="section-title">
-            <a href="<?php echo get_post_type_archive_link(get_post_type()); ?>" class="js-ajax-link"><?php 
+            <a href="<?php echo get_post_type_archive_link(get_post_type()); ?>" class="js-ajax-link"><?php
               $post_type = get_post_type_object( get_post_type() );
-              echo $post_type->label; 
+              echo $post_type->label;
             ?></a>
           </h2>
         </div>
-        <div class="u-cf"></div>
-      </div> 
+      </div>
     </div>
 
 <?php
@@ -52,9 +51,9 @@ if( have_posts() ) {
           <img src="<?php echo $image['image']; ?>" />
         </div>
 <?php
-        } 
+        }
       }
-?>  
+?>
 <?php
     }
 ?>
@@ -63,7 +62,11 @@ if( have_posts() ) {
 } else {
 ?>
     <div class="container">
-      <article class="u-alert col col1"><?php _e('Sorry, no posts matched your criteria :{'); ?></article>
+      <article class="u-alert row">
+        <div class="col col2">
+          <?php _e('Sorry, no posts matched your criteria :{'); ?>
+        </div>
+      </article>
     </div>
 <?php
 } ?>
