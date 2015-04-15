@@ -39,19 +39,19 @@ function igv_cmb_metaboxes() {
    * Reference: https://github.com/WebDevStudios/CMB2/blob/master/example-functions.php
 	 */
 
-	$about_page = new_cmb2_box( array(
+	$about = new_cmb2_box( array(
 		'id'            => $prefix . 'about_page',
-		'title'         => __( '', 'cmb2' ),
+		'title'         => __( 'Options', 'cmb2' ),
 		'object_types'  => array( 'page', ), // Post type
 		'context'       => 'normal',
 		'priority'      => 'high',
 		'show_names'    => true, // Show field names on the left
-		'show_on' => array( 'key' => 'id', 'value' => array( get_id_by_slug('about') ) ),
+		'show_on' => array( 'key' => 'id', 'value' => (get_id_by_slug('about')) ),
 		// 'cmb_styles' => false, // false to disable the CMB stylesheet
 		// 'closed'     => true, // true to keep the metabox closed by default
 	) );
 
-	$about_page->add_field( array(
+	$about->add_field( array(
 		'name'    => __( 'Services', 'cmb2' ),
 		'desc'    => __( '', 'cmb2' ),
 		'id'      => $prefix . 'services',
@@ -59,21 +59,21 @@ function igv_cmb_metaboxes() {
 		'options' => array( 'textarea_rows' => 5, 'media_buttons' => false, ),
 	) );
 
-	$about_page->add_field( array(
+	$about->add_field( array(
 		'name' => __( 'Email', 'cmb2' ),
 		'desc' => __( 'Fruitmilk contact email', 'cmb2' ),
 		'id'   => $prefix . 'email',
 		'type' => 'text_email',
 	) );
 
-	$about_page->add_field( array(
+	$about->add_field( array(
 		'name' => __( 'Shop URL', 'cmb2' ),
 		'desc' => __( '', 'cmb2' ),
 		'id'   => $prefix . 'shop_url',
 		'type' => 'text',
 	) );
 
-	$about_page->add_field( array(
+	$about->add_field( array(
 		'name'    => __( 'Secondary color', 'cmb2' ),
 		'desc'    => __( 'used for links', 'cmb2' ),
 		'id'      => $prefix . 'colorpicker',
