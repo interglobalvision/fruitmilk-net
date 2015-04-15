@@ -19,7 +19,8 @@
       Composites = Matter.Composites,
       MouseConstraint = Matter.MouseConstraint,
       Mouse = Matter.Mouse,
-      Sleeping = Matter.Sleeping;
+      Sleeping = Matter.Sleeping,
+      currentLocation = window.location.href;
 
   var Nav = {
     minimized: false,
@@ -230,10 +231,18 @@
 
             // Mouse down
             if( mouse.button === 0 ) {
+              var newLocation = wp.origin + '/' + blob.label;
+              console.log ('new ' +newLocation);
               if (blob.label == 'shop') {
                 window.location = shopUrl;
               } else {
-                Router.loadBlob(blob.label);
+                if (currentLocation == newLocation || currentLocation == newLocation + '/') {
+                  console.log('same');
+                  Nav.minimize();
+                } else {
+                  console.log('notsame');
+                  Router.loadBlob(blob.label);
+                }
               }
               break;
             }
@@ -381,7 +390,7 @@
 
     window.onstatechange = function () {
       Nav.minimize();
-      href = window.location['href'];
+      href = window.location.href;
       Router.loadContent(href);
     }
 
@@ -467,7 +476,7 @@
     if(!Nav.minimized) {
       return;
     }
-
+    
     Nav.switchGravity();
     Nav.container.style.top = "0";
     setTimeout( function() {
