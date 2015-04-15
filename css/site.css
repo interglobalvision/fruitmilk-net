@@ -1030,30 +1030,34 @@ body {
   line-height: 1.35em;
   letter-spacing: 0.001em;
 }
-h1 {
-  font-size: 3em;
+h1,
+h2,
+h3 {
   font-family: 'alienleagueiiital';
   text-transform: lowercase;
+}
+h1 {
+  font-size: 3em;
 }
 h2 {
   font-size: 2em;
-  font-family: 'alienleagueiiital';
-  text-transform: lowercase;
 }
 h3 {
   font-size: 1.5em;
-  font-family: 'alienleagueiiital';
-  text-transform: lowercase;
 }
 p {
   margin: 0 0 1.7em;
   font-family: 'luculentregular';
   line-height: 1.7em;
 }
-strong {
+strong,
+b,
+.font-bold {
   font-family: 'luculentbold';
 }
-em {
+em,
+i,
+.font-italic {
   font-family: 'luculentitalic';
 }
 strong em,
@@ -1094,9 +1098,6 @@ img {
   max-width: 100%;
   height: auto;
 }
-#main-content.error404 {
-  text-align: center;
-}
 #preloader {
   position: fixed;
   top: 46%;
@@ -1104,12 +1105,12 @@ img {
   width: 100%;
   text-align: center;
   z-index: -1;
-  -webkit-transition: opacity 1s;
-          transition: opacity 1s;
+  -webkit-transition: opacity 0.8s;
+          transition: opacity 0.8s;
   opacity: 0;
   pointer-events: none;
-  -webkit-animation: twist 1.3s infinite;
-          animation: twist 1.3s infinite;
+  -webkit-animation: twist 1.2s infinite;
+          animation: twist 1.2s infinite;
   -webkit-animation-timing-function: cubic-bezier(0, 0, 0.58, 1);
           animation-timing-function: cubic-bezier(0, 0, 0.58, 1);
 }
@@ -1127,13 +1128,15 @@ img {
   left: 0;
   right: 0;
   bottom: 0;
-  -webkit-transition: all 2000ms;
-          transition: all 2000ms;
+  -webkit-transition: top 1.6s;
+          transition: top 1.6s;
   z-index: 9999;
 }
 #main-content {
   padding-top: 165px;
   padding-bottom: 82.5px;
+  -webkit-transition: padding-top 0.8s;
+          transition: padding-top 0.8s;
 }
 .section-title {
   border: 1px solid #1a1a1a;
@@ -1171,9 +1174,6 @@ img {
   text-align: center;
   line-height: 2em;
 }
-#pagination {
-  width: 100%;
-}
 .tumblr-meta {
   margin-bottom: 0.5em;
   display: block;
@@ -1184,12 +1184,12 @@ img {
 .tumblr-link {
   text-align: center;
 }
-a.instagram-link .instagram-image {
+.instagram-image {
   float: left;
   width: 49%;
   margin-bottom: 1%;
 }
-a.instagram-link:nth-child(odd) .instagram-image {
+instagram-link:nth-child(odd) .instagram-image {
   margin-right: 1%;
 }
 form {
@@ -1199,8 +1199,7 @@ form {
 }
 input {
   display: inline-block;
-  -webkit-appearance: none;
-  -moz-appearance: none;
+  appearance: none;
   border: 0;
   border-radius: 0;
   background: none;
@@ -1236,7 +1235,7 @@ input:focus {
   position: fixed;
   z-index: 0;
 }
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1200px) {
   .container {
     width: 859.2px;
   }
