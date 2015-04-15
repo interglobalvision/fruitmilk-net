@@ -1187,12 +1187,12 @@ img {
 .tumblr-link {
   text-align: center;
 }
-.instagram-image {
+.instagram-link .instagram-image {
   float: left;
   width: 49%;
   margin-bottom: 1%;
 }
-instagram-link:nth-child(odd) .instagram-image {
+.instagram-link:nth-child(odd) .instagram-image {
   margin-right: 1%;
 }
 form {
