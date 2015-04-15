@@ -74,7 +74,7 @@
       restitution: 0.3,
       friction: 0.1,
       render: {
-        visible: true,
+        visible: false,
         strokeStyle: 'red'
       }
     },
