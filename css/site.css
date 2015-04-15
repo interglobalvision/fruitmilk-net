@@ -1302,9 +1302,6 @@ input:focus {
     line-height: 1.35em;
     letter-spacing: 0.001em;
   }
-  #site-title {
-    font-size: 2em;
-  }
   #main-content {
     padding-top: 40px;
   }
@@ -1316,6 +1313,9 @@ input:focus {
   #subscribe-email,
   #subscribe-submit {
     width: 100%;
+  }
+  #site-title {
+    font-size: 2em;
   }
 }
 @media screen and (max-width: 400px) {
