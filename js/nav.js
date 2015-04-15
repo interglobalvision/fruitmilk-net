@@ -51,8 +51,8 @@
       friction: 0.1,
       restitution: 0.7,
       render: {
-        strokeStyle: '#000000',
-        fillStyle: '#000000'
+        strokeStyle: 'rgb(26,26,26)',
+        fillStyle: 'rgb(26,26,26)'
       },
     },
 
@@ -63,7 +63,7 @@
       restitution: 1,
       draggable: true,
       render: {
-        strokeStyle: '#000000',
+        strokeStyle: 'rgb(26,26,26)',
         fillStyle: 'rgba(0,0,0,0)'
       }
     },
