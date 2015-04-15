@@ -232,6 +232,7 @@
             // Mouse down
             if( mouse.button === 0 ) {
               var newLocation = wp.origin + '/' + blob.label;
+              console.log(currentLocation);
               if (blob.label == 'shop') {
                 window.location = shopUrl;
               } else {
@@ -239,6 +240,8 @@
                   Nav.minimize();
                 } else {
                   Router.loadBlob(blob.label);
+                  currentLocation = window.location.href;
+                  console.log(currentLocation);
                 }
               }
               break;
