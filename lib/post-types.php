@@ -20,18 +20,18 @@ add_action( 'init', 'register_cpt_collab' );
 function register_cpt_collab() {
 
     $labels = array( 
-        'name' => _x( 'Collabs', 'collab' ),
-        'singular_name' => _x( 'Collab', 'collab' ),
-        'add_new' => _x( 'Add New', 'collab' ),
-        'add_new_item' => _x( 'Add New Collab', 'collab' ),
-        'edit_item' => _x( 'Edit Collab', 'collab' ),
-        'new_item' => _x( 'New Collab', 'collab' ),
-        'view_item' => _x( 'View Collab', 'collab' ),
-        'search_items' => _x( 'Search Collabs', 'collab' ),
-        'not_found' => _x( 'No Collabs found', 'collab' ),
-        'not_found_in_trash' => _x( 'No Collabs found in Trash', 'collab' ),
-        'parent_item_colon' => _x( 'Parent Collab:', 'collab' ),
-        'menu_name' => _x( 'Collabs', 'collab' ),
+        'name' => _x( 'Collabs', 'collabs' ),
+        'singular_name' => _x( 'Collab', 'collabs' ),
+        'add_new' => _x( 'Add New', 'collabs' ),
+        'add_new_item' => _x( 'Add New Collab', 'collabs' ),
+        'edit_item' => _x( 'Edit Collab', 'collabs' ),
+        'new_item' => _x( 'New Collab', 'collabs' ),
+        'view_item' => _x( 'View Collab', 'collabs' ),
+        'search_items' => _x( 'Search Collabs', 'collabs' ),
+        'not_found' => _x( 'No Collabs found', 'collabs' ),
+        'not_found_in_trash' => _x( 'No Collabs found in Trash', 'collabs' ),
+        'parent_item_colon' => _x( 'Parent Collab:', 'collabs' ),
+        'menu_name' => _x( 'Collabs', 'collabs' ),
     );
 
     $args = array( 
@@ -55,7 +55,7 @@ function register_cpt_collab() {
         'capability_type' => 'post'
     );
 
-    register_post_type( 'collab', $args );
+    register_post_type( 'collabs', $args );
 }
 
 add_action( 'init', 'register_cpt_installation' );
@@ -63,18 +63,18 @@ add_action( 'init', 'register_cpt_installation' );
 function register_cpt_installation() {
 
     $labels = array( 
-        'name' => _x( 'Installations', 'installation' ),
-        'singular_name' => _x( 'Installation', 'installation' ),
-        'add_new' => _x( 'Add New', 'installation' ),
-        'add_new_item' => _x( 'Add New Installation', 'installation' ),
-        'edit_item' => _x( 'Edit Installation', 'installation' ),
-        'new_item' => _x( 'New Installation', 'installation' ),
-        'view_item' => _x( 'View Installation', 'installation' ),
-        'search_items' => _x( 'Search Installations', 'installation' ),
-        'not_found' => _x( 'No Installations found', 'installation' ),
-        'not_found_in_trash' => _x( 'No Installations found in Trash', 'installation' ),
-        'parent_item_colon' => _x( 'Parent Installation:', 'installation' ),
-        'menu_name' => _x( 'Installations', 'installation' ),
+        'name' => _x( 'Installations', 'installations' ),
+        'singular_name' => _x( 'Installation', 'installations' ),
+        'add_new' => _x( 'Add New', 'installations' ),
+        'add_new_item' => _x( 'Add New Installation', 'installations' ),
+        'edit_item' => _x( 'Edit Installation', 'installations' ),
+        'new_item' => _x( 'New Installation', 'installations' ),
+        'view_item' => _x( 'View Installation', 'installations' ),
+        'search_items' => _x( 'Search Installations', 'installations' ),
+        'not_found' => _x( 'No Installations found', 'installations' ),
+        'not_found_in_trash' => _x( 'No Installations found in Trash', 'installations' ),
+        'parent_item_colon' => _x( 'Parent Installation:', 'installations' ),
+        'menu_name' => _x( 'Installations', 'installations' ),
     );
 
     $args = array( 
@@ -98,7 +98,7 @@ function register_cpt_installation() {
         'capability_type' => 'post'
     );
 
-    register_post_type( 'installation', $args );
+    register_post_type( 'installations', $args );
 }
 
 add_action( 'init', 'register_cpt_press' );
