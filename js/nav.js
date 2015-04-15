@@ -28,7 +28,7 @@
   // Comment the function of these?
   Nav.options = {
 
-    minimizedHeight: 80,
+    minimizedHeight: 100,
 
     // Initial and reapplied forces
     maxForce: 0.2,
