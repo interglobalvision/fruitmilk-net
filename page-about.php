@@ -24,7 +24,7 @@ if( have_posts() ) {
 
         <div class="row">
           <div class="col col2">
-            <h1 class="section-title"><a href="<?php the_permalink() ?>"><?php the_title(); ?></a></h1>
+            <h1 class="section-title"><a href="<?php the_permalink() ?>" class="js-ajax-link"><?php the_title(); ?></a></h1>
           </div>
           <div class="u-cf"></div>
         </div>
