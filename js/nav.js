@@ -357,6 +357,11 @@
     canvas.width = renderOptions.width = Nav.container.clientWidth;
     canvas.height = renderOptions.height = Nav.container.clientHeight;
 
+    if (Nav.minimized) {
+      height = Nav.container.clientHeight - Nav.options.minimizedHeight;
+      Nav.container.style.top = "-" + height + "px";
+    } 
+   
     Nav.updateWalls();
   };
 
@@ -439,7 +444,7 @@
   };
 
   window.addEventListener('load', Nav.init);
-  window.addEventListener('resize', Nav.updateScene);
+  window.addEventListener('resize', debounce( Nav.updateScene ) );
 
   // Monkey patch to make convex blobs draggable
   MouseConstraint.update = function(mouseConstraint, bodies) {
