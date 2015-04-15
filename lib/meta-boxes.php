@@ -67,6 +67,13 @@ function igv_cmb_metaboxes() {
 	) );
 
 	$about_page->add_field( array(
+		'name' => __( 'Shop URL', 'cmb2' ),
+		'desc' => __( '', 'cmb2' ),
+		'id'   => $prefix . 'shop_url',
+		'type' => 'text',
+	) );
+
+	$about_page->add_field( array(
 		'name'    => __( 'Secondary color', 'cmb2' ),
 		'desc'    => __( 'used for links', 'cmb2' ),
 		'id'      => $prefix . 'colorpicker',
