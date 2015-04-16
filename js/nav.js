@@ -273,14 +273,10 @@ var Nav = {
             // Mouse down
             if( mouse.button === 0 ) {
               var newLocation = WP.origin + '/' + blob.label;
-              if (blob.label === 'shop') {
-                window.location = WP.shopUrl;
+              if (currentLocation === newLocation || currentLocation === newLocation + '/') {
+                Nav.minimize();
               } else {
-                if (currentLocation === newLocation || currentLocation === newLocation + '/') {
-                  Nav.minimize();
-                } else {
-                  Router.loadBlob(blob.label);
-                }
+                Router.loadBlob(blob.label);
               }
               break;
             }

@@ -34,7 +34,11 @@ var Router = {
     History.pushState(null, WP.blogName, href);
   },
   loadBlob: function(label) {
-    History.pushState(null, WP.blogName, WP.origin + '/' + label);
+    if (label == 'shop'){
+      window.location = WP.shopUrl;
+    } else {
+      History.pushState(null, WP.blogName, WP.origin + '/' + label);
+    }
   },
   loadContent: function(href) {
     $('#preloader').addClass('show');
