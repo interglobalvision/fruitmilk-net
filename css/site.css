@@ -443,6 +443,8 @@ textarea {
 .u-invisible {
   visibility: hidden;
 }
+.row:before,
+.row:after,
 .u-cf:before,
 .u-cf:after {
   content: " ";
@@ -450,6 +452,7 @@ textarea {
   display: table;
 /* 2 */
 }
+.row:after,
 .u-cf:after {
   clear: both;
 }
@@ -1030,30 +1033,34 @@ body {
   line-height: 1.35em;
   letter-spacing: 0.001em;
 }
+h1,
+h2,
+h3 {
+  font-family: 'alienleagueiiital';
+  text-transform: lowercase;
+}
 h1 {
   font-size: 3em;
-  font-family: 'alienleagueiiital';
-  text-transform: uppercase;
 }
 h2 {
   font-size: 2em;
-  font-family: 'alienleagueiiital';
-  text-transform: uppercase;
 }
 h3 {
   font-size: 1.5em;
-  font-family: 'alienleagueiiital';
-  text-transform: uppercase;
 }
 p {
   margin: 0 0 1.7em;
   font-family: 'luculentregular';
   line-height: 1.7em;
 }
-strong {
+strong,
+b,
+.font-bold {
   font-family: 'luculentbold';
 }
-em {
+em,
+i,
+.font-italic {
   font-family: 'luculentitalic';
 }
 strong em,
@@ -1094,17 +1101,29 @@ img {
   max-width: 100%;
   height: auto;
 }
-body.error404 #main-content {
-  text-align: center;
-}
-#site-title {
+#preloader {
   position: fixed;
-  width: 100%;
   top: 46%;
+  left: 0;
+  width: 100%;
   text-align: center;
-  font-size: 4em;
-  letter-spacing: 0.4em;
-  line-height: 0;
+  z-index: -1;
+  -webkit-transition: opacity 0.8s;
+          transition: opacity 0.8s;
+  opacity: 0;
+  pointer-events: none;
+  -webkit-animation: twist 1.2s infinite;
+          animation: twist 1.2s infinite;
+  -webkit-animation-timing-function: cubic-bezier(0, 0, 0.58, 1);
+          animation-timing-function: cubic-bezier(0, 0, 0.58, 1);
+}
+#preloader span {
+  text-transform: lowercase;
+  font-family: 'alienleagueiiital';
+  font-size: 2em;
+}
+#preloader.show {
+  opacity: 1;
 }
 #nav {
   position: fixed;
@@ -1112,13 +1131,15 @@ body.error404 #main-content {
   left: 0;
   right: 0;
   bottom: 0;
-  -webkit-transition: all 2000ms;
-          transition: all 2000ms;
+  -webkit-transition: top 1.6s;
+          transition: top 1.6s;
   z-index: 9999;
 }
 #main-content {
   padding-top: 165px;
-  padding-bottom: 165px;
+  padding-bottom: 82.5px;
+  -webkit-transition: padding-top 0.8s;
+          transition: padding-top 0.8s;
 }
 .section-title {
   border: 1px solid #1a1a1a;
@@ -1156,9 +1177,6 @@ body.error404 #main-content {
   text-align: center;
   line-height: 2em;
 }
-#pagination {
-  width: 100%;
-}
 .tumblr-meta {
   margin-bottom: 0.5em;
   display: block;
@@ -1169,12 +1187,12 @@ body.error404 #main-content {
 .tumblr-link {
   text-align: center;
 }
-a.instagram-link .instagram-image {
+.instagram-link .instagram-image {
   float: left;
   width: 49%;
   margin-bottom: 1%;
 }
-a.instagram-link:nth-child(odd) .instagram-image {
+.instagram-link:nth-child(odd) .instagram-image {
   margin-right: 1%;
 }
 form {
@@ -1184,8 +1202,7 @@ form {
 }
 input {
   display: inline-block;
-  -webkit-appearance: none;
-  -moz-appearance: none;
+  appearance: none;
   border: 0;
   border-radius: 0;
   background: none;
@@ -1207,8 +1224,21 @@ input:focus {
 }
 #footer {
   width: 100%;
+  padding-top: 82.5px;
 }
-@media screen and (max-width: 1024px) {
+#site-title {
+  text-align: center;
+  font-size: 4em;
+  letter-spacing: 0.4em;
+  line-height: 0;
+}
+.home-title {
+  width: 100%;
+  top: 46%;
+  position: fixed;
+  z-index: 0;
+}
+@media screen and (max-width: 1200px) {
   .container {
     width: 859.2px;
   }
@@ -1298,9 +1328,6 @@ input:focus {
     line-height: 1.35em;
     letter-spacing: 0.001em;
   }
-  #site-title {
-    font-size: 2em;
-  }
   #main-content {
     padding-top: 40px;
   }
@@ -1312,6 +1339,9 @@ input:focus {
   #subscribe-email,
   #subscribe-submit {
     width: 100%;
+  }
+  #site-title {
+    font-size: 2em;
   }
 }
 @media screen and (max-width: 400px) {
@@ -1343,5 +1373,25 @@ input:focus {
     margin-bottom: 10px;
     margin-left: 5px;
     margin-right: 5px;
+  }
+}
+@-webkit-keyframes twist {
+  0%, 100% {
+    -webkit-transform: rotate(12deg);
+            transform: rotate(12deg);
+  }
+  50% {
+    -webkit-transform: rotate(-12deg);
+            transform: rotate(-12deg);
+  }
+}
+@keyframes twist {
+  0%, 100% {
+    -webkit-transform: rotate(12deg);
+            transform: rotate(12deg);
+  }
+  50% {
+    -webkit-transform: rotate(-12deg);
+            transform: rotate(-12deg);
   }
 }

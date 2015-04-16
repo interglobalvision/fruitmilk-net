@@ -24,9 +24,8 @@ if( have_posts() ) {
 
         <div class="row">
           <div class="col col2">
-            <h1 class="section-title"><a href="<?php the_permalink() ?>"><?php the_title(); ?></a></h1>
+            <h1 class="section-title"><a href="<?php the_permalink() ?>" class="js-ajax-link"><?php the_title(); ?></a></h1>
           </div>
-          <div class="u-cf"></div>
         </div>
 
         <div class="row">
@@ -35,14 +34,13 @@ if( have_posts() ) {
           </div>
           <div class="col col1">
             <?php
-            if ($services) { 
+            if ($services) {
               echo $services[0];
             } ?>
-
             <p>
               <?php
               if ($email) {
-                echo 'You can contact us at <a href="mailto:'.$email[0].'" target="_blank">'.$email[0].'</a> or subscribe to our mailing list:';
+                echo 'You can contact us at <a href="mailto:'.$email[0].'">'.$email[0].'</a> or subscribe to our mailing list:';
               } else {
                 echo 'Subscribe to our mailing list:';
               }
@@ -66,12 +64,14 @@ for ($i = 0; $i < 6; ++$i) {
   $item = $results['data'][$i];
   $image_link = $item['link'];
   $image_src = $item['images']['low_resolution']['url']; ?>
-              <a href="<?php echo $image_link; ?>" target="_blank" class="instagram-link"><img class="instagram-image" src="<?php echo $image_src ?>" /></a>
-<?php } ?> 
-            <div class="u-cf"></div>
+              <a href="<?php echo $image_link; ?>" target="_blank" class="instagram-link">
+                <img class="instagram-image" src="<?php echo $image_src ?>" />
+              </a>
+<?php
+}
+?>
             </div>
           </div>
-          <div class="u-cf"></div>
         </div>
 
       </article>
@@ -80,7 +80,11 @@ for ($i = 0; $i < 6; ++$i) {
   }
 } else {
 ?>
-    <article class="u-alert"><?php _e('Sorry, no posts matched your criteria :{'); ?></article>
+    <article class="u-alert row">
+      <div class="col col2">
+        <?php _e('Sorry, no posts matched your criteria :{'); ?>
+      </div>
+    </article>
 <?php
 } ?>
 
@@ -93,6 +97,8 @@ for ($i = 0; $i < 6; ++$i) {
   <?php get_template_part('partials/pagination'); ?>
 
 <!-- end main-content -->
+
+<?php get_template_part('partials/pagefooter'); ?>
 
 </main>
 

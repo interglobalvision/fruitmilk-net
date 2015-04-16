@@ -2,8 +2,8 @@
 @import "fonts"
 
 $cols = 2
-$col = 1100px*0.462
-$gutter = 1100px*0.075
+$col = 1100px * 0.462
+$gutter = 1100px * 0.075
 .container
   margin: 0 auto
   width: ($col * $cols)+($gutter * $cols)
@@ -11,8 +11,8 @@ $gutter = 1100px*0.075
   clear: both
 .col
   float: left
-  margin-left: ($gutter/2)
-  margin-right: ($gutter/2)
+  margin-left: ($gutter / 2)
+  margin-right: ($gutter / 2)
   box-sizing: content-box
 for col in 1..$cols
   .col{col}
@@ -30,8 +30,8 @@ for col in 1..$cols
 // VARIABLES
 
 $margin-small = ($gutter)
-$margin-basic = ($gutter*2)
-$margin-large = ($gutter*5)
+$margin-basic = ($gutter * 2)
+$margin-large = ($gutter * 5)
 
 $font-size-basic = 17px
 $font-leading-basic = 1.35em
@@ -47,39 +47,41 @@ $font-luculent-bold = 'luculentbold';
 $font-luculent-italic = 'luculentitalic';
 $font-luculent-bold-italic = 'luculentbold_italic';
 
+$nav-animation-speed = 1.6s
+$basic-animation-speed = .8s
+$preloader-animation-speed = 1.2s
+
 
 // TYPOGRAPHY
 
 body
-  font-family:$font-luculent-regular,helvetica,arial,sans-serif
+  font-family: $font-luculent-regular, helvetica, arial, sans-serif
   font-size: $font-size-basic
   line-height: $font-leading-basic
   letter-spacing: $font-tracking-basic
 
+h1, h2, h3
+  font-family: $font-alien
+  text-transform: lowercase
+
 h1
   font-size: 3em
-  font-family: $font-alien
-  text-transform: uppercase
 
 h2
   font-size: 2em
-  font-family: $font-alien
-  text-transform: uppercase
 
 h3
   font-size: 1.5em
-  font-family: $font-alien
-  text-transform: uppercase
 
 p
   margin: 0 0 1.7em
   font-family: $font-luculent-regular
   line-height: 1.7em
 
-strong
+strong, b, .font-bold
   font-family: $font-luculent-bold
 
-em
+em, i, .font-italic
   font-family: $font-luculent-italic
 
 strong em, em strong
@@ -103,7 +105,7 @@ ul
 a, a:active, a:visited
   color: inherit
   text-decoration: none
-  
+
 h1, h2, h3
   a
     color: $color-black-soft !important
@@ -122,21 +124,41 @@ html
 img
   max-width: 100%
   height: auto
-  
-body.error404 #main-content
+
+
+//PRELOADER
+
+#preloader
+  position: fixed
+  top: 46%
+  left: 0
+  width: 100%
   text-align: center
+  z-index: -1
+  transition: opacity $basic-animation-speed
+  opacity: 0
+  pointer-events: none
+  animation: twist $preloader-animation-speed infinite
+  animation-timing-function: cubic-bezier(0, 0, .58, 1)
+  span
+    text-transform: lowercase
+    font-family: $font-alien
+    font-size: 2em
+
+#preloader.show
+  opacity: 1
+
+@keyframes twist {
+  0%, 100% {
+    transform: rotate(12deg)
+  }
+  50% {
+    transform: rotate(-12deg)
+  }
+}
 
 
 // HEADER
-
-#site-title
-  position: fixed
-  width: 100%
-  top: 46%
-  text-align: center
-  font-size: 4em
-  letter-spacing: .4em
-  line-height: 0
 
 #nav
   position: fixed
@@ -144,14 +166,16 @@ body.error404 #main-content
   left: 0
   right: 0
   bottom: 0
-  transition: all 2000ms
+  transition: top $nav-animation-speed
   z-index: 9999
+
 
 // POSTS LOOP
 
 #main-content
   padding-top: $margin-basic
-  padding-bottom: $margin-basic
+  padding-bottom: $margin-small
+  transition: padding-top $basic-animation-speed
 
 .section-title
   border: 1px solid $color-black-soft
@@ -168,8 +192,8 @@ body.error404 #main-content
 .item
   position: relative
   margin-bottom: $margin-small
-  margin-left: ($gutter/2)
-  margin-right: ($gutter/2)
+  margin-left: ($gutter / 2)
+  margin-right: ($gutter / 2)
   h1
     text-align: left
     line-height: 1.5em
@@ -185,22 +209,23 @@ body.error404 #main-content
   text-align: center
   line-height: 2em
 
-#pagination
-  width: 100%
-  
 
 // BLOG
+
 .tumblr-meta
   margin-bottom: .5em
   display: block
+
 .tumblr-title
   margin-bottom: 1em
+
 .tumblr-link
   text-align: center
 
 
 // INSTAGRAM
-a.instagram-link
+
+.instagram-link
   .instagram-image
     float: left
     width: 49%
@@ -208,7 +233,6 @@ a.instagram-link
   &:nth-child(odd)
     .instagram-image
       margin-right: 1%
-      
 
 
 // FORM
@@ -220,11 +244,8 @@ form
 
 input
   display: inline-block
-  -webkit-appearance: none
-  -moz-appearance: none
+  appearance: none
   border: 0
-  -webkit-border-radius: 0
-  -moz-border-radius: 0
   border-radius: 0
   background: none
   font-family: $font-luculent-regular
@@ -247,13 +268,28 @@ input
 
 #footer
   width: 100%
+  padding-top: $margin-small
+
+#site-title
+  text-align: center
+  font-size: 4em
+  letter-spacing: .4em
+  line-height: 0
+
+.home-title
+  width: 100%
+  top: 46%
+  position: fixed
+  z-index: 0
+
 
 ///////////////////////////////////////////////////////////////
 
 
 // MEDIA QUERIES
 
-@media screen and (max-width: 1024px)
+@media screen and (max-width: 1200px)
+
   $cols = 2
   $col = (800px *0.462)
   $gutter = (800px *0.075)
@@ -275,8 +311,8 @@ input
   // VARIABLES
 
   $margin-small = ($gutter)
-  $margin-basic = ($gutter*2)
-  $margin-large = ($gutter*5)
+  $margin-basic = ($gutter * 2)
+  $margin-large = ($gutter * 5)
 
   // TYPOGRAPHY
 
@@ -295,9 +331,9 @@ input
     margin-left: ($gutter/2)
     margin-right: ($gutter/2)
 
-  // FOOTER
 
 ///////////////////////////////////////////////////////////////
+
 
 @media screen and (max-width: 800px)
   $col = 2
@@ -341,9 +377,9 @@ input
     margin-left: ($gutter/2)
     margin-right: ($gutter/2)
 
-  // FOOTER
 
 ///////////////////////////////////////////////////////////////
+
 
 @media screen and (max-width: 600px)
   $cols = 1
@@ -378,12 +414,7 @@ input
     font-size: $font-size-basic
     line-height: $font-leading-basic
     letter-spacing: $font-tracking-basic
-    
-  // HEADER
-  
-  #site-title
-    font-size: 2em
-    
+
 
   // POSTS LOOP
 
@@ -402,7 +433,12 @@ input
 
   // FOOTER
 
+  #site-title
+    font-size: 2em
+
+
 ///////////////////////////////////////////////////////////////
+
 
 @media screen and (max-width: 400px)
   $cols = 1

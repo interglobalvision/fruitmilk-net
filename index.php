@@ -6,7 +6,7 @@ get_header();
 
 <main id="main-content">
 
-	<h1 id="site-title"><?php bloginfo('name'); ?></h1>
+<?php get_template_part('partials/pagefooter'); ?>
 
 </main>
 
