@@ -31,10 +31,10 @@ var Router = {
     };
   },
   loadHref: function(href) {
-    History.pushState(null, bloginfoName, href);
+    History.pushState(null, WP.blogName, href);
   },
   loadBlob: function(label) {
-    History.pushState(null, bloginfoName, WP.origin + '/' + label);
+    History.pushState(null, WP.blogName, WP.origin + '/' + label);
   },
   loadContent: function(href) {
     $('#preloader').addClass('show');
