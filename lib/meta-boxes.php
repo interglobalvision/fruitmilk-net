@@ -100,7 +100,7 @@ function igv_cmb_metaboxes() {
 	$project = new_cmb2_box( array(
 		'id'            => $prefix . 'project',
 		'title'         => __( 'Project', 'cmb2' ),
-		'object_types'  => array( 'collab','installation' ), // Post type
+		'object_types'  => array( 'collabs','installations' ), // Post type
 		'context'       => 'normal',
 		'priority'      => 'high',
 		'show_names'    => true, // Show field names on the left
