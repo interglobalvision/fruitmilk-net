@@ -13,7 +13,8 @@ function scripts_and_styles_method() {
   wp_localize_script( 'myscripts', 'WP', array(
     'templateDir' => get_stylesheet_directory_uri(),
     'origin' => get_site_url(),
-    'shopUrl' => parseShopUrl()
+    'shopUrl' => parseShopUrl(),
+    'bloginfoName' = get_bloginfo('name')
   ));
 
   // enqueue stylesheet here. file does not exist until stylus file is processed
