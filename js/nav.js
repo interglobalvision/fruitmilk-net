@@ -86,6 +86,9 @@ var Nav = {
     // Base width for scaling
     minWidth: 1300,
 
+    // position margin %
+    posMargin: 12,
+
     // Initial and reapplied forces
     maxForce: 0.2,
     minForce: -0.2,
@@ -311,13 +314,17 @@ var Nav = {
 
     // Add all blobs
     for(var i = 0; i < blobsArray.length; i++) {
-      var blob = blobsArray[i];
+      var blob = blobsArray[i],
+        marginX = _engine.render.options.width * ( Nav.options.posMargin / 100),
+        marginY = _engine.render.options.height * ( Nav.options.posMargin / 100),
+        posX = Nav.random( 0 + marginX, _engine.render.options.width - marginX),
+        posY = Nav.random( 0 + marginY, _engine.render.options.height - marginY);
       Composite.add(Nav.blobs, Body.create( Common.extend({
         label: blob.label,
         vertices: Vertices.fromPath(blob.shape),
         position: {
-          x: Nav.random(0, _engine.render.options.width),
-          y: Nav.random(0, _engine.render.options.height),
+          x: posX,
+          y: posY
         },
         force: {
           x: Nav.random(Nav.options.minForce, Nav.options.maxForce),
@@ -340,11 +347,15 @@ var Nav = {
 
     for(var i = 0; i < bumpersArray.length; i++) {
 //       var name = "bumper" + (i+1);
-      Composite.add(Nav.bumpers, Body.create( Common.extend({
+      var marginX = _engine.render.options.width * ( Nav.options.posMargin / 100),
+        marginY = _engine.render.options.height * ( Nav.options.posMargin / 100),
+        posX = Nav.random( 0 + marginX, _engine.render.options.width - marginX),
+        posY = Nav.random( 0 + marginY, _engine.render.options.height - marginY);
+       Composite.add(Nav.bumpers, Body.create( Common.extend({
           vertices: Vertices.fromPath(bumpersArray[i]),
           position: {
-            x: Nav.random(0, _engine.render.options.width),
-            y: Nav.random(0, _engine.render.options.height),
+            x: posX,
+            y: posY
           },
         },
         Common.extend({
@@ -363,8 +374,8 @@ var Nav = {
   ready: function() {
 
     // Scale blobs & bumpers
-    if( Nav.container.clientWidth < 1300 ) {
-      Nav.updateBlobs(Nav.container.clientWidth / 1300);
+    if( Nav.container.clientWidth < Nav.options.minWidth ) {
+      Nav.updateBlobs(Nav.container.clientWidth / Nav.options.minWidth);
     }
 
     // Minimize
@@ -380,8 +391,8 @@ var Nav = {
       return;
     }
 
-    if( Nav.container.clientWidth < 1300 ) {
-      Nav.updateBlobs(Nav.container.clientWidth / _engine.render.options.width);
+    if( Nav.container.clientWidth < Nav.options.minWidth ) {
+      Nav.updateBlobs();
     }
 
     var renderOptions = _engine.render.options,
@@ -396,7 +407,7 @@ var Nav = {
 
     Nav.updateWalls();
   },
-  updateBlobs: function(scale) {
+  updateBlobs: function() {
     if (!_engine) {
       return;
     }
