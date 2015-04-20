@@ -88,12 +88,11 @@ function fixNavMargin() {
   $('#main-content').css('padding-top', navMargin + 30);
 }
 
-$(window).on( 'resize', function() {
-  debounce( function() {
-    navMargin = $(window).height() * navPercentHeight;
-    fixNavMargin();
-  });
-});
+$(window).on( 'resize', debounce( function() {
+  $('#nav').height( $(window).height() );
+  navMargin = $(window).height() * navPercentHeight;
+  fixNavMargin();
+}, 20));
 
 // MAILCHIMP
 
