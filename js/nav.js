@@ -60,20 +60,14 @@ var Engine = Matter.Engine,
     Bounds = Matter.Bounds,
     Detector = Matter.Detector,
     Vertices = Matter.Vertices,
-//     Vector = Matter.Vector,
     Common = Matter.Common,
     Composite = Matter.Composite,
-    Composites = Matter.Composites,
     MouseConstraint = Matter.MouseConstraint,
-    Mouse = Matter.Mouse,
     Sleeping = Matter.Sleeping,
     currentLocation = window.location.href;
 
 var _engine,
-  _mouseConstraint,
-  // NOT ACTUALLY USED?
-  _sceneWidth,
-  _sceneHeight;
+  _mouseConstraint;
 
 var gravityTimeout,
   maximizeTimeout,
@@ -81,6 +75,8 @@ var gravityTimeout,
 
 var Nav = {
   minimized: false,
+  scale: 1,
+
   options: {
     
     // Base width for scaling
@@ -213,10 +209,9 @@ var Nav = {
 
     // is main the best name here?
     Nav.main();
-    Nav.updateScene();
+    Nav.updateWalls();
   },
   main: function() {
-    var _world = _engine.world;
     var counter = 0;
     var isDragging = false;
 
@@ -375,7 +370,26 @@ var Nav = {
 
     // Scale blobs & bumpers
     if( Nav.container.clientWidth < Nav.options.minWidth ) {
-      Nav.updateBlobs(Nav.container.clientWidth / Nav.options.minWidth);
+      Nav.scale = Nav.container.clientWidth / Nav.options.minWidth;
+      var blobs = Composite.allBodies(Nav.blobs);
+      for(var i = 0; i < blobs.length; i++) {
+        var blob = blobs[i];
+        Body.scale(blob, Nav.scale, Nav.scale);
+        blob.render.sprite.xScale = blob.render.sprite.yScale = Nav.scale;
+        blob.render.sprite.yScale = blob.render.sprite.yScale = Nav.scale;
+        blob.render.sprite.xOffset = blob.render.sprite.xOffset * Nav.scale;
+        blob.render.sprite.yOffset = blob.render.sprite.yOffset * Nav.scale;
+      }
+      var bumpers = Composite.allBodies(Nav.bumpers);
+      for(var i = 0; i < bumpers.length; i++) {
+        var bumper = bumpers[i];
+        Body.scale(bumper, Nav.scale, Nav.scale);
+      }
+      if(Nav.scale > 1) {
+        _engine.timing.timeScale = 1;
+      } else {
+        _engine.timing.timeScale = Nav.scale / 2;
+      }
     }
 
     // Minimize
@@ -398,9 +412,6 @@ var Nav = {
     var renderOptions = _engine.render.options,
       canvas = _engine.render.canvas;
 
-    // Update Blobs
-    Nav.updateBlobs(); 
-
     // Update the scene
     canvas.width = renderOptions.width = Nav.container.clientWidth;
     canvas.height = renderOptions.height = Nav.container.clientHeight;
@@ -411,34 +422,35 @@ var Nav = {
     if (!_engine) {
       return;
     }
+    
+    var scale = Nav.scale;
 
-    if(_engine.render.options.width < Nav.options.minWidth) {
-      var scale = _engine.render.options.width / Nav.options.minWidth;
-    } else {
-      var scale = 1;
+    if(Nav.container.clientWidth !== _engine.render.options.width) {
+      scale = Nav.container.clientWidth / _engine.render.options.width;
     }
-    console.log('scale', scale);
+    if(Nav.scale !== scale) {
+      console.log('scale', scale);
+      var blobs = Composite.allBodies(Nav.blobs);
+      for(var i = 0; i < blobs.length; i++) {
+        var blob = blobs[i];
+        Body.scale(blob, scale, scale);
+        blob.render.sprite.xScale = blob.render.sprite.yScale = blob.render.sprite.yScale * scale;
+        blob.render.sprite.xOffset = blob.render.sprite.xOffset * scale;
+        blob.render.sprite.yOffset = blob.render.sprite.yOffset * scale;
+      }
 
-    var blobs = Composite.allBodies(Nav.blobs);
-    for(var i = 0; i < blobs.length; i++) {
-      var blob = blobs[i];
-      Body.scale(blob, scale, scale);
-      blob.render.sprite.xScale = blob.render.sprite.yScale = scale;
-      blob.render.sprite.yScale = blob.render.sprite.yScale = scale;
-      blob.render.sprite.xOffset = blob.render.sprite.xOffset * scale;
-      blob.render.sprite.yOffset = blob.render.sprite.yOffset * scale;
-    }
-
-    if(scale > 1) {
-      _engine.timing.timeScale = 1;
-    } else {
-      _engine.timing.timeScale = scale / 2;
-    }
-  
-    var bumpers = Composite.allBodies(Nav.bumpers);
-    for(var i = 0; i < bumpers.length; i++) {
-      var bumper = bumpers[i];
-      Body.scale(bumper, scale, scale);
+      if(scale > 1) {
+        _engine.timing.timeScale = 1;
+      } else {
+        _engine.timing.timeScale = scale / 2;
+      }
+    
+      var bumpers = Composite.allBodies(Nav.bumpers);
+      for(var i = 0; i < bumpers.length; i++) {
+        var bumper = bumpers[i];
+        Body.scale(bumper, scale, scale);
+      }
+      Nav.scale = scale;
     }
   },
   updateWalls: function() {
