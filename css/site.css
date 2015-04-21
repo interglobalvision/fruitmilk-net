@@ -1029,7 +1029,7 @@ ul.u-inline-list li {
 }
 body {
   font-family: 'luculentregular', helvetica, arial, sans-serif;
-  font-size: 17px;
+  font-size: 16px;
   line-height: 1.35em;
   letter-spacing: 0.001em;
 }
@@ -1096,6 +1096,7 @@ p a:visited {
 html {
   background-color: #eff1f1;
   color: #1a1a1a;
+  min-height: 100%;
 }
 img {
   max-width: 100%;
@@ -1259,7 +1260,7 @@ input:focus {
     width: 60px;
   }
   body {
-    font-size: 17px;
+    font-size: 16px;
     line-height: 1.35em;
     letter-spacing: 0.001em;
   }
@@ -1293,7 +1294,7 @@ input:focus {
     width: 45px;
   }
   body {
-    font-size: 17px;
+    font-size: 14px;
     line-height: 1.35em;
     letter-spacing: 0.001em;
   }
@@ -1317,6 +1318,9 @@ input:focus {
   .col1 {
     width: 340px;
   }
+  .col2 {
+    width: 340px;
+  }
   .grid-sizer {
     width: 360px;
   }
@@ -1324,7 +1328,7 @@ input:focus {
     width: 20px;
   }
   body {
-    font-size: 15px;
+    font-size: 13px;
     line-height: 1.35em;
     letter-spacing: 0.001em;
   }
@@ -1346,23 +1350,26 @@ input:focus {
 }
 @media screen and (max-width: 400px) {
   .container {
-    width: 280px;
+    width: 290px;
   }
   .col {
     margin-left: 5px;
     margin-right: 5px;
   }
   .col1 {
-    width: 270px;
+    width: 280px;
+  }
+  .col2 {
+    width: 280px;
   }
   .grid-sizer {
-    width: 280px;
+    width: 290px;
   }
   .gutter-sizer {
     width: 10px;
   }
   body {
-    font-size: 17px;
+    font-size: 12px;
     line-height: 1.35em;
     letter-spacing: 0.001em;
   }

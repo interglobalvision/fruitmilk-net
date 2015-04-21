@@ -33,7 +33,7 @@ $margin-small = ($gutter)
 $margin-basic = ($gutter * 2)
 $margin-large = ($gutter * 5)
 
-$font-size-basic = 17px
+$font-size-basic = 16px
 $font-leading-basic = 1.35em
 $font-tracking-basic = 0.001em
 
@@ -120,6 +120,7 @@ p
 html
   background-color: $color-taupe
   color: $color-black-soft
+  min-height: 100%
 
 img
   max-width: 100%
@@ -289,8 +290,6 @@ input
 // MEDIA QUERIES
 
 @media screen and (max-width: 1200px)
-
-  $cols = 2
   $col = (800px *0.462)
   $gutter = (800px *0.075)
   .container
@@ -336,7 +335,6 @@ input
 
 
 @media screen and (max-width: 800px)
-  $col = 2
   $col = (600px *0.462)
   $gutter = (600px *0.075)
   .container
@@ -359,6 +357,8 @@ input
   $margin-small = ($gutter)
   $margin-basic = ($gutter*2)
   $margin-large = ($gutter*5)
+  
+  $font-size-basic = 14px
 
   // TYPOGRAPHY
 
@@ -382,17 +382,16 @@ input
 
 
 @media screen and (max-width: 600px)
-  $cols = 1
   $col = 340px
   $gutter = 20px
   .container
-    width: ($col * $cols)+($gutter * $cols)
+    width: ($col * 1)+($gutter * 1)
   .col
     margin-left: ($gutter/2)
     margin-right: ($gutter/2)
   for col in 1..$cols
     .col{col}
-      width: ( col * $col ) + ( ( col - 1 ) * $gutter )
+      width: ( 1 * $col ) + ( ( 1 - 1 ) * $gutter )
 
   .grid-sizer
     width: $col + $gutter
@@ -406,7 +405,7 @@ input
   $margin-basic = ($gutter*2)
   $margin-large = ($gutter*5)
 
-  $font-size-basic = 15px
+  $font-size-basic = 13px
 
   // TYPOGRAPHY
 
@@ -441,17 +440,16 @@ input
 
 
 @media screen and (max-width: 400px)
-  $cols = 1
-  $col = 270px
+  $col = 280px
   $gutter = 10px
   .container
-    width: ($col * $cols)+($gutter * $cols)
+    width: ($col * 1)+($gutter * 1)
   .col
     margin-left: ($gutter/2)
     margin-right: ($gutter/2)
   for col in 1..$cols
     .col{col}
-      width: ( col * $col ) + ( ( col - 1 ) * $gutter )
+      width: ( 1 * $col ) + ( ( 1 - 1 ) * $gutter )
 
   .grid-sizer
     width: $col + $gutter
@@ -463,6 +461,8 @@ input
   $margin-small = ($gutter)
   $margin-basic = ($gutter*2)
   $margin-large = ($gutter*5)
+  
+  $font-size-basic = 12px
 
   // TYPOGRAPHY
 
