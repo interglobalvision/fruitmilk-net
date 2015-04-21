@@ -155,6 +155,7 @@ var Nav = {
           height: Nav.container.clientHeight,
           background: Nav.options.background,
           wireframes: false,
+          pixerlRatio: 'auto',
           /*
           showAngleIndicator: true,
           showBroadphase: true,
