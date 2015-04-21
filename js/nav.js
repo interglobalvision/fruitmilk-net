@@ -98,7 +98,7 @@ var Nav = {
     velocityThreshold: 0.20, // The threshold to check if force should be reapplied or not
 
     gravity: 0, // World default gravity
-    altGravity: 0.2, // World alternative gravity
+    altGravity: 2, // World alternative gravity
     gravityReboundAnimationSpeed: 700,
 
     // Blobs options
@@ -155,7 +155,7 @@ var Nav = {
           height: Nav.container.clientHeight,
           background: Nav.options.background,
           wireframes: false,
-          pixerlRatio: 'auto',
+          pixelRatio: 'auto',
           /*
           showAngleIndicator: true,
           showBroadphase: true,
