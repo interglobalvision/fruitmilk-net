@@ -437,6 +437,14 @@ var Nav = {
         blob.render.sprite.xScale = blob.render.sprite.yScale = blob.render.sprite.yScale * scale;
         blob.render.sprite.xOffset = blob.render.sprite.xOffset * scale;
         blob.render.sprite.yOffset = blob.render.sprite.yOffset * scale;
+
+        // Translate blob if outside of the scene
+        if(blob.position.x > Nav.container.clientWidth) {
+          Body.translate(blob, {x: blob.position.x/2 * -1, y: 0});
+        }
+        if(blob.position.y > Nav.container.clientHeight) {
+          Body.translate(blob, {x: 0, y: blob.position.y/2 * -1});
+        }
       }
 
       if(scale > 1) {
