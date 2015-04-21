@@ -418,7 +418,7 @@ var Nav = {
     canvas.height = renderOptions.height = Nav.container.clientHeight;
 
     // Update pixelRatio
-    _engine.renderOptions.pixelRatio = window.devicePixelRatio;
+    renderOptions.pixelRatio = window.devicePixelRatio;
 
     Nav.updateWalls();
   },
