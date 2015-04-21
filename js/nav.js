@@ -417,6 +417,9 @@ var Nav = {
     canvas.width = renderOptions.width = Nav.container.clientWidth;
     canvas.height = renderOptions.height = Nav.container.clientHeight;
 
+    // Update pixelRatio
+    _engine.renderOptions.pixelRatio = window.devicePixelRatio;
+
     Nav.updateWalls();
   },
   updateBlobs: function() {
