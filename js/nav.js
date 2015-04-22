@@ -98,7 +98,7 @@ var Nav = {
     velocityThreshold: 0.20, // The threshold to check if force should be reapplied or not
 
     gravity: 0, // World default gravity
-    altGravity: 2, // World alternative gravity
+    altGravity: 0.2, // World alternative gravity
     gravityReboundAnimationSpeed: 700,
 
     // Blobs options
@@ -130,7 +130,7 @@ var Nav = {
       restitution: 0.3,
       friction: 0.1,
       render: {
-        visible: false,
+        visible: true,
         strokeStyle: 'red'
       }
     }
@@ -210,7 +210,6 @@ var Nav = {
 
     // is main the best name here?
     Nav.main();
-    Nav.updateWalls();
   },
   main: function() {
     var counter = 0;
@@ -308,6 +307,46 @@ var Nav = {
       }
     });
 
+
+    Nav.ready();
+  },
+  ready: function() {
+
+    Nav.updateScene();
+
+    // Minimize
+    if (!($('body').hasClass('home'))) {
+      Nav.minimize();
+    }
+
+    window.addEventListener('resize', debounce(Nav.updateScene,250));
+  },
+  updateScene: function() {
+    if (!_engine) {
+      return;
+    }
+
+    // Update the scene size/bounds
+    _engine.render.canvas.width = _engine.render.options.width = Nav.container.clientWidth;
+    _engine.render.canvas.height = _engine.render.options.height = Nav.container.clientHeight;
+    // Update pixelRatio
+    _engine.render.options.pixelRatio = window.devicePixelRatio;
+
+    Nav.updateBodies();
+  },
+  updateBodies: function() {
+
+    // Get all bodies
+    var blobs = Composite.allBodies(Nav.blobs);
+    var bumpers = Composite.allBodies(Nav.bumpers);
+      
+    // Clean bodies from scene
+    if(blobs.length > 0 || bumpers.length > 0) {
+      Composite.clear(Nav.blobs);
+      Composite.clear(Nav.bumpers);
+      Composite.clear(Nav.walls);
+    }
+
     // Add all blobs
     for(var i = 0; i < blobsArray.length; i++) {
       var blob = blobsArray[i],
@@ -341,8 +380,8 @@ var Nav = {
       ))));
     }
 
+    // Add all bumpers
     for(var i = 0; i < bumpersArray.length; i++) {
-//       var name = "bumper" + (i+1);
       var marginX = _engine.render.options.width * ( Nav.options.posMargin / 100),
         marginY = _engine.render.options.height * ( Nav.options.posMargin / 100),
         posX = Nav.random( 0 + marginX, _engine.render.options.width - marginX),
@@ -364,116 +403,6 @@ var Nav = {
       )));
     }
 
-    Nav.ready();
-
-  },
-  ready: function() {
-
-    // Scale blobs & bumpers
-    if( Nav.container.clientWidth < Nav.options.minWidth ) {
-      Nav.scale = Nav.container.clientWidth / Nav.options.minWidth;
-      var blobs = Composite.allBodies(Nav.blobs);
-      for(var i = 0; i < blobs.length; i++) {
-        var blob = blobs[i];
-        Body.scale(blob, Nav.scale, Nav.scale);
-        blob.render.sprite.xScale = blob.render.sprite.yScale = Nav.scale;
-        blob.render.sprite.yScale = blob.render.sprite.yScale = Nav.scale;
-        blob.render.sprite.xOffset = blob.render.sprite.xOffset * Nav.scale;
-        blob.render.sprite.yOffset = blob.render.sprite.yOffset * Nav.scale;
-      }
-      var bumpers = Composite.allBodies(Nav.bumpers);
-      for(var i = 0; i < bumpers.length; i++) {
-        var bumper = bumpers[i];
-        Body.scale(bumper, Nav.scale, Nav.scale);
-      }
-      if(Nav.scale > 1) {
-        _engine.timing.timeScale = 1;
-      } else {
-        _engine.timing.timeScale = Nav.scale / 2;
-      }
-    }
-
-    // Minimize
-    if (!($('body').hasClass('home'))) {
-      Nav.minimize();
-    }
-
-    window.addEventListener('resize', Nav.updateScene );
-  },
-
-  updateScene: function() {
-    if (!_engine) {
-      return;
-    }
-
-    if( Nav.container.clientWidth < Nav.options.minWidth ) {
-      Nav.updateBlobs();
-    }
-
-    var renderOptions = _engine.render.options,
-      canvas = _engine.render.canvas;
-
-    // Update the scene
-    canvas.width = renderOptions.width = Nav.container.clientWidth;
-    canvas.height = renderOptions.height = Nav.container.clientHeight;
-
-    // Update pixelRatio
-    renderOptions.pixelRatio = window.devicePixelRatio;
-
-    Nav.updateWalls();
-  },
-  updateBlobs: function() {
-    if (!_engine) {
-      return;
-    }
-    
-    var scale = Nav.scale;
-
-    if(Nav.container.clientWidth !== _engine.render.options.width) {
-      scale = Nav.container.clientWidth / _engine.render.options.width;
-    }
-    if(Nav.scale !== scale) {
-      console.log('scale', scale);
-      var blobs = Composite.allBodies(Nav.blobs);
-      for(var i = 0; i < blobs.length; i++) {
-        var blob = blobs[i];
-        Body.scale(blob, scale, scale);
-        blob.render.sprite.xScale = blob.render.sprite.yScale = blob.render.sprite.yScale * scale;
-        blob.render.sprite.xOffset = blob.render.sprite.xOffset * scale;
-        blob.render.sprite.yOffset = blob.render.sprite.yOffset * scale;
-
-        // Translate blob if outside of the scene
-        if(blob.position.x > Nav.container.clientWidth) {
-          Body.translate(blob, {x: blob.position.x/2 * -1, y: 0});
-        }
-        if(blob.position.y > Nav.container.clientHeight) {
-          Body.translate(blob, {x: 0, y: blob.position.y/2 * -1});
-        }
-      }
-
-      if(scale > 1) {
-        _engine.timing.timeScale = 1;
-      } else {
-        _engine.timing.timeScale = scale / 2;
-      }
-    
-      var bumpers = Composite.allBodies(Nav.bumpers);
-      for(var i = 0; i < bumpers.length; i++) {
-        var bumper = bumpers[i];
-        Body.scale(bumper, scale, scale);
-      }
-      Nav.scale = scale;
-    }
-  },
-  updateWalls: function() {
-    if (!_engine) {
-      return;
-    }
-
-    if(this.walls.bodies.length > 0) {
-      Composite.clear(Nav.walls);
-    }
-
     // Add walls
     Composite.add( Nav.walls, [
       Bodies.rectangle(_engine.render.options.width/2, 0, _engine.render.options.width, 1, Common.extend({ label: 'topWall'}, Nav.options.wallOptions)),
@@ -482,11 +411,56 @@ var Nav = {
       Bodies.rectangle(_engine.render.options.width, _engine.render.options.height/2, 1, _engine.render.options.height, Common.extend({ label: 'rightWall'}, Nav.options.wallOptions))
     ]);
 
-  },
+    // Scale
+    Nav.scaleBodies();
 
+  },
+  scaleBodies: function() {
+
+    // Get all bodies
+    var blobs = Composite.allBodies(Nav.blobs);
+    var bumpers = Composite.allBodies(Nav.bumpers);
+
+    // Scale blobs & bumpers
+    if( Nav.container.clientWidth < Nav.options.minWidth ) {
+      
+      // Calculate new scale
+      Nav.scale = Nav.container.clientWidth / Nav.options.minWidth;
+
+      // Scale is a lil larger in smaller windows
+      if(Nav.container.clientWidth < 450) {
+        Nav.scale = Nav.scale * 1.5;
+      }
+
+      // Scale bodies
+      for(var i = 0; i < blobs.length; i++) {
+        var blob = blobs[i];
+        Body.scale(blob, Nav.scale, Nav.scale);
+        blob.render.sprite.xScale = blob.render.sprite.yScale = Nav.scale;
+        blob.render.sprite.yScale = blob.render.sprite.yScale = Nav.scale;
+        blob.render.sprite.xOffset = blob.render.sprite.xOffset * Nav.scale;
+        blob.render.sprite.yOffset = blob.render.sprite.yOffset * Nav.scale;
+      }
+
+      // Scale bumpers
+      for(var i = 0; i < bumpers.length; i++) {
+        var bumper = bumpers[i];
+        Body.scale(bumper, Nav.scale, Nav.scale);
+      }
+
+      // Scale timeScale
+      _engine.timing.timeScale = Nav.scale;
+    }
+  },
   minimize: function () {
     if(Nav.minimized) {
       return;
+    }
+
+    // Set wall restitution to 0: No bounce
+    var walls = Composite.allBodies(Nav.walls);
+    for(var i = 0; i < walls.length; i++) {
+      walls[i].restitution = 0;
     }
 
     Nav.switchGravity();
@@ -503,6 +477,12 @@ var Nav = {
 
     currentLocation = window.location.href;
 
+    // Set wall restitution to 1: Super bouncy
+    var walls = Composite.allBodies(Nav.walls);
+    for(var i = 0; i < walls.length; i++) {
+      walls[i].restitution = 1;
+    }
+
     Nav.switchGravity();
     Nav.container.style.top = '0';
     maximizeTimeout = setTimeout( function() {
@@ -511,7 +491,7 @@ var Nav = {
   },
   switchGravity: function() {
     if(Nav.minimized) {
-      _engine.world.gravity.y = Nav.options.altGravity * -2;
+      _engine.world.gravity.y = Nav.options.altGravity * -6;
       gravityTimeout = setTimeout( function() {
         _engine.world.gravity.y = Nav.options.gravity;
       }, Nav.options.gravityReboundAnimationSpeed);
