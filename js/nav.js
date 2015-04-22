@@ -53,18 +53,18 @@ var bumpersArray = [
 
 // Matter module aliases
 var Engine = Matter.Engine,
-    Events = Matter.Events,
-    World = Matter.World,
-    Body = Matter.Body,
-    Bodies = Matter.Bodies,
-    Bounds = Matter.Bounds,
-    Detector = Matter.Detector,
-    Vertices = Matter.Vertices,
-    Common = Matter.Common,
-    Composite = Matter.Composite,
-    MouseConstraint = Matter.MouseConstraint,
-    Sleeping = Matter.Sleeping,
-    currentLocation = window.location.href;
+  Events = Matter.Events,
+  World = Matter.World,
+  Body = Matter.Body,
+  Bodies = Matter.Bodies,
+  Bounds = Matter.Bounds,
+  Detector = Matter.Detector,
+  Vertices = Matter.Vertices,
+  Common = Matter.Common,
+  Composite = Matter.Composite,
+  MouseConstraint = Matter.MouseConstraint,
+  Sleeping = Matter.Sleeping,
+  currentLocation = window.location.href;
 
 var _engine,
   _mouseConstraint;
@@ -78,7 +78,7 @@ var Nav = {
   scale: 1,
 
   options: {
-    
+
     // Base width for scaling
     minWidth: 1300,
 
@@ -208,21 +208,33 @@ var Nav = {
     Nav.bumpers = Composite.create();
     Composite.add(_engine.world, [Nav.walls, Nav.blobs, Nav.bumpers]);
 
-    // is main the best name here?
-    Nav.main();
+    // do a bunch of other setup stuff
+    Nav.bindEvents();
+    Nav.addBlobs();
+    Nav.ready();
     Nav.updateWalls();
+
   },
-  main: function() {
+  bindEvents: function() {
+
     var counter = 0;
     var isDragging = false;
 
+    Events.on(_mouseConstraint, 'startdrag', function() {
+      isDragging = true;
+    });
+
+    Events.on(_mouseConstraint, 'enddrag', function() {
+      isDragging = false;
+    });
+
     Events.on(_engine, 'tick', function() {
+      // in here the code needs to be very efficient as it happens a LOT
+
       var blobs = Composite.allBodies(Nav.blobs);
       var bumpers = Composite.allBodies(Nav.bumpers);
 
-      /*
-       *  Loop that runs to reapply force and stuff
-       */
+      // Loop that runs to reapply force and stuff
       counter++;
       // Every [Nav.options.loopTimer] seconds
       if(counter >= 60 * Nav.options.loopTimer) {
@@ -243,27 +255,20 @@ var Nav = {
         }
       }
 
-      /*
-       * Mouse constraint stuff
-       */
+      // Mouse constraint stuff
+      // should these be declared everytime inside this scope or exist in memory?
       var mouse = _mouseConstraint.mouse,
-          inBlob = false,
-          inBumper = false,
-          inMinNav = false;
+        inBlob = false,
+        inBumper = false,
+        inMinNav = false;
 
-      Events.on(_mouseConstraint, 'startdrag', function() {
-        isDragging = true;
-      });
+      if(Nav.minimized) {
 
-      Events.on(_mouseConstraint, 'enddrag', function() {
-        isDragging = false;
-      });
-
-      if (Nav.minimized) {
         inMinNav = true;
         if( mouse.button === 0 ) {
           Nav.maximize();
         }
+
       } else {
         for (var i = 0; i < blobs.length; i++) {
           var blob = blobs[i];
@@ -280,7 +285,7 @@ var Nav = {
               } else {
                 Router.loadBlob(blob.label);
               }
-              break;
+              break; //what does break do here?
             }
           }
         }
@@ -297,6 +302,7 @@ var Nav = {
       }
 
 
+      // cursors
       if(inMinNav) {
         Nav.container.style.cursor = 's-resize';
       } else if(inBlob) {
@@ -308,13 +314,16 @@ var Nav = {
       }
     });
 
-    // Add all blobs
+  },
+  addBlobs: function() {
+
     for(var i = 0; i < blobsArray.length; i++) {
       var blob = blobsArray[i],
         marginX = _engine.render.options.width * ( Nav.options.posMargin / 100),
         marginY = _engine.render.options.height * ( Nav.options.posMargin / 100),
         posX = Nav.random( 0 + marginX, _engine.render.options.width - marginX),
         posY = Nav.random( 0 + marginY, _engine.render.options.height - marginY);
+
       Composite.add(Nav.blobs, Body.create( Common.extend({
         label: blob.label,
         vertices: Vertices.fromPath(blob.shape),
@@ -364,8 +373,6 @@ var Nav = {
       )));
     }
 
-    Nav.ready();
-
   },
   ready: function() {
 
@@ -399,6 +406,7 @@ var Nav = {
     }
 
     window.addEventListener('resize', Nav.updateScene );
+
   },
 
   updateScene: function() {
@@ -410,6 +418,7 @@ var Nav = {
       Nav.updateBlobs();
     }
 
+    // what is the point of declaring these variables here inside this scope?
     var renderOptions = _engine.render.options,
       canvas = _engine.render.canvas;
 
@@ -422,19 +431,23 @@ var Nav = {
 
     Nav.updateWalls();
   },
+
   updateBlobs: function() {
     if (!_engine) {
       return;
     }
-    
+
     var scale = Nav.scale;
 
     if(Nav.container.clientWidth !== _engine.render.options.width) {
       scale = Nav.container.clientWidth / _engine.render.options.width;
     }
+
     if(Nav.scale !== scale) {
       console.log('scale', scale);
+
       var blobs = Composite.allBodies(Nav.blobs);
+
       for(var i = 0; i < blobs.length; i++) {
         var blob = blobs[i];
         Body.scale(blob, scale, scale);
@@ -444,7 +457,7 @@ var Nav = {
 
         // Translate blob if outside of the scene
         if(blob.position.x > Nav.container.clientWidth) {
-          Body.translate(blob, {x: blob.position.x/2 * -1, y: 0});
+          Body.translate(blob, {x: blob.position.x/2 * -1, y: 0}); // the maths for x: here should be inside brackets
         }
         if(blob.position.y > Nav.container.clientHeight) {
           Body.translate(blob, {x: 0, y: blob.position.y/2 * -1});
@@ -456,15 +469,18 @@ var Nav = {
       } else {
         _engine.timing.timeScale = scale / 2;
       }
-    
+
       var bumpers = Composite.allBodies(Nav.bumpers);
+
       for(var i = 0; i < bumpers.length; i++) {
         var bumper = bumpers[i];
         Body.scale(bumper, scale, scale);
       }
+
       Nav.scale = scale;
     }
   },
+
   updateWalls: function() {
     if (!_engine) {
       return;
@@ -496,6 +512,7 @@ var Nav = {
       Nav.minimized = true;
     }, basicAnimationSpeed);
   },
+
   maximize: function() {
     if(!Nav.minimized) {
       return;
@@ -509,19 +526,21 @@ var Nav = {
       Nav.minimized = false;
     }, basicAnimationSpeed);
   },
+
   switchGravity: function() {
     if(Nav.minimized) {
       _engine.world.gravity.y = Nav.options.altGravity * -2;
+
       gravityTimeout = setTimeout( function() {
         _engine.world.gravity.y = Nav.options.gravity;
       }, Nav.options.gravityReboundAnimationSpeed);
+
     } else {
       _engine.world.gravity.y = Nav.options.altGravity;
     }
   }
 
 };
-
 window.addEventListener('load', Nav.init);
 
 
