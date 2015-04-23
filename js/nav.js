@@ -82,6 +82,9 @@ var Nav = {
     // Base width for scaling
     minWidth: 1300,
 
+    // Scale base for devices < 450px (width)
+    mobileScale: 1.6,
+
     // position margin %
     posMargin: 12,
 
@@ -379,6 +382,12 @@ var Nav = {
     // Scale blobs & bumpers
     if( Nav.container.clientWidth < Nav.options.minWidth ) {
       Nav.scale = Nav.container.clientWidth / Nav.options.minWidth;
+
+      // Scale is a lil larger in smaller windows
+      if(Nav.container.clientWidth < 450) {
+        Nav.scale = Nav.scale * Nav.options.mobileScale;
+      }
+
       var blobs = Composite.allBodies(Nav.blobs);
       for(var i = 0; i < blobs.length; i++) {
         var blob = blobs[i];
@@ -441,6 +450,11 @@ var Nav = {
 
     if(Nav.container.clientWidth !== _engine.render.options.width) {
       scale = Nav.container.clientWidth / _engine.render.options.width;
+    }
+
+    // Scale is a lil larger in smaller windows
+    if(Nav.container.clientWidth < 450) {
+      scale = scale * Nav.options.mobileScale;
     }
 
     if(Nav.scale !== scale) {
