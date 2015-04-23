@@ -405,7 +405,7 @@ var Nav = {
       Nav.minimize();
     }
 
-    window.addEventListener('resize', Nav.updateScene );
+    window.addEventListener('resize', debounce(Nav.updateScene, 150));
 
   },
 
@@ -424,10 +424,10 @@ var Nav = {
 
     // Update the scene
     canvas.width = renderOptions.width = Nav.container.clientWidth;
+    canvas.style.width = canvas.width + 'px';
     canvas.height = renderOptions.height = Nav.container.clientHeight;
+    canvas.style.height = canvas.height + 'px';
 
-    // Update pixelRatio
-    renderOptions.pixelRatio = window.devicePixelRatio;
 
     Nav.updateWalls();
   },
