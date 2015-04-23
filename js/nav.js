@@ -328,7 +328,11 @@ var Nav = {
 
     // Update the scene size/bounds
     _engine.render.canvas.width = _engine.render.options.width = Nav.container.clientWidth;
+    _engine.render.canvas.style.width = _engine.render.canvas.width + 'px';
+
     _engine.render.canvas.height = _engine.render.options.height = Nav.container.clientHeight;
+    _engine.render.canvas.style.height = _engine.render.canvas.height + 'px';    
+
     // Update pixelRatio
     _engine.render.options.pixelRatio = window.devicePixelRatio;
 
