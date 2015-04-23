@@ -28,15 +28,16 @@ if( have_posts() ) {
 <?php
 $tumblr_uri = 'fruitmilkblog.tumblr.com';
 $tumblr_limit = '10';
-$tumblr_type = 'text';
 $tumblr_apikey = 'IOB9uwQ7SgRUYoBr8LGNiXr4jTHK4DUzhGNCDcTd6XQjQ6ikKD';
-$url = 'http://api.tumblr.com/v2/blog/'.$tumblr_uri.'/posts/'.$tumblr_type.'?limit='.$tumblr_limit.'&api_key='.$tumblr_apikey;
+$url = 'http://api.tumblr.com/v2/blog/'.$tumblr_uri.'/posts/?limit='.$tumblr_limit.'&api_key='.$tumblr_apikey;
 
 $results = json_decode(file_get_contents($url), true);
 $count = count($item = $results['response']['posts']);
 
 for ($i = 0; $i < $count; ++$i) {
   $item = $results['response']['posts'][$i];
+  $type = $results['response']['posts'][$i]['type'];
+  if ($type == 'text') {
 ?>
         <div class="item col1">
           <span class="tumblr-meta">
@@ -53,7 +54,36 @@ for ($i = 0; $i < $count; ++$i) {
           </h2>
           <?php echo $item['body']; ?>
         </div>
-<?php }
+<?php 
+  }
+  if ($type == 'photo') {
+    $caption = $item['caption'];
+?>
+        <div class="item col1">
+          <span class="tumblr-meta">
+            <a href="<?php echo $item['post_url']; ?>" target="_blank">
+              <?php echo date('m/d/Y', $item['timestamp']); ?>
+              ~*
+              <?php echo $item['note_count']; ?> notes
+            </a>
+          </span>
+          <?php if ($caption) { ?>
+          <h2 class="tumblr-title">
+            <a href="<?php echo $item['post_url']; ?>" target="_blank">
+              <?php echo strip_tags($caption); ?>
+            </a>
+          </h2>
+          <?php } ?>
+          <?php 
+            $photos = $item['photos'];
+            foreach ($photos as $photo) {
+              echo '<p><img src="' . $photo['original_size']['url'] . '"/></p>';
+            }
+          ?>
+        </div>
+<?php
+  }
+}
   $link_text = get_the_content();
   if ($link_text) {
 ?>
