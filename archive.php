@@ -36,9 +36,9 @@ if( have_posts() ) {
     $thumb_url = $thumb_url_array[0];
 ?>
 
-        <article <?php post_class('item col1'); ?> id="post-<?php the_ID(); ?>">
+        <article <?php post_class('item col1 archive-item'); ?> id="post-<?php the_ID(); ?>">
           <a href="<?php if ($post_type == 'press') { echo $press_link.'" target="_blank'; } else { the_permalink(); } ?>" class="js-ajax-link">
-            <img src="<?php echo $thumb_url; ?>" />
+            <img src="<?php echo $thumb_url; ?>" class="archive-thumb" />
             <h2 class="item-title color-secondary"><?php the_title(); ?></h1>
           </a>
         </article>
