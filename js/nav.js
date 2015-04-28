@@ -63,7 +63,6 @@ var Engine = Matter.Engine,
   Common = Matter.Common,
   Composite = Matter.Composite,
   MouseConstraint = Matter.MouseConstraint,
-  Sleeping = Matter.Sleeping,
   currentLocation = window.location.href;
 
 var _engine,
@@ -74,11 +73,11 @@ var gravityTimeout,
   minimizeTimeout;
 
 var Nav = {
-  minimized: false,
+  isMinimized: false,
+  isResetting: false,
   scale: 1,
 
   options: {
-
     // Base width for scaling
     minWidth: 1300,
 
@@ -101,8 +100,8 @@ var Nav = {
     velocityThreshold: 0.20, // The threshold to check if force should be reapplied or not
 
     gravity: 0, // World default gravity
-    altGravity: 2, // World alternative gravity
-    gravityReboundAnimationSpeed: 700,
+    altGravity: 1, // World alternative gravity
+    gravityReboundAnimationSpeed: 400,
 
     // Blobs options
     blobsOptions : {
@@ -144,7 +143,6 @@ var Nav = {
   },
 
   init: function() {
-
     Nav.container = document.getElementById('nav');
 
     // create a Matter.js engine
@@ -219,11 +217,12 @@ var Nav = {
 
   },
   reset: function() {
-    console.log('reset');
-
-    World.clear(_engine.world, _mouseConstraint);
-
+    Nav.isResetting = true;
+    $('#nav canvas').remove();
     Engine.clear(_engine);
+    World.clear(_engine.world, true, true);
+    Events.off(_engine);
+    Events.off(_mouseConstraint);
 
     // reset id pool
     Common._nextId = 0;
@@ -231,14 +230,11 @@ var Nav = {
     // reset random seed
     Common._seed = 0;
 
-    Events.off(_engine);
 
-    $('#nav canvas').remove();
     Nav.init();
-
+    Nav.isResetting = false;
   },
   bindEvents: function() {
-
     var counter = 0;
     var isDragging = false;
 
@@ -284,8 +280,7 @@ var Nav = {
         inBumper = false,
         inMinNav = false;
 
-      if(Nav.minimized) {
-
+      if(Nav.isMinimized) {
         inMinNav = true;
         if( mouse.button === 0 ) {
           Nav.maximize();
@@ -307,7 +302,7 @@ var Nav = {
               } else {
                 Router.loadBlob(blob.label);
               }
-              break; //what does break do here?
+              break;
             }
           }
         }
@@ -338,7 +333,6 @@ var Nav = {
 
   },
   addBlobs: function() {
-
     for(var i = 0; i < blobsArray.length; i++) {
       var blob = blobsArray[i],
         marginX = _engine.render.options.width * ( Nav.options.posMargin / 100),
@@ -373,7 +367,6 @@ var Nav = {
     }
 
     for(var i = 0; i < bumpersArray.length; i++) {
-//       var name = "bumper" + (i+1);
       var marginX = _engine.render.options.width * ( Nav.options.posMargin / 100),
         marginY = _engine.render.options.height * ( Nav.options.posMargin / 100),
         posX = Nav.random( 0 + marginX, _engine.render.options.width - marginX),
@@ -397,7 +390,6 @@ var Nav = {
 
   },
   ready: function() {
-
     // Scale blobs & bumpers
     if( Nav.container.clientWidth < Nav.options.minWidth ) {
       Nav.scale = Nav.container.clientWidth / Nav.options.minWidth;
@@ -429,7 +421,7 @@ var Nav = {
     }
 
     // Minimize
-    if (!($('body').hasClass('home'))) {
+    if (!($('body').hasClass('home')) && !Nav.isResetting) {
       Nav.minimize();
     }
 
@@ -458,7 +450,7 @@ var Nav = {
   },
 
   minimize: function () {
-    if(Nav.minimized) {
+    if(Nav.isMinimized) {
       return;
     }
 
@@ -466,12 +458,12 @@ var Nav = {
     var height = $(window).height() - navMargin;
     Nav.container.style.top = '-' + height + 'px';
     minimizeTimeout = setTimeout( function() {
-      Nav.minimized = true;
+      Nav.isMinimized = true;
     }, basicAnimationSpeed);
   },
 
   maximize: function() {
-    if(!Nav.minimized) {
+    if(!Nav.isMinimized) {
       return;
     }
 
@@ -480,12 +472,12 @@ var Nav = {
     Nav.switchGravity();
     Nav.container.style.top = '0';
     maximizeTimeout = setTimeout( function() {
-      Nav.minimized = false;
+      Nav.isMinimized = false;
     }, basicAnimationSpeed);
   },
 
   switchGravity: function() {
-    if(Nav.minimized) {
+    if(Nav.isMinimized) {
       _engine.world.gravity.y = Nav.options.altGravity * -2;
 
       gravityTimeout = setTimeout( function() {
