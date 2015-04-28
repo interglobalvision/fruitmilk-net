@@ -3,6 +3,7 @@ var gulp = require('gulp');
   rename = require('gulp-rename'),
   notify = require('gulp-notify'),
   util = require('gulp-util'),
+  concat = require('gulp-concat'),
 
   jshint = require('gulp-jshint'),
   uglify = require('gulp-uglify'),
@@ -23,12 +24,14 @@ function errorNotify(error){
 
 gulp.task('js', function() {
   gulp.src([
-    'js/main.js',
-    'js/nav.js'
+    'js/nav.js',
+    'js/main.js'
   ])
+  .pipe(concat('site.js'))
   .pipe(sourcemaps.init())
   .pipe(jshint())
   .pipe(jshint.reporter('jshint-stylish'))
+  .pipe(gulp.dest('js'))
   .pipe(uglify())
   .on('error', errorNotify)
   .pipe(rename({suffix: '.min'}))

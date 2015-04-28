@@ -1,10 +1,6 @@
 /* jshint browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
 /* global $, jQuery, document, Modernizr, Nav, History, WP, debounce */
 
-function l(data) {
-  console.log(data);
-}
-
 // VARS
 
 var basicAnimationSpeed = 800;
@@ -34,7 +30,7 @@ var Router = {
     History.pushState(null, WP.blogName, href);
   },
   loadBlob: function(label) {
-    if (label == 'shop'){
+    if (label === 'shop'){
       window.location = WP.shopUrl;
     } else {
       History.pushState(null, WP.blogName, WP.origin + '/' + label);

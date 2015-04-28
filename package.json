@@ -31,5 +31,8 @@
     "gulp-util": "^3.0.1",
     "gulp-watch": "^3.0.0",
     "jshint-stylish": "^1.0.1"
+  },
+  "dependencies": {
+    "gulp-concat": "^2.5.2"
   }
 }
