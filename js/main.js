@@ -67,8 +67,12 @@ var Router = {
       }
     })
     .fail(function(jqXHR, textStatus, errorThrown) {
-      // ERROR HANDLING HERE
-      l(errorThrown);
+
+      $('#main-content').html('Eeek Something went wrong?! :(');
+      $('#preloader').removeClass('show');
+      $('html, body').animate({ scrollTop: '0px' }, basicAnimationSpeed/2);
+      $('#main-content, #footer').animate({'opacity': 1}, basicAnimationSpeed);
+
     });
   },
 };
