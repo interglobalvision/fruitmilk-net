@@ -2,15 +2,25 @@
 
 <meta name="twitter:site" value="@">
 <?php
-if( have_posts() ) {
-  while( have_posts() ) {
-    the_post();
-      $excerpt = get_the_excerpt();
-      if(has_post_thumbnail()) {
-        $thumb = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'opengraph' );
-      }
+$args = array (
+  'post_type'              => array( 'installations', 'collabs', 'press' )
+);
+
+$query = new WP_Query( $args );
+
+if ( $query->have_posts() ) {
+  while ( $query->have_posts() ) {
+    $query->the_post();
+    $excerpt = get_the_excerpt();
+    if(has_post_thumbnail()) {
+      $thumb = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'opengraph' );
+    }
   }
-}
+} 
+
+// Restore original Post Data
+wp_reset_postdata();
+
 if( !empty($thumb) ) {
 ?>
   <meta property="og:image" content="<?php echo $thumb[0] ?>" />
