@@ -1148,11 +1148,13 @@ img {
   border: 1px solid #1a1a1a;
   border-bottom-width: 0;
   border-radius: 0.5em 0.5em 0 0;
+  line-height: 0;
   display: inline-block;
-  padding: 0.7em 1em 0.2em;
+  padding: 0.7em 1em 0;
   margin-bottom: 1em;
   font-size: 2em;
   text-align: center;
+  line-height: 0.8em;
 }
 .section-title a:link {
   text-decoration: none;
@@ -1172,6 +1174,11 @@ img {
 }
 .item img {
   width: 100%;
+  -webkit-transition: opacity 0.3s;
+          transition: opacity 0.3s;
+}
+.item:hover img {
+  opacity: 0.1;
 }
 .item-title {
   position: absolute;
@@ -1179,6 +1186,7 @@ img {
   width: 100%;
   text-align: center;
   line-height: 2em;
+  font-size: 2.5em;
 }
 .tumblr-meta {
   margin-bottom: 0.5em;

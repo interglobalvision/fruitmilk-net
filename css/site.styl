@@ -184,13 +184,15 @@ img
   border: 1px solid $color-black-soft
   border-bottom-width: 0
   border-radius: .5em .5em 0 0
+  line-height: 0
   display: inline-block
-  padding: .7em 1em .2em
+  padding: .7em 1em 0
   margin-bottom: 1em
   font-size: 2em
   text-align: center
+  line-height: .8em
   a:link
-    text-decoration: none
+    text-decoration: none 
 
 .item
   position: relative
@@ -204,6 +206,10 @@ img
       display: inline-block
   img
     width: 100%
+    transition: opacity .3s
+  &:hover
+    img
+      opacity: 0.1
 
 .item-title
   position: absolute
@@ -211,6 +217,7 @@ img
   width: 100%
   text-align: center
   line-height: 2em
+  font-size: 2.5em
 
 
 // BLOG
