@@ -218,6 +218,25 @@ var Nav = {
     Nav.updateWalls();
 
   },
+  reset: function() {
+    console.log('reset');
+
+    World.clear(_engine.world, _mouseConstraint);
+
+    Engine.clear(_engine);
+
+    // reset id pool
+    Common._nextId = 0;
+
+    // reset random seed
+    Common._seed = 0;
+
+    Events.off(_engine);
+
+    $('#nav canvas').remove();
+    Nav.init();
+
+  },
   bindEvents: function() {
 
     var counter = 0;
@@ -414,86 +433,10 @@ var Nav = {
       Nav.minimize();
     }
 
-    window.addEventListener('resize', debounce(Nav.updateScene, 150));
+    window.addEventListener('resize', debounce(Nav.reset, 250));
 
   },
 
-  updateScene: function() {
-    if (!_engine) {
-      return;
-    }
-
-    if( Nav.container.clientWidth < Nav.options.minWidth ) {
-      Nav.updateBlobs();
-    }
-
-    // what is the point of declaring these variables here inside this scope?
-    var renderOptions = _engine.render.options,
-      canvas = _engine.render.canvas;
-
-    // Update the scene
-    canvas.width = renderOptions.width = Nav.container.clientWidth;
-    canvas.style.width = canvas.width + 'px';
-    canvas.height = renderOptions.height = Nav.container.clientHeight;
-    canvas.style.height = canvas.height + 'px';
-
-
-    Nav.updateWalls();
-  },
-
-  updateBlobs: function() {
-    if (!_engine) {
-      return;
-    }
-
-    var scale = Nav.scale;
-
-    if(Nav.container.clientWidth !== _engine.render.options.width) {
-      scale = Nav.container.clientWidth / _engine.render.options.width;
-    }
-
-    // Scale is a lil larger in smaller windows
-    if(Nav.container.clientWidth < 450) {
-      scale = scale * Nav.options.mobileScale;
-    }
-
-    if(Nav.scale !== scale) {
-      console.log('scale', scale);
-
-      var blobs = Composite.allBodies(Nav.blobs);
-
-      for(var i = 0; i < blobs.length; i++) {
-        var blob = blobs[i];
-        Body.scale(blob, scale, scale);
-        blob.render.sprite.xScale = blob.render.sprite.yScale = blob.render.sprite.yScale * scale;
-        blob.render.sprite.xOffset = blob.render.sprite.xOffset * scale;
-        blob.render.sprite.yOffset = blob.render.sprite.yOffset * scale;
-
-        // Translate blob if outside of the scene
-        if(blob.position.x > Nav.container.clientWidth) {
-          Body.translate(blob, {x: blob.position.x/2 * -1, y: 0}); // the maths for x: here should be inside brackets
-        }
-        if(blob.position.y > Nav.container.clientHeight) {
-          Body.translate(blob, {x: 0, y: blob.position.y/2 * -1});
-        }
-      }
-
-      if(scale > 1) {
-        _engine.timing.timeScale = 1;
-      } else {
-        _engine.timing.timeScale = scale / 2;
-      }
-
-      var bumpers = Composite.allBodies(Nav.bumpers);
-
-      for(var i = 0; i < bumpers.length; i++) {
-        var bumper = bumpers[i];
-        Body.scale(bumper, scale, scale);
-      }
-
-      Nav.scale = scale;
-    }
-  },
 
   updateWalls: function() {
     if (!_engine) {
