@@ -17,7 +17,7 @@ if ($post_type == 'press') {
     <div class="container">
       <div class="row">
         <div class="col col2">
-          <h1 class="section-title"><a href="<?php echo get_post_type_archive_link($post_type); ?>" class="js-ajax-link"><?php post_type_archive_title(); if ($post_type == 'collabs') { echo ' + PROJECTS'; } ?></a></h1>
+          <h2 class="section-title"><a href="<?php echo get_post_type_archive_link($post_type); ?>" class="js-ajax-link"><?php post_type_archive_title(); if ($post_type == 'collabs') { echo ' + PROJECTS'; } ?></a></h2>
         </div>
       </div>
     </div>
@@ -38,8 +38,8 @@ if( have_posts() ) {
 
         <article <?php post_class('item col1'); ?> id="post-<?php the_ID(); ?>">
           <a href="<?php if ($post_type == 'press') { echo $press_link.'" target="_blank'; } else { the_permalink(); } ?>" class="js-ajax-link">
-            <h2 class="item-title color-secondary"><?php the_title(); ?></h1>
             <img src="<?php echo $thumb_url; ?>" />
+            <h2 class="item-title color-secondary"><?php the_title(); ?></h1>
           </a>
         </article>
 
