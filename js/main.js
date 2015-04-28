@@ -64,7 +64,7 @@ var Router = {
     })
     .fail(function(jqXHR, textStatus, errorThrown) {
 
-      $('#main-content').html('Eeek Something went wrong?! :(');
+      $('#main-content').html('<h4 class="u-align-center">Eeek Something went wrong?! :(</h4>');
       $('#preloader').removeClass('show');
       $('html, body').animate({ scrollTop: '0px' }, basicAnimationSpeed/2);
       $('#main-content, #footer').animate({'opacity': 1}, basicAnimationSpeed);
