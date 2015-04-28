@@ -1174,11 +1174,6 @@ img {
 }
 .item img {
   width: 100%;
-  -webkit-transition: opacity 0.3s;
-          transition: opacity 0.3s;
-}
-.item:hover img {
-  opacity: 0.1;
 }
 .item-title {
   position: absolute;
@@ -1187,6 +1182,13 @@ img {
   text-align: center;
   line-height: 2em;
   font-size: 2.5em;
+}
+.archive-item img.archive-thumb {
+  -webkit-transition: opacity 0.3s;
+          transition: opacity 0.3s;
+}
+.archive-item:hover img.archive-thumb {
+  opacity: 0.1;
 }
 .tumblr-meta {
   margin-bottom: 0.5em;

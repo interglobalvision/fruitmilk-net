@@ -206,10 +206,6 @@ img
       display: inline-block
   img
     width: 100%
-    transition: opacity .3s
-  &:hover
-    img
-      opacity: 0.1
 
 .item-title
   position: absolute
@@ -218,6 +214,13 @@ img
   text-align: center
   line-height: 2em
   font-size: 2.5em
+  
+.archive-item
+  img.archive-thumb
+    transition: opacity .3s
+  &:hover
+    img.archive-thumb
+      opacity: 0.1
 
 
 // BLOG
