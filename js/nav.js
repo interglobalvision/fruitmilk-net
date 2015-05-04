@@ -428,8 +428,6 @@ var Nav = {
       Nav.switchGravity(true);
     }
 
-    window.addEventListener('resize', debounce(Nav.reset, 250));
-
   },
 
   updateWalls: function() {
@@ -492,4 +490,7 @@ var Nav = {
   }
 
 };
+
+// Event Listeners
+window.addEventListener('resize', debounce(Nav.reset, 250));
 window.addEventListener('load', Nav.init);
