@@ -20,7 +20,7 @@ add_action( 'init', 'register_cpt_collabs' );
 function register_cpt_collabs() {
 
     $labels = array( 
-        'name' => _x( 'Collabs', 'collabs' ),
+        'name' => _x( 'Collabs + projects', 'collabs' ),
         'singular_name' => _x( 'Collab', 'collabs' ),
         'add_new' => _x( 'Add New', 'collabs' ),
         'add_new_item' => _x( 'Add New Collab', 'collabs' ),

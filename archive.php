@@ -17,7 +17,7 @@ if ($post_type == 'press') {
     <div class="container">
       <div class="row">
         <div class="col col2">
-          <h2 class="section-title"><a href="<?php echo get_post_type_archive_link($post_type); ?>" class="js-ajax-link"><?php post_type_archive_title(); if ($post_type == 'collabs') { echo ' + PROJECTS'; } ?></a></h2>
+          <h2 class="section-title"><a href="<?php echo get_post_type_archive_link($post_type); ?>" class="js-ajax-link"><?php post_type_archive_title(); ?></a></h2>
         </div>
       </div>
     </div>
