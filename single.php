@@ -15,8 +15,6 @@ get_header();
           <h2 class="section-title">
             <a href="<?php echo get_post_type_archive_link(get_post_type()); ?>" class="js-ajax-link"><?php
               $post_type = get_post_type_object( get_post_type() ); 
-              $label = strtolower($post_type->label);
-              echo $post_type->label; if ( $label == 'collabs' ) { echo ' + projects'; }
             ?></a>
           </h2>
         </div>
