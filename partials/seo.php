@@ -2,28 +2,13 @@
 
 <meta name="twitter:site" value="@">
 <?php
-$args = array (
-  'post_type'              => array( 'installations', 'collabs', 'press' )
-);
-
-$query = new WP_Query( $args );
-
-if ( $query->have_posts() ) {
-  while ( $query->have_posts() ) {
-    $query->the_post();
-    $excerpt = get_the_excerpt();
-    if(has_post_thumbnail()) {
-      $thumb = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'opengraph' );
-    }
-  }
-} 
-
-// Restore original Post Data
-wp_reset_postdata();
 
 if( is_single() ) {
+  setup_postdata( $post );
+  $thumb = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'opengraph' );
+  $excerpt = get_the_excerpt();
 ?>
-  <meta property="og:url" content="<?php the_permalink() ?>"/>
+  <meta property="og:url" content="<?php the_permalink(); ?>"/>
   <meta property="og:title" content="<?php single_post_title(''); ?>" />
   <meta property="og:description" content="<?php echo $excerpt ?>" />
   <meta property="og:type" content="article" />
