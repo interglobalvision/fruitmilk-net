@@ -46,9 +46,16 @@ if( have_posts() ) {
 <?php
       if ($images) {
         foreach ($images as $image) {
+          if ( array_key_exists('image_id', $image) ) {
+            $image_id = (string)$image['image_id'];
+            $attachment_src = wp_get_attachment_image_src( $image_id, 'feed' );
+            $image_src = $attachment_src[0];
+          } else {
+            $image_src = $image['image'];
+          }
 ?>
         <div class="item col1">
-          <img src="<?php echo $image['image']; ?>" />
+          <img src="<?php echo $image_src; ?>" />
         </div>
 <?php
         }
