@@ -230,7 +230,6 @@ var Nav = {
     // reset random seed
     Common._seed = 0;
 
-
     Nav.init();
     Nav.isResetting = false;
   },
@@ -421,14 +420,17 @@ var Nav = {
     }
 
     // Minimize
-    if (!($('body').hasClass('home')) && !Nav.isResetting) {
+    if(!($('body').hasClass('home')) && !Nav.isResetting) {
       Nav.minimize();
+    }
+
+    if(Nav.isMinimized) {
+      Nav.switchGravity(true);
     }
 
     window.addEventListener('resize', debounce(Nav.reset, 250));
 
   },
-
 
   updateWalls: function() {
     if (!_engine) {
@@ -454,7 +456,7 @@ var Nav = {
       return;
     }
 
-    Nav.switchGravity();
+    Nav.switchGravity(true);
     var height = $(window).height() - navMargin;
     Nav.container.style.top = '-' + height + 'px';
     minimizeTimeout = setTimeout( function() {
@@ -469,23 +471,23 @@ var Nav = {
 
     currentLocation = window.location.href;
 
-    Nav.switchGravity();
+    Nav.switchGravity(false);
     Nav.container.style.top = '0';
     maximizeTimeout = setTimeout( function() {
       Nav.isMinimized = false;
     }, basicAnimationSpeed);
   },
 
-  switchGravity: function() {
-    if(Nav.isMinimized) {
+  switchGravity: function(setting) {
+    if(setting === true) {
+      _engine.world.gravity.y = Nav.options.altGravity;
+    } else {
       _engine.world.gravity.y = Nav.options.altGravity * -2;
 
       gravityTimeout = setTimeout( function() {
         _engine.world.gravity.y = Nav.options.gravity;
       }, Nav.options.gravityReboundAnimationSpeed);
 
-    } else {
-      _engine.world.gravity.y = Nav.options.altGravity;
     }
   }
 
