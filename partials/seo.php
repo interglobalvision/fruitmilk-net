@@ -27,11 +27,12 @@ if( !empty($thumb) ) {
 <?php
 } else {
 ?>
-  <meta property="og:image" content="<?php bloginfo('stylesheet_directory'); ?>/img/favicon.png" />
+  <meta property="og:image" content="<?php bloginfo('stylesheet_directory'); ?>/img/og-image.jpg" />
 <?php
 }
 if( is_home() ) {
-?>
+?>  
+  <meta property="og:url" content="<?php the_permalink() ?>"/>
   <meta property="og:title" content="<?php bloginfo('name'); ?>" />
   <meta property="og:site_name" content="<?php bloginfo('name'); ?>" />
   <meta property="og:type" content="website" />
@@ -48,6 +49,7 @@ if( is_home() ) {
 <?php
 } else {
 ?>
+  <meta property="og:url" content="<?php the_permalink() ?>"/>
   <meta property="og:title" content="<?php single_post_title(''); ?>" />
   <meta property="og:site_name" content="<?php bloginfo('name'); ?>" />
   <meta property="og:description" content="<?php bloginfo('description'); ?>" />
